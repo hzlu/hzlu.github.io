@@ -1,0 +1,39 @@
+<% if (page.type) { %>
+    <%- partial('_partial/sidebar', { type: page.type, index: page.index, category: page.category }) %>
+<% } else { %>
+  <div class="sidebar">
+    <ul class="main-menu">
+      <%- partial('_partial/main_menu') %>
+    </ul>
+  </div>
+<% } %>
+<div class="content <%- page.type ? page.type + ' with-sidebar' : '' %> <%- page.type === 'notes' ? page.path.replace(/.+\//, '').replace('.html', '') + '-guide' : '' %>">
+    <% if (page.type) { %>
+      <% if (page.type === 'menu') { %>
+        <form id="search-form">
+          <input type="text" id="search-query-menu" class="search-query st-default-search-input">
+        </form>
+        <%- partial('_partial/toc', { type: 'notes', category: page.category }) %>
+      <% } %>
+    <% } %>
+    <% if (page.title.trim()) { %>
+      <h1><%- page.title %></h1>
+    <% } %>
+    <%- page.content %>
+    <% if (page.type === 'notes') { %>
+      <div class="guide-links">
+        <% site.pages.find({ type: page.type, category: page.category, order: page.order - 1 }).each(function (page) { %>
+          <span>← <a href="<%- url_for(page.path) %>"><%- page.title %></a></span>
+        <% }) %>
+        <% site.pages.find({ type: page.type, category: page.category, order: page.order + 1 }).each(function (page) { %>
+          <span style="float:right"><a href="<%- url_for(page.path) %>"><%- page.title %></a> →</span>
+        <% }) %>
+      </div>
+    <% } %>
+    <div class="footer">
+      Caught a mistake or want to contribute to the documentation?
+      <a href="https://github.com/hzlu/hzlublog/blob/master/source/<%- page.path.replace(/\.html$/, '.md') %>" target="_blank">
+        Edit this page on Github!
+      </a>
+    </div>
+</div>

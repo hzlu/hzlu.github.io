@@ -1,0 +1,44 @@
+@import "_common"
+@import "_header"
+@import '_sidebar'
+
+$width = 900px
+$space = 50px
+
+body
+  background-color: darken($light, 10%)
+
+#logo
+  span
+    font-size: 1.2em
+  img
+    display: none
+
+.sidebar
+  display: none
+
+#mobile-bar
+  &.top
+    background-color: transparent
+    box-shadow: none
+    .logo
+      display: none
+
+#footer
+  padding: $space 0
+  color: #fff
+  text-align: center
+  a
+    font-weight: 700
+    color: #fff
+
+@media screen and (max-width: $width)
+  body
+    -webkit-text-size-adjust: none
+    font-size: 14px
+  .sidebar
+    display: block
+  #header
+    display: none
+  #mobile-bar
+    display: block

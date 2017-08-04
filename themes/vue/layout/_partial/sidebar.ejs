@@ -1,0 +1,13 @@
+<div class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="main-menu">
+            <%- partial('_partial/main_menu') %>
+        </ul>
+        <div class="list">
+            <h2>
+                <%- type.charAt(0).toUpperCase() + type.slice(1) %>
+            </h2>
+            <%- partial('_partial/toc', { type, category }) %>
+        </div>
+    </div>
+</div>

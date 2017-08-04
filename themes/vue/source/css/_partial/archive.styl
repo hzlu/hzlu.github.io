@@ -1,0 +1,85 @@
+.archives-wrap
+  margin: block-margin auto
+  max-width: 60%
+
+.archives
+  clearfix()
+
+.archive-year-wrap
+  margin-bottom: 1em
+
+.archive-year
+  @extend $block-caption
+
+.archives
+  padding-left: 2em
+  column-gap: 10px
+  @media mq-tablet
+    column-count: 1
+  @media mq-normal
+    column-count: 1
+
+.archive-article
+  avoid-column-break()
+
+.archive-article-inner
+  // @extend $block
+  // padding: 10px
+  // margin-bottom: 15px
+  h1
+    display: inline-block
+    margin: 0 20px
+
+.archive-article-title
+  text-decoration: none
+  font-weight: bold
+  color: $dark
+  transition: color 0.2s
+  line-height: line-height
+  &:hover
+    color: $green
+
+.archive-article-footer
+  margin-top: 1em
+
+.archive-article-date
+  color: color-grey
+  text-decoration: none
+  font-size: 0.95em
+  line-height: 1em
+  margin-bottom: 0.5em
+  display: inline-block
+
+#page-nav
+  clearfix()
+  margin: block-margin auto
+  background: #fff
+  box-shadow: 1px 2px 3px #ddd
+  border: 1px solid color-border
+  border-radius: 3px
+  text-align: center
+  color: color-grey
+  overflow: hidden
+  a, span
+    padding: 10px 20px
+    line-height: 1
+    height: 2ex
+  a
+    color: color-grey
+    text-decoration: none
+    &:hover
+      background: color-grey
+      color: #fff
+  .prev
+    float: left
+  .next
+    float: right
+  .page-number
+    display: inline-block
+    @media mq-mobile
+      display: none
+  .current
+    color: color-default
+    font-weight: bold
+  .space
+    color: color-border
