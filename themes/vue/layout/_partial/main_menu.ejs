@@ -1,4 +1,18 @@
-<li><a href="<%- url_for("/") %>" class="nav-link<%- page.path.match(/^index\.html$/) ? ' current' : '' %>">BLOG</a></li>
-<li><a href="<%- url_for("/archives") %>" class="nav-link<%- page.path.match(/archive/) ? ' current' : '' %>">ARCHIVE</a></li>
+<li>
+  <a href="<%- url_for("/") %>"
+    class="nav-link<%- page.path.match(/^index\.html$/) ? ' current' : '' %>"
+    >
+    BLOG
+  </a>
+</li>
+<li>
+  <a href="<%- url_for("/archives") %>"
+    class="nav-link<%- page.path.match(/archive/) ? ' current' : '' %>"
+    >
+    ARCHIVE
+  </a>
+</li>
 <%- partial('_partial/note_dropdown') %>
-<li><a href="/about" class="nav-link shop">ABOUT</a></li>
+<li>
+  <a href="/about" class="nav-link shop">ABOUT</a>
+</li>
