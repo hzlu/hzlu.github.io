@@ -1,0 +1,83 @@
+---
+title: iTerm2 操作小结
+type: notes
+category: devtools
+tags: [iTerm2]
+order: 4
+---
+
+## 标签页与窗口
+
+**功能** | **快捷方式**
+-------- | --------
+前一个标签页 | `⌘`+ `←`
+后一个标签页 | `⌘`+ `→`
+切换到标签页 | `⌘` + `Number`
+切换到窗口 | `⌘` + `Option` + `Number`
+根据方向切换到面板 | `⌘` + `Option` + `方向键`
+切换到使用过的面板 | `⌘` + `]` , `⌘` + `[`
+水平切分窗口 (same profile) | `⌘` + `Option` + `d`
+垂直切分窗口 (same profile) | `⌘` + `d`
+Set Mark | `⌘` + `M`
+Jump to Mark | `⌘` + `J`
+Split Window Horizontally (new profile) | `Option` + `⌘` + `H`
+Split Window Vertically (new profile) | `Option` + `⌘` + `V`
+
+## 移动命令
+
+**功能** | **快捷方式**
+-------- | --------
+移动到行首 | `Ctrl` + `a`
+移动到行尾 | `Ctrl` + `e`
+向后移动字符 | `Ctrl` + `b`
+向前移动字符 | `Ctrl` + `f`
+向前移动一个词 | `Option` + `f`
+向后移动一个词 | `Option` + `b`
+
+** 需要先设置 `Option` 键为 `+Esc` ，在 `Preferences > Profiles > Keys` 中设置 **
+
+## 删除命令
+
+**功能** | **快捷方式**
+-------- | --------
+删除当前字符 | `Ctrl` + `d`
+向前删除字符 | `Ctrl` + `h`
+向前删除单词 | `Ctrl` + `w` 或 `Option` + `Backspace`
+向后删除单词 | `Option` + `d`
+删除到行尾 | `Ctrl` + `k`
+删除整行 | `Ctrl` + `u`
+
+## 粘贴命令
+
+**功能** | **快捷方式**
+-------- | --------
+Loop through and paste previously cut text | `Option` + `y`
+Loop through and paste the last argument of previous commands | `Option` + `.`
+
+## 清屏与撤销命令
+
+**功能** | **快捷方式**
+-------- | --------
+清屏 | `⌘` + `r` 或 `Ctrl` +`l`
+清除当前窗口buffer | `⌘` + `k`
+撤销操作 | `Ctrl` + `-`
+
+## 搜索与历史命令
+
+**功能** | **快捷方式**
+-------- | --------
+历史输入搜索 | `Ctrl` + `r` 输入搜索命令; 重复触发 `Ctrl` + `r` 遍历结果
+最后记住的搜索命令 | 重复输入 `Ctrl` + `r`
+End the search at current history entry  | `Ctrl` + `y`
+取消搜索并返回原始命令 | `Ctrl` + `g`
+上一条命令 | `Ctrl` + `p`
+弹出历史命令选项列表 | `⌘` + `;`
+弹出剪切板 | `⌘` + `shift` + `h`
+扩展搜索匹配 | `tab` 向后扩展搜索匹配，`shift` + `tab`向前扩展
+把匹配粘贴到输入行 | `option` + `enter`
+进入回放模式 | `cmd` + `option` + `b`
+进入**espose tab** 模式 | `cmd` + `option` + `e`
+高亮当前光标位置 | `cmd` + `/`
+高亮当前光标行 | `cmd` + `alt` + `;`
+显示右侧时间栏 | `cmd` + `shift` + `e`
+

@@ -1,9 +1,13 @@
 <li class="nav-dropdown-container language">
-  <a class="nav-link<%- page.path.match(/notes/) ? ' current' : '' %>">NOTES</a><span class="arrow"></span>
+  <a class="nav-link<%- page.path.match(/notes/) ? ' current' : '' %>">
+    NOTES
+  </a>
+  <span class="arrow"></span>
   <ul class="nav-dropdown">
     <li><a href="<%- url_for("/notes/javascript") %>" class="nav-link">JavaScript</a></li>
     <li><a href="<%- url_for("/notes/ruby") %>" class="nav-link">Ruby</a></li>
     <li><a href="<%- url_for("/notes/linux") %>" class="nav-link">Linux</a></li>
-    <li><a href="<%- url_for("/notes/vim") %>" class="nav-link">Vim</a></li>
+    <li><a href="<%- url_for("/notes/devtools") %>" class="nav-link">DevTools</a></li>
+    <li><a href="<%- url_for("/notes") %>" class="nav-link">其他</a></li>
   </ul>
 </li>
