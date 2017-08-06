@@ -1,5 +1,5 @@
 ---
-title: 👏 欢迎
+title: 👏 Welcome
 ---
 
-这是我的个人技术博客，敬请期待。
+Welcome to visit my programming blog.

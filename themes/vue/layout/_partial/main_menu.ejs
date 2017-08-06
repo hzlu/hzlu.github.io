@@ -1,13 +1,6 @@
 <li>
-  <a href="<%- url_for("/") %>"
-    class="nav-link<%- page.path.match(/^index\.html$/) ? ' current' : '' %>"
-    >
-    BLOG
-  </a>
-</li>
-<li>
   <a href="<%- url_for("/archives") %>"
-    class="nav-link<%- page.path.match(/archive/) ? ' current' : '' %>"
+    class="nav-link<%- page.path.match(/(archive|^index\.html$)/) ? ' current' : '' %>"
     >
     ARCHIVE
   </a>
