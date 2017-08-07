@@ -5,7 +5,18 @@
     ARCHIVE
   </a>
 </li>
-<%- partial('_partial/note_dropdown') %>
 <li>
-  <a href="/about" class="nav-link shop">ABOUT</a>
+  <a href="<%- url_for("/categories") %>"
+    class="nav-link<%- page.path.match(/categories/) ? ' current' : '' %>"
+    >
+    CATEGORY
+  </a>
 </li>
+<li>
+  <a href="<%- url_for("/about") %>"
+    class="nav-link<%- page.path.match(/about/) ? ' current' : '' %>"
+    >
+    ABOUT
+  </a>
+</li>
+<% partial('_partial/note_dropdown') %>

@@ -1,8 +1,8 @@
 ---
-title: 👏 Welcome index
+title: 👏 Welcome foo
 categories:
 - Sports
-- index
+- foo
 ---
 
 Welcome to visit my programming blog.

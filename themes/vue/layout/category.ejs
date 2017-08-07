@@ -1,0 +1,26 @@
+<div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <%- partial('_partial/main_menu') %>
+    </ul>
+  </div>
+</div>
+
+<section class="archives-wrap">
+  <% site.categories.each(function (category) { %>
+    <% if (page.category == null || page.category == category.name) { %>
+      <div class="archive-year-wrap">
+        <a href="<%- url_for(category.path) %>" class="archive-year">
+          <%- category.name %> ( <%- category.length %> )
+        </a>
+      </div>
+      <ul class="archives">
+        <% category.posts.each(function (post) { %>
+        <li class="archive-post">
+          <%- partial('_partial/archive-post', { post }) %>
+        </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  <% }) %>
+</section>

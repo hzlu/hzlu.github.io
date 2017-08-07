@@ -1,8 +1,8 @@
 ---
-title: 👏 Welcome index
+title: 👏 Welcome bar
 categories:
 - Sports
-- index
+- bar
 ---
 
 Welcome to visit my programming blog.
