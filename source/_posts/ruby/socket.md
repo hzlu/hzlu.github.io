@@ -1,8 +1,6 @@
 ---
 title: Socket
-type: notes
-order: 9
-category: Ruby
+category: ruby
 ---
 
 网络功能是通过套接字实现的，它是一种 `IO` 对象

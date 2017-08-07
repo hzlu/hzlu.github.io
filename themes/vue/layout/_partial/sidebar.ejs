@@ -3,11 +3,10 @@
     <ul class="main-menu">
       <%- partial('_partial/main_menu') %>
     </ul>
-    <div class="list">
-      <h2>
-        <%- type.charAt(0).toUpperCase() + type.slice(1) %>
-      </h2>
-      <%- partial('_partial/toc', { type, category }) %>
-    </div>
+    <% if (page.hasOwnProperty('published')) { %>
+      <div class="list" id="toc-list">
+        <%- toc(page.content, { list_number: false, class: 'my-toc' }) %>
+      </div>
+    <% } %>
   </div>
 </div>

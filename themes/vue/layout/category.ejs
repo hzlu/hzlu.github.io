@@ -1,11 +1,3 @@
-<div class="sidebar">
-  <div class="sidebar-inner">
-    <ul class="main-menu">
-      <%- partial('_partial/main_menu') %>
-    </ul>
-  </div>
-</div>
-
 <section class="archives-wrap">
   <% site.categories.each(function (category) { %>
     <% if (page.category == null || page.category == category.name) { %>
@@ -15,7 +7,7 @@
         </a>
       </div>
       <ul class="archives">
-        <% category.posts.each(function (post) { %>
+        <% category.posts.sort('date', -1).each(function (post) { %>
         <li class="archive-post">
           <%- partial('_partial/archive-post', { post }) %>
         </li>

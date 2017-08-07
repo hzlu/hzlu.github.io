@@ -1,13 +1,5 @@
-<div class="sidebar">
-  <div class="sidebar-inner">
-    <ul class="main-menu">
-      <%- partial('_partial/main_menu') %>
-    </ul>
-  </div>
-</div>
-
 <% var last; %>
-<% site.posts.each(function(post, i){ %>
+<% site.posts.sort('date', -1).each(function(post, i){ %>
   <% var year = post.date.year(); %>
   <% if (last != year){ %>
     <% if (last != null){ %>

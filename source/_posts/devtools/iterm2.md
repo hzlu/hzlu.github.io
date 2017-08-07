@@ -1,9 +1,7 @@
 ---
 title: iTerm2 操作小结
-type: notes
 category: devtools
-tags: [iTerm2]
-order: 4
+tags: [iterm2]
 ---
 
 ## 标签页与窗口

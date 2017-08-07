@@ -1,8 +1,6 @@
 ---
 title: 改善 Ruby 程序的建议
-type: notes
-order: 16
-category: Ruby
+category: ruby
 ---
 
 + 除了false和nil外所有值都表示真值

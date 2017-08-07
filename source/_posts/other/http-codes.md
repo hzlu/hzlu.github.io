@@ -1,8 +1,6 @@
 ---
 title: HTTP 常用状态码
-type: notes
-order: 4
-category: notes
+category: original
 ---
 
 ## 状态码类别

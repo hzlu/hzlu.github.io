@@ -1,27 +1,4 @@
-<div class="sidebar">
-  <div class="sidebar-inner">
-    <ul class="main-menu">
-      <%- partial('_partial/main_menu') %>
-    </ul>
-  </div>
-</div>
-<div class="content with-sidebar blog post">
+<div class="content blog post">
   <h1><%- page.title %></h1>
   <%- page.content %>
-  <!-- <span id="reversedEmail" style="unicode&#45;bidi:bidi&#45;override; direction: rtl;"> -->
-  <!--     moc.liamg@0102ulzh -->
-  <!-- </span> -->
 </div>
-
-<script type="text/javascript">
-  const myMailDom = document.querySelector('#reversedEmail');
-  const emailText = myMailDom.innerText;
-  myMailDom.addEventListener('copy', function(e) {
-    const selection = window.getSelection().toString();
-    if (selection.indexOf(emailText) >= 0) {
-      const email = selection.split('').reverse().join('');
-      e.clipboardData.setData("text/plain", email);
-    }
-    e.preventDefault();
-  });
-</script>

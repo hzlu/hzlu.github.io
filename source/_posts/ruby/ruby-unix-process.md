@@ -1,9 +1,7 @@
 ---
 title: 《理解 Unix 进程》笔记
-type: notes
-category: Ruby
+category: ruby
 tags: [linux, ruby]
-order: 3
 ---
 
 ## 基础知识

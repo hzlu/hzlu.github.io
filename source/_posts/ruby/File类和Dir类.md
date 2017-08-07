@@ -1,8 +1,6 @@
 ---
 title: File 类和 Dir 类
-type: notes
-order: 7
-category: Ruby
+category: ruby
 ---
 
 ```

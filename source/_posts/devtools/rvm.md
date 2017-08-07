@@ -1,8 +1,7 @@
 ---
 title: RVM 使用
-type: notes
-order: 5
-category: notes
+category: devtools
+tags: [rvm]
 ---
 
 ## 常用命令

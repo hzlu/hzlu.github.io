@@ -1,9 +1,7 @@
 ---
 title: Vagrant Cheat Sheet
-type: notes
 category: devtools
-tags: [Vagrant]
-order: 3
+tags: [vagrant]
 ---
 
 作用 | 命令

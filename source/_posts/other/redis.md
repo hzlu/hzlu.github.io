@@ -1,8 +1,6 @@
 ---
 title: 《The Little Redis Book》笔记
-type: notes
-order: 3
-category: notes
+category: original
 ---
 
 参考：[极客学院](http://wiki.jikexueyuan.com/project/the-little-redis-book/)

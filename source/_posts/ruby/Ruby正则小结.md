@@ -1,8 +1,6 @@
 ---
 title: Ruby 正则小结
-type: notes
-order: 5
-category: Ruby
+category: ruby
 ---
 
 ## 语法

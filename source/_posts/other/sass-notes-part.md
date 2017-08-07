@@ -1,9 +1,7 @@
 ---
 title: Sass 语法小结
+category: original
 tags: [css]
-categories:
-- Sports
-- foo
 ---
 
 ## `Sass` 与 `Scss` 的区别

@@ -1,8 +1,6 @@
 ---
 title: IO类
-type: notes
-order: 6
-category: Ruby
+category: ruby
 ---
 
 向标准输出（IO对象）写入的数据会显示在屏幕中。

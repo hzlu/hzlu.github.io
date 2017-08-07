@@ -1,8 +1,6 @@
 ---
 title: 《Ruby 基础教程》笔记
-type: notes
-order: 2
-category: Ruby
+category: ruby
 ---
 
 ```

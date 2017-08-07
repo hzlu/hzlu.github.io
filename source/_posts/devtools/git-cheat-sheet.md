@@ -1,9 +1,7 @@
 ---
 title: Git 命令小结
-type: notes
 category: devtools
-tags: [Git]
-order: 2
+tags: [git]
 ---
 
 ## 配置

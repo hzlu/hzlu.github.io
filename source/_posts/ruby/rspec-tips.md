@@ -1,8 +1,6 @@
 ---
 title: Rspec 测试技巧
-type: notes
-order: 5
-category: Ruby
+category: ruby
 ---
 
 ### 使用共享用例
