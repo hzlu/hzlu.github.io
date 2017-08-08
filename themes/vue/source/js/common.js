@@ -141,7 +141,7 @@
     var tocButton = document.getElementById('toc-button');
     var tocList = document.getElementById('toc-list');
     var content = document.querySelector('.content');
-    tocButton.addEventListener('click', function () {
+    tocButton && tocButton.addEventListener('click', function () {
       if (tocList.style.display != 'none') {
         content.classList.remove('with-sidebar');
         tocList.style.display = 'none';
