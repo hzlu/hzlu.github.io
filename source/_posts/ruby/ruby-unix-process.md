@@ -176,7 +176,7 @@ $PROGRAM_NAME = 'fuck name'
 
 Ruby的退出方式`Kernel#exit`，最简单的进程退出方式，返回退出码`0`，也是脚本执行结束的默认退出方式。
 
-#### `Kernel#exit`
+### `Kernel#exit`
 
 ~~~ruby
 # 退出码0 正常退出
@@ -188,7 +188,7 @@ exit
 exit 22
 ~~~
 
-#### `Kernel#exit!`
+### `Kernel#exit!`
 
 ~~~ruby
 # 返回默认退出码1，并且退出前不会执行at_exit块中的代码。
@@ -196,7 +196,7 @@ exit!
 exit! 33  #返回退出码33
 ~~~
 
-#### `Kernel#abort`
+### `Kernel#abort`
 
 - abort提供了从错误进程中退出的通用方式
 - 传递的消息会在进程退出前打印到STDERR
@@ -210,7 +210,7 @@ at_exit {puts 'last!'}
 abort
 ~~~
 
-#### `raise`
+### `raise`
 
 - 不会马上使进程结束，但如果没有rescue处理这个异常，进程就会退出返回退出码1。
 - at_exit块会被调用，异常信息打印到STDERR
