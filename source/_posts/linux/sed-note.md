@@ -1,0 +1,117 @@
+---
+title: Sed 使用
+category: linux
+tags: [sed]
+---
+
+## 基本语法
+
+- 用双引号可以对表达式求值来进行扩展
+- 对于匹配的第一个子串，对应的标记为`\1` 依次类推`\2`...
+- 使用`&`引用被匹配的字符
+
+### 全部替换
+
+```bash
+sed "s/my/your/g" file # 把文件中的my匹配替换成your，并不会改变文件内容，只是输出到STDOUT
+sed -i "s/my/your/g" file # 使用-i参数直接修改文件内容。
+sed 's/^/#/g' file # 在每行前面加#
+sed 's/$/ ---/g' file # 在每行后面加 ---
+sed 's:test:replace:g' # 可以使用任意定界符 : / |
+```
+
+- `\<` 表示词首，`\<abc` 表示以abc为首的词（OSX下有问题）
+- `\>` 表示词尾，`abc\>` 表示abc结尾的词（OSX下有问题）
+
+### 指定行替换
+
+```bash
+sed "3s/my/your/g" file # 只替换第3行
+sed "3,6s/my/your/g" file # 第3到第6行替换
+```
+
+### 指定列位置替换
+
+```bash
+sed "s/s/S/2" file # 只替换每一行的第二个s
+sed "s/s/S/3g" file # 替换每一行第三个以后的s（OSX下有问题）
+```
+
+### 使用`&`引用被匹配的变量
+
+```bash
+sed "s/my/[&]/g" file # &指代被匹配的变量my可以在左右加点东西
+```
+
+### 多个匹配
+
+```bash
+sed '1,3s/my/your/g; 4,$s/This/That/g' file
+# 分号隔开多个匹配条件
+sed -e '1,3s/my/your/g' -e '4,$s/This/That/g' file
+# 用-e选项与上面等价
+```
+
+### 圆括号捕获
+
+```bash
+sed 's/This is my \([^,]*\), .* is \(.*\)/\1:\2/g' file
+```
+
+捕获的圆括号需要使用转义
+```
+\\
+\1 表示第一个捕获组
+\2 表示第二个捕获组
+```
+
+### a追加命令 i插入命令
+
+（在OSX下无法使用）
+
+```bash
+sed "1 i This is new line." file # 在第一行前插入
+sed "$ a This is new line." file # 在最后一行后追加
+sed "/my/a ---" file # 在匹配到的每一行后追加
+```
+
+### c替换命令 d删除命令
+
+```bash
+sed "/fish/c This is a replace line." file # 替换匹配行
+sed "/fish/d" file # 删除匹配行
+```
+
+### p打印命令
+
+```bash
+sed "/fish/p" file # 会把其他不匹配也输出，需要使用n参数
+sed -n "/fish/p" file # 相当于grep，只打印匹配行
+sed -n "/dog/,/fish/p" file # 从dog模式到fish模式打印
+sed -n "1,/fish/p" file # 从第一行打印到匹配fish成功那一行
+```
+
+### 命令打包（嵌套命令）
+
+```bash
+sed '3,6 {/This/d}' file # 对第3到第6行执行命令/This/d
+sed '3,6 {/This/{/fish/d}}' file # 匹配成功后再匹配成功执行d命令
+sed '1,$ {/This/d; s/^ *//g}' file # 匹配This删除，如果前面有空格去空格
+```
+
+### N命令
+
+把偶数行纳入奇数行匹配，偶数行不变
+
+```bash
+sed "N;s/\n/, /" file # 把偶数行并到上一行
+```
+
+### 组合多个表达式
+
+```bash
+echo abc | sed 's/a/A/' | sed 's/c/C/'
+echo abc | sed 's/a/A/;s/c/C/'
+echo abc | sed -e 's:a:A:' -e 's:c:C:'
+```
+
