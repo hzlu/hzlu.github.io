@@ -1,6 +1,9 @@
 {
+  "name": "luhaozhao.com",
+  "short_name": "luhaozhao",
+  "description": "luhaozhao.com personal blog",
   "background_color": "#ffffff",
-  "description": "The Progressive JavaScript Framework",
+  "theme_color": "#4fc08d",
   "display": "standalone",
   "icons": [
     {
@@ -39,10 +42,5 @@
       "type": "image\/png",
       "density": "4.0"
     }
-  ],
-  "lang": "en-US",
-  "name": "Vue.js",
-  "short_name": "Vue",
-  "start_url": "./menu",
-  "theme_color": "#4fc08d"
+  ]
 }
