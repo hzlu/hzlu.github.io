@@ -19,4 +19,10 @@
     ABOUT
   </a>
 </li>
-<% partial('_partial/note_dropdown') %>
+<% if (theme.rss){ %>
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="<%- theme.rss %>" title="<%= __('rss_feed') %>">
+      RSS <i class="fa fa-rss"></i>
+    </a>
+  </li>
+<% } %>

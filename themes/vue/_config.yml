@@ -1,3 +1,5 @@
 site_description: "Luhaozhao's Blog"
 google_analytics: UA-66499261-1
 root_domain: luhaozhao.com
+
+rss: /atom.xml
