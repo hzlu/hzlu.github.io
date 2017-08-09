@@ -1,8 +1,11 @@
 ---
 title: apt 使用
-category: linux
-tags: [apt]
+categories:
+- linux
+tags:
+- apt
 ---
+
 
 ```bash
 sudo apt-get update
