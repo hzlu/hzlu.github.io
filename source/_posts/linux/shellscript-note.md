@@ -1,7 +1,11 @@
 ---
 title: Shell 脚本编程
-category: linux
-tags: [shell]
+date: 2017/8/9 12:00:00
+updated: 2017/8/9 12:00:00
+categories:
+- linux
+tags:
+- shell
 ---
 
 ## fork_bomb
@@ -65,8 +69,7 @@ fi
 ```bash
 [ $var -eq 0 ]
 [ $var -ne 0 ]
-# 逻辑与 -a 逻辑或 -o
-[ $var1 -ne 0 -a $var2 -gt 2 ]
+[ $var1 -ne 0 -a $var2 -gt 2 ] # 逻辑与 -a 逻辑或 -o
 ```
 
 |操作符|含义|
