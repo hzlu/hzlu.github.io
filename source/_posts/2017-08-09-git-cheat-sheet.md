@@ -2,7 +2,8 @@
 title: Git 命令小结
 tags:
   - git
-category: devtools
+categories:
+  - 命令行工具
 date: 2017-08-09 22:36:57
 ---
 
