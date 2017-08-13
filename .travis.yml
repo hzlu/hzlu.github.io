@@ -8,7 +8,7 @@ script:
 after_script:
   - cd ./public
   - git init
-  - git config user.name "hzlu2010"
+  - git config user.name "hzlu"
   - git config user.email "hzlu2010@163.com"
   - git add .
   - git commit -m "update"
