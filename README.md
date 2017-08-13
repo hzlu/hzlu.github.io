@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/hzlu/hzlu.github.io.svg?branch=hexo)](https://travis-ci.org/hzlu/hzlu.github.io)
 # My Blog
 
 http://luhaozhao.com
