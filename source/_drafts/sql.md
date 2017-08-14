@@ -1,0 +1,187 @@
+---
+title: sql
+categories:
+  - 命令行工具
+tags:
+  - sql
+---
+
+
+## 描述表结构
+
+```mysql
+DESCRIBE table_name;
+SHOW CREATE TABLE table_name;
+```
+
+## ALTER TABLE
+
+```mysql
+# 添加列
+ALTER TABLE table_name
+ADD column_name datatype;
+
+# 删除列
+ALTER TABLE table_name
+DROP COLUMN column_name;
+
+# 修改列的数据类型
+ALTER TABLE table_name
+CHANGE COLUMN old_col new_col datatype;
+
+# 改变 AUTO_INCREMENT 的起始值
+ALTER TABLE table_name AUTO_INCREMENT=100;
+```
+
+## CONSTRAINT
+
+### PRIMARY KEY
+
+```mysql
+ALTER TABLE table_name
+ADD PRIMARY KEY (col);
+# 或多个列定义
+ADD CONSTRAINT pk_name PRIMARY KEY (col1,col2);
+```
+
+撤销 PRIMARY KEY 约束
+
+```mysql
+ALTER TABLE table_name
+DROP PRIMARY KEY;
+```
+
+### UNIQUE
+
+a unique constrait is also an **index**
+
+```mysql
+ALTER TABLE table_name
+ADD UNIQUE (col);
+# 或命名 UNIQUE 约束，并定义多个列的 UNIQUE 约束
+ADD CONSTRAINT constraint_name UNIQUE (col1,col2);
+```
+
+要 drop 掉表中的唯一约束先要找出索引的名字，`Key_name` 便是索引的名字
+
+```mysql
+SHOW INDEX FROM table_name;
+```
+
+```mysql
+DROP INDEX index_name ON table_name;
+# 或者使用 alter 语法
+ALTER TABLE table_name
+DROP INDEX index_name;
+```
+
+### INDEX
+
+```mysql
+CREATE INDEX index_name
+ON table_name(col1,col2);
+
+# 创建唯一索引
+CREATE UNIQUE INDEX index_name
+ON table_name(column_name);
+```
+
+### FOREIGN KEY
+
+外键约束能防止非法数据插入外键列，它必须是它指向的那个表中的值之一
+
+```mysql
+CREATE TABLE orders
+(
+o_id int NOT NULL,
+order_no int NOT NULL,
+u_id int,
+PRIMARY KEY (o_id),
+FOREIGN KEY (u_id) REFERENCES users(u_id)
+# 或命名外键
+CONSTRAINT fk_name FOREIGN KEY (u_id) REFERENCES users(u_id) ON DELETE CASCADE
+)
+```
+
+已经存在表后添加外键约束
+
+```mysql
+ALTER TABLE table_name
+ADD CONSTRAINT fk_name
+FOREIGN KEY (u_id)
+REFERENCES users(u_id);
+```
+
+drop 掉外键约束
+
+```mysql
+ALTER TABLE table_name
+DROP FOREIGN KEY fk_name;
+```
+
+### CHECK
+
+限制列中的值的范围
+
+> MySQL 不支持 check 约束，可以定义约束，但不会起作用
+> PostgreSQL 支持
+
+```mysql
+CREATE TABLE table_name
+(
+...
+CHECK (col1 > 0)
+CONSTRAINT check_name CHECK (col2 > 0 AND col3 = 'foo')
+)
+```
+
+已存在的表添加 CHECK 约束
+
+```mysql
+ALTER TABLE table_name
+ADD CHECK (col1 > 0);
+# 或命名 check
+CONSTRAINT check_name CHECK (col2 > 0 AND col3 = 'foo')
+)
+```
+
+drop 掉 check 约束
+
+```mysql
+ALTER TABLE table_name
+DROP CHECK check_name;
+# 或
+DROP CONSTRAINT check_name;
+```
+
+### DEFAULT
+
+```mysql
+ALTER TABLE table_name
+ALTER col SET DEFAULT 'value';
+# 或
+ALTER COLUMN col SET DEFAULT 'value';
+```
+
+drop DEFAULT
+
+```mysql
+alter table table_name
+alter col DROP DEFAULT;
+# 或
+alter column col DROP DEFAULT;
+```
+
+## 视图
+
+```mysql
+CREATE VIEW view_name AS
+SELECT col1,col2 FROM table_name;
+
+SHOW CREATE TABLE view_name;
+SHOW CREATE VIEW view_name;
+
+ALTER VIEW view_name AS new_defination...;
+
+DROP VIEW view_name;
+```
