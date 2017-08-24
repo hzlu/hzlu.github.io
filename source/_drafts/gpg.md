@@ -1,8 +1,11 @@
 ---
-title: GPG 使用
-category: linux
-tags: [gpg]
+title: GPG 备忘
+categories:
+  - 命令行工具
+tags:
+  - gpg
 ---
+
 
 ## 安装
 
