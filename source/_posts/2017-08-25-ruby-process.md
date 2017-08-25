@@ -1,10 +1,12 @@
 ---
 title: 《理解Unix进程》笔记
-categories:
-  - ruby
 tags:
   - ruby
+categories:
+  - ruby
+date: 2017-08-25 12:00:21
 ---
+
 
 
 ## 基础知识
@@ -411,7 +413,9 @@ end
 
 信号从一个进程发送到另一个进程，借助内核作为中介。
 
-信号最初的设计目的是为了以不同的方式去终结进程。以下代码是一个进程给另一进程发信号，用`Process.kill`
+> 信号最初的设计目的是为了以不同的方式去终结进程。
+
+以下代码是一个进程给另一进程发信号，用`Process.kill`
 
 ```ruby
 # 进程一
@@ -465,7 +469,7 @@ writer.close
 puts reader.read
 ```
 
-###共享管道
+### 共享管道
 
 ```ruby
 reader, writer = IO.pipe
@@ -616,7 +620,41 @@ git log | grep shipped | less
 
 Ruby程序中一个常见的交互是在程序中通过shelling out的方式在终端执行某个命令，这在编写Ruby脚本来将若干常用命令粘合在一起时尤为常见。（在Ruby中生成进程来执行终端命令）
 
-exec命令能让你把当前进程替换成一个不同的进程。你可以把当前的Ruby进程转换成一个Python进程或者一个`ls`进程。exec替换进程后是不会返回到原来的进程的。因此需要联合使用`fork+exec`。专门fork出一个进程来exec，这时候可以使用之前的`Process.wait`来等待退出码。
+### Kernel#`
+
+返回字符串
+
+```ruby
+`ls`
+`ls --help`
+```
+
+### `%x( cmd )`
+
+反引号与`%x`作用相同
+
+```ruby
+%x[git log | tail -10]
+```
+
+### `Kernel#system`
+
+`Kernel#system` 返回 `true` 或者 `false` ，当终端命令退出码是 `0` 时，方法返回 `true`。
+
+生成的进程与当前进程共享标准流（stdout stdin stderr），但会**阻塞调用**
+
+```ruby
+system('ls')
+system('ls', '--help')
+```
+
+### exec
+
+- `exec` 命令能让你把当前进程替换成一个不同的进程。
+- `exec` 替换进程后是不会返回到原来的进程的。
+- 需要联合使用`fork+exec`。专门fork出一个进程来exec，这时候可以使用之前的`Process.wait`来等待退出码。
+
+你可以把当前的Ruby进程转换成一个Python进程或者一个`ls`进程。
 
 `exec`不会关闭文件，也不做内存清理，以下代码是在Ruby中打开文件，然后生成一个Python进程去读取这个文件，在Ruby中打开了，在Python中就不需要再次打开了
 
@@ -627,31 +665,13 @@ exec 'python', '-c', "import os; print os.fdopen(#{hosts.fileno}).read()"
 
 > `$man 2 exec`
 
-### exec的参数
-参数可以是`字符串`，也可以是`数组`，之间有微妙的不同，字符串参数表示它会启动一个`shell进程`，然后把字符串参数传给shell去解析；数组参数的话，它会跳过shell进程，而直接把数组作为新进程的`ARGV参数`。
+参数可以是`字符串`，也可以是`数组`，之间有微妙的不同。
+
+- 字符串参数表示它会启动一个`shell进程`，然后把字符串参数传给shell去解析；
+- 数组参数的话，它会跳过shell进程，而直接把数组作为新进程的`ARGV参数`。
 
 推荐使用数组参数，字符串参数有安全问题。
 
-### `Kernel#system`
-
-`Kernel#system`返回`true`或者`false`，当终端命令退出码是0是，方法返回true。
-生成的进程与当前进程共享标准流（stdout stdin stderr），但会**阻塞调用**
-
-```ruby
-system('ls')
-system('ls', '--help')
-```
-
-### 反引号执行
-
-反引号返回值和`system`不同，它是标准输出返回转字符串的形式。
-反引号与`%x`作用相同
-
-```ruby
-`ls`
-`ls --help`
-%x[git log | tail -10]
-```
 ### `Process.spawn`
 
 `Process.spawn` 非阻塞调用，返回`shelling out`进程的PID
