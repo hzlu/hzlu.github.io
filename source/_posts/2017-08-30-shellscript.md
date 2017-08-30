@@ -107,15 +107,6 @@ echo ${string:4:8} # => efghijkl
 echo ${string:(-2):2} # => yz
 ```
 
-### 打印匹配的变量名
-
-```bash
-${arr[*]} # 或
-${arr[@]} # 数组全部元素
-${arr[1]} # 第一个元素
-${#arr[*]} # 数组长度
-```
-
 ## 变量展开
 
 ```bash
@@ -142,11 +133,11 @@ result=`expr 1 + 1` # 子 shell 的另一种写法
 # 把子 shell 放入双引号中，会保留空格和换行符
 out="$(cat file)"
 
-array=(1 2 3 4 5)
-${array[$index]} # 数组取值
-${!array[*]} # 获取关联数组的键列表对应普通数组的索引列表
-${!array[@]} # 等价
-${array[*]} # 获取关联数组的值列表，对应普通数组的值
+array=(1 2 3 4 5) # 定义数组
+${array[$index]} # 数组索引取值，从 0 开始索引
+${!array[*]} # 关联数组的键列表
+${!array[@]} # 等价 ⬆️
+${array[*]} # 获取关联数组的值列表
 ${#array[*]} # 数组长度
 ```
 
@@ -278,8 +269,6 @@ for (( i=0; i<5; i=i+1 )); do
 done
 ```
 
-
-
 ## 测试
 
 `[ expression ]` 与 `test expression` 是等价的。
@@ -363,8 +352,6 @@ read var1 var2 var3
 
 read -a array #输入赋值到数组array中
 
-read -e # 使用Readline的方式编辑输入
-
 read -n 5 # 只读取5个输入字符
 
 read -p "提示输入"
@@ -372,6 +359,8 @@ read -p "提示输入"
 read -s # 输入密码使用的静默输入
 
 read -r # 反斜杠不解释为转义字符
+
+read -e # 使用Readline的方式编辑输入
 
 read -u fg # 使用文件描述符输入，不是标准输入
 
