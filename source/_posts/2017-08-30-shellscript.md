@@ -109,7 +109,6 @@ echo ${string:(-2):2} # => yz
 
 ### 打印匹配的变量名
 
-
 ```bash
 ${arr[*]} # 或
 ${arr[@]} # 数组全部元素
@@ -208,6 +207,79 @@ fi
 - 脚本中末尾可以使用 `exit` 命令，接收可选退出状态数作为参数，表示脚本的退出状态。
 - 遇到 `exit`，脚本执行就会结束返回。
 
+## 循环
+
+### 循环while/until
+
+```bash
+while commands; do
+  xxx
+done
+break 跳出循环
+continue 执行下一次循环
+
+until [ xxx ]; do
+  xxx
+done < foo.txt
+
+foo.txt | while read var; do
+  xxx
+done
+```
+
+### 流程控制case
+
+```bash
+case $REPLY in
+  0) commands1 ;;
+  1) commands2 ;;
+  a|A) echo “可以使用竖线字符作为分隔符把多个模式结合起来，或条件"
+    ;;
+  [[:alpha:]]) xxx ;;
+  *) default ;;
+esac
+```
+
+添加 `;;&` 语法允许 `case` 语句继续执行下一条测试而不是简单终止运行。
+
+### for循环
+
+花括号展开
+
+```bash
+for i in {A..D}; do
+  echo $i
+done
+```
+
+路径名展开
+
+```bash
+for i in foo*.txt; do
+  echo $i
+done
+```
+
+命令替换
+
+```bash
+for i in $(strings file); do
+  len=$(echo $i | wc -c)
+  xxx
+done
+```
+strings 能为文件生成一个可读的文本格式的words列表，用于for循环
+
+C语言格式
+
+```bash
+for (( i=0; i<5; i=i+1 )); do
+  echo $i
+done
+```
+
+
+
 ## 测试
 
 `[ expression ]` 与 `test expression` 是等价的。
@@ -281,7 +353,7 @@ if (( (( INT % 2 )) == 0 )); then
 - `OR` `-o` `||`
 - `NOT` `!`
 
-### read
+## read
 
 读取键盘输入
 
@@ -312,76 +384,6 @@ IFS=":" read user pw id god name home shell <<< "$file_info"
 
 - 利用 `source` 来执行脚本是在父进程中执行的。
 - 点号执行，直接执行，或sh执行会创建子进程执行。
-
-### 循环while/until
-
-```bash
-while commands; do
-  xxx
-done
-break 跳出循环
-continue 执行下一次循环
-
-until [ xxx ]; do
-  xxx
-done < foo.txt
-
-foo.txt | while read var; do
-  xxx
-done
-```
-
-### 流程控制case
-
-```bash
-case $REPLY in
-  0) commands1 ;;
-  1) commands2 ;;
-  a|A) echo “可以使用竖线字符作为分隔符把多个模式结合起来，或条件"
-    ;;
-  [[:alpha:]]) xxx ;;
-  *) default ;;
-esac
-```
-
-添加 `;;&` 语法允许 `case` 语句继续执行下一条测试而不是简单终止运行。
-
-### for循环
-
-花括号展开
-
-```bash
-for i in {A..D}; do
-  echo $i
-done
-```
-
-路径名展开
-
-```bash
-for i in foo*.txt; do
-  echo $i
-done
-```
-
-命令替换
-
-```bash
-for i in $(strings file); do
-  len=$(echo $i | wc -c)
-  xxx
-done
-```
-strings 能为文件生成一个可读的文本格式的words列表，用于for循环
-
-C语言格式
-
-```bash
-for (( i=0; i<5; i=i+1 )); do
-  echo $i
-done
-```
-
 
 ## 脚本调试
 
