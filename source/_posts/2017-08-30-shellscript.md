@@ -1,9 +1,10 @@
 ---
 title: Shell 脚本编程
-categories:
-- 命令行工具
 tags:
-- shell
+  - shell
+categories:
+  - 命令行工具
+date: 2017-08-30 15:44:31
 ---
 
 
