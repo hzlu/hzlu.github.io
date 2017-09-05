@@ -117,4 +117,79 @@ $ filter file2 | cat file1 - file3 | lpr
 $ filter file2 | cat file1 /dev/fd/0 file3 | lpr
 ```
 
+## 文件和目录
 
+### stat fstat lstat 函数
+
+```c
+#include <sys/stat.h>
+
+/* 检测不出符号链接 */
+int stat(const char *restrict pathname, struct stat *restrict buf);
+int fstat(int filedes, struct stat *buf);
+
+/* 返回该符号链接的有关信息，而不是由该符号链接引用文件的信息 */
+int ltat(const char *restrict pathname, struct stat *restrict buf);
+```
+
+第二个参数 buf 是指针，它指向一个我们必须提供的结构。
+
+
+```c
+struct stat {
+  mode_t st_mode; /* 文件类型及权限 */
+  ino_t st_ino; /* i-node 号 */
+  dev_t st_dev; /* 设备号 */
+  dev_t st_rdev; /* 特殊文件设备号 */
+  nlink_t st_nlink; /* 链接数 */
+  uid_t st_uid; /* uid */
+  gid_t st_gid; /* gid */
+  off_t st_size; /* 普通文件大小 */
+  time_t st_atime; /* access 时间 */
+  time_t st_mtime; /* 修改时间 */
+  time_t st_ctime; /* 文件状态最新更改时间 */
+  blksize_t st_blksize; /* 最优 I/O 长度 */
+  blkcnt_t st_blocks; /* 磁盘块分配数量 */
+}
+```
+
+### 文件类型
+
+- 普通文件 (二进制可执行文件应该遵循一种格式，以使内核能确定程序文本和数据的加载位置)
+- 目录文件
+  + (包含了其他文件的名字以及指向这些文件有关信息的指针)
+  + 对目录文件具有读权限的进程可以读取该目录的内容
+  + 只有内核可以直接写目录文件
+  + 进程必须使用特定函数才能更改目录
+- 块特殊文件 block special file
+  + 提供对设备带缓冲的访问
+  + 每次访问以固定长度为单位进行
+- 字符特殊文件 character special file
+  + 提供对设备不带缓冲的访问
+  + 每次访问长度可变
+- FIFO
+  + 用于进程间通信
+  + 有时也称为 命名管道 named pipe
+- socket
+  + 用于进程间网络通信
+  + 也可用于一台宿主机上进程间非网络通信
+- 符号链接 symbolic link
+
+### 设置用户 ID 和设置组 ID
+
+- 实际用户 ID
+- 实际组 ID
+- 有效用户 ID
+- 有效组 ID
+- 附加组 ID
+- 保存的设置用户 ID
+- 保存的设置组 ID
+
+设置用户ID `set-user-ID` 位及设置组ID `set-group-ID` 位都包含在 st_mode 值中。这两位可用常量 `S_ISUID` `S_ISGID` 测试。
+
+当执行一个程序文件时，进程的有效用户ID通常就是实际用户ID ，有效组ID通常就是实际组ID。但可以在 st_mode 中设置一个特殊标志，其含义是 **当执行此文件时，将进程的有效用户ID设置为文件所有者的用户ID** `st_uid`。与此类似可以设置另一位使得进程的有效组ID 设置为文件的组所有者ID `st_gid`
+
+### 文件访问权限
+
+- 为了在一个目录中创建新文件，必须对该目录具有写权限和执行权限
+- 为了删除目录中的一个文件，必须对目录具有写权限和执行权限，对该文件本身不需要读写权限
