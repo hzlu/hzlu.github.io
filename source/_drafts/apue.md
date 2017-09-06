@@ -175,6 +175,8 @@ struct stat {
   + 也可用于一台宿主机上进程间非网络通信
 - 符号链接 symbolic link
 
+对于目录文件的执行权限就是可以在目录中搜索特定的文件名
+
 ### 设置用户 ID 和设置组 ID
 
 - 实际用户 ID
@@ -185,7 +187,12 @@ struct stat {
 - 保存的设置用户 ID
 - 保存的设置组 ID
 
-设置用户ID `set-user-ID` 位及设置组ID `set-group-ID` 位都包含在 st_mode 值中。这两位可用常量 `S_ISUID` `S_ISGID` 测试。
+**设置用户ID位** `set-user-ID` 及**设置组ID位** `set-group-ID` 都包含在 st_mode 值中。这两位可用常量 `S_ISUID` `S_ISGID` 测试。
+
+
+```bash
+chmod u+s foo # 打开设置用户ID位
+```
 
 当执行一个程序文件时，进程的有效用户ID通常就是实际用户ID ，有效组ID通常就是实际组ID。但可以在 st_mode 中设置一个特殊标志，其含义是 **当执行此文件时，将进程的有效用户ID设置为文件所有者的用户ID** `st_uid`。与此类似可以设置另一位使得进程的有效组ID 设置为文件的组所有者ID `st_gid`
 
@@ -193,3 +200,76 @@ struct stat {
 
 - 为了在一个目录中创建新文件，必须对该目录具有写权限和执行权限
 - 为了删除目录中的一个文件，必须对目录具有写权限和执行权限，对该文件本身不需要读写权限
+
+内核权限测试：
+
+1. 若进程的有效用户ID 是 0 则允许访问
+2. 若进程的有效用户ID 等于文件的所有者ID，若所有者适当的访问权限位被设置则允许访问
+3. 若进程的有效组ID 或进程的附加组ID 之一等于文件的组ID 那么根据组适当的访问权限位来判断
+4. 最后根据其他用户访问权限位进行判断
+
+### 新文件及目录的所有权
+
+新文件的用户ID 设置为进程的有效用户ID
+组ID可能是：
+
+- 进程的有效组ID
+- 新目录所在目录的组ID 向下传递组所有权
+
+### access 函数
+
+
+```c
+#include <unistd.h>
+int access(const char *pathname, int mode);
+/* 成功返回0 出错返回-1 */
+```
+
+检测访问权限，按**实际** uid 和 gid 来检测而不是进程的**有效** uid 和 gid
+
+### umask 函数
+
+```c
+#include <sys/stat.h>
+
+mode_t umask(mode_t cmask);
+/* 设置新 mask 返回以前的 mask */
+```
+
+`open` 和 `creat` 函数都有一个 mode 参数，它指定新文件的访问权限位
+
+mask 中为 1 的位，在文件 mode 中相应位一定被关闭
+
+
+```bash
+umask -S # 打印符号形式的掩码
+```
+
+### 粘住位
+
+sticky bit 在分页机制出来之前的Unix系统，设置粘住位可以使得程序的正文段始终驻留内存中加快运行速度。
+
+后来的Unix版本称它为**保存正文位** saved-text bit 因此也就有了常量 `S_ISVTX` ，现今较新的Unix系统大多数都配置有虚拟存储系统以及快速文件系统，所以不需要使用这种技术。
+
+现今系统扩展了粘住位的使用范围，允许针对目录设置，针对该目录具有写权限的用户满足下列条件之一才能删除或更名目录下的文件：
+
+- 拥有此文件
+- 拥有此目录
+- 是超级用户
+
+`/tmp` `/var/spool/uucppublic` 是设置粘住位的例子，任何用户都可以在目录中创建文件，但不能删除或更名其他人的文件。
+
+### chown fchown lchown
+
+
+```c
+#include <unistd.h>
+
+int chown(const char *pathname, uid_t owner, gid_t group);
+int fchown(int filedes, uid_t owner, gid_t group);
+int lchown(const char *pathname, uid_t owner, gid_t group);
+```
+
+若参数 owner 或 group 任意一个是 -1 则对应的ID不变
+
+如果函数由非超级用户调用，则在成功返回时，该文件的设置用户ID位 和 设置组ID位会被清除
