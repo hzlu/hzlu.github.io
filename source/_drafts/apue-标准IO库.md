@@ -242,3 +242,116 @@ int puts(const char *str);
 
 ## 标准IO的效率
 
+## 二进制IO
+
+```c
+size_t fread(void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);
+size_t fwrite(const void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);
+```
+
+- size 每个元素的长度
+- nobj 为元素个数
+- ptr 读或写的对象指针
+- 返回读或写的对象数
+- 只能用于读在同一系统上已写的数据
+- 异构系统的成员偏移量因编译器和系统而不同、存储多字节整数和浮点值的二进制格式也可能不同
+- 在不同系统之间交换二进制数据的实际解决方式是使用较高级的协议
+
+## 定位流
+
+```c
+long ftell(FILE *fp);
+
+int fseek(FILE *fp, long offset, int whence);
+
+void rewind(FILE *fp);
+```
+
+## 格式化IO
+
+```c
+#include <stdio.h>
+
+int printf(const char *restrict format, ...);
+int fprintf(FILE *restrict fp, const char *restrict format, ...);
+int sprintf(char *restrict buf, const char *restrict format, ...);
+
+int snprintf(char *restrict buf, size_t n, const char *restrict format, ...);
+```
+
+- printf 将格式化数据写到标准输出
+- fprintf 写到指定流
+- sprintf 将格式化字符送入数组buf中，在该数组的尾端自动加一个null字节
+- sprintf 可能会造成buf 指向的缓冲区溢出，调用者有责任确保缓冲区足够大
+- snprintf 缓冲区长度是一个显式参数n 超过缓冲区尾端写的字符会被丢弃
+- 以上函数返回输出字节数，但不计算null字节，发生编码错误会返回负值
+
+### 格式化输入
+
+```c
+int scanf(const char *restrict format, ...);
+int fscanf(FILE *restrict fp, const char *restrict format, ...);
+int sscanf(const char *restrict buf, const char *restrict format, ...);
+```
+
+类型转换
+
+- d 有符号十进制
+- i 有符号十进制，基数由输入格式决定
+- o 无符号八进制
+- u 无符号十进制
+- x 无符号十六进制
+- a A e E f F g G 浮点数
+- c 字符
+- s 字符串
+- p void指针
+- % %字符
+- C 宽字符
+- S 宽字符
+- [ 匹配列出的字符序列
+
+## 实现细节
+
+标准IO库最终要调用IO例程，每个标准IO流都有一个与其相关联的文件描述符
+
+可以对一个流调用fileno函数获得其描述符。
+
+```c
+int fileno(FILE *fp);
+```
+
+## 临时文件
+
+```c
+char *tmpnam(char *ptr);
+FILE *tmpfile(void);
+```
+
+- tmpnam 产生一个有效路径名字符串
+- ptr是NULL 则路径名放在一个静态区中，指向静态区的指针作为函数值返回
+- 若ptr不是NULL则认为它指向长度至少是L_tmpnam个字符的数组，路径名放数组中，ptr也作为函数值返回
+- tmpfile创建一个 *临时二进制文件* `wb+` 在关闭该文件或程序结束时自动删除这种文件
+- tmpfile的实现
+  + 先调用tmpnam产生唯一路径名
+  + 然后用该路径名创建一个文件
+  + 并立即unlink
+  + 解除链接不会删除内容，关闭文件时才删除
+
+### tempnam 函数
+
+```c
+char *tempnam(const char *directory, const char *prefix);
+int mkstemp(char *template);
+```
+是tmpnam的一个变体，允许指定目录和前缀
+
+- 如果定义了环境变量TMPDIR 则用其作为目录
+- 如果directory非null 则作为目录
+- 将`<stdio.h>` 中的字符串 P_tmpdir 作为目录
+- 将本地目录 `/tmp` 用作目录
+- 如果prefix非null 它应该最多包含5个字符的字符串
+- 该函数调用 malloc 函数分配动态存储区，用其存放构造的路径名
+- mkstemp 返回文件描述符，并且创建的临时文件不会自动被删除
+- tmpnam和tempnam的不足之处：在返回唯一路径名和应用程序用该路径名创建文件之间有一个时间窗口，在这期间另一进程可能创建同名文件
+- tempfile 和 mkstemp 不会有这种问题
+
