@@ -138,20 +138,41 @@
    */
 
   function initTocButton () {
-    var tocButton = document.getElementById('toc-button');
-    var tocList = document.getElementById('toc-list');
-    var content = document.querySelector('.content');
-    tocButton && tocButton.addEventListener('click', function () {
-      if (tocList.style.display != 'none') {
-        content.classList.remove('with-sidebar');
-        tocList.style.display = 'none';
-        tocButton.innerText = '显示文章目录';
-      } else {
+    const tocButton = document.getElementById('toc-button');
+    const tocList = document.getElementById('toc-list');
+    const content = document.querySelector('.content');
+    function toggleToc(show) {
+      if (show) {
         content.classList.add('with-sidebar');
         tocList.style.display = 'block';
         tocButton.innerText = '隐藏文章目录';
+      } else {
+        content.classList.remove('with-sidebar');
+        tocList.style.display = 'none';
+        tocButton.innerText = '显示文章目录';
+      }
+    }
+    tocButton && tocButton.addEventListener('click', function () {
+      if (tocList.style.display == 'block') {
+        toggleToc(false);
+      } else {
+        toggleToc(true);
       }
     });
+  }
+
+  const progressBar = document.querySelector('.progress-bar');
+  function updateProgressBar() {
+    const h = document.documentElement;
+    const b = document.body;
+    const st = 'scrollTop';
+    const sh = 'scrollHeight';
+    const percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+
+    progressBar.style.width = `${percent}%`;
+  }
+  if (progressBar) {
+    window.addEventListener('scroll', updateProgressBar);
   }
 
   /**

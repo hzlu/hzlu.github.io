@@ -22,7 +22,7 @@
 .content
   position: relative
   padding: 2.2em 0
-  max-width: 600px
+  max-width: 700px
   margin: 0 auto
   padding-left: 30px
   &.api
@@ -166,6 +166,13 @@
         content: '\f00c'
         font-family: FontAwesome
         background-color: $green
+  .progress-bar
+    position: fixed
+    top: 0
+    left: 0
+    height: 3px
+    background-color: $green
+    z-index: 99
 
 .guide-links
   margin-top: 2em
@@ -217,7 +224,7 @@
   .highlight pre
     padding: 1.2em 1em
   .content
-    padding-left 0
+    padding-left: 0
     &.with-sidebar
       margin: auto
     h2, h3

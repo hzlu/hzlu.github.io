@@ -1,11 +1,12 @@
 <div class="content with-sidebar blog post">
   <h1><%- page.title %></h1>
   <h4>
-    <button id="toc-button" class="toc-button">隐藏文章目录</button>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
     &nbsp;&nbsp;
     <%- page.date.format('YYYY-MM-DD') %>
   </h4>
   <%- page.content %>
+  <div class="progress-bar"></div>
   <% if (page.comments && config.disqus_shortname){ %>
   <section id="comments">
     <div id="disqus_thread">
