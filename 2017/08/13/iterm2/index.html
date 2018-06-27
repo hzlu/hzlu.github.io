@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>iTerm2 操作小结 - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="iTerm2 操作小结 — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="iTerm2 操作小结 — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#标签页与窗口"><span class="my-toc-text">标签页与窗口</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#移动命令"><span class="my-toc-text">移动命令</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#删除命令"><span class="my-toc-text">删除命令</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#粘贴命令"><span class="my-toc-text">粘贴命令</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#清屏与撤销命令"><span class="my-toc-text">清屏与撤销命令</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#搜索与历史命令"><span class="my-toc-text">搜索与历史命令</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>iTerm2 操作小结</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-13
+  </h4>
+  <h2 id="标签页与窗口"><a href="#标签页与窗口" class="headerlink" title="标签页与窗口"></a>标签页与窗口</h2><table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>快捷方式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前一个标签页</td>
+<td><code>⌘</code>+ <code>←</code></td>
+</tr>
+<tr>
+<td>后一个标签页</td>
+<td><code>⌘</code>+ <code>→</code></td>
+</tr>
+<tr>
+<td>切换到标签页</td>
+<td><code>⌘</code> + <code>Number</code></td>
+</tr>
+<tr>
+<td>切换到窗口</td>
+<td><code>⌘</code> + <code>Option</code> + <code>Number</code></td>
+</tr>
+<tr>
+<td>根据方向切换到面板</td>
+<td><code>⌘</code> + <code>Option</code> + <code>方向键</code></td>
+</tr>
+<tr>
+<td>切换到使用过的面板</td>
+<td><code>⌘</code> + <code>]</code> , <code>⌘</code> + <code>[</code></td>
+</tr>
+<tr>
+<td>水平切分窗口 (same profile)</td>
+<td><code>⌘</code> + <code>Option</code> + <code>d</code></td>
+</tr>
+<tr>
+<td>垂直切分窗口 (same profile)</td>
+<td><code>⌘</code> + <code>d</code></td>
+</tr>
+<tr>
+<td>Set Mark</td>
+<td><code>⌘</code> + <code>M</code></td>
+</tr>
+<tr>
+<td>Jump to Mark</td>
+<td><code>⌘</code> + <code>J</code></td>
+</tr>
+<tr>
+<td>Split Window Horizontally (new profile)</td>
+<td><code>Option</code> + <code>⌘</code> + <code>H</code></td>
+</tr>
+<tr>
+<td>Split Window Vertically (new profile)</td>
+<td><code>Option</code> + <code>⌘</code> + <code>V</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="移动命令"><a href="#移动命令" class="headerlink" title="移动命令"></a>移动命令</h2><table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>快捷方式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>移动到行首</td>
+<td><code>Ctrl</code> + <code>a</code></td>
+</tr>
+<tr>
+<td>移动到行尾</td>
+<td><code>Ctrl</code> + <code>e</code></td>
+</tr>
+<tr>
+<td>向后移动字符</td>
+<td><code>Ctrl</code> + <code>b</code></td>
+</tr>
+<tr>
+<td>向前移动字符</td>
+<td><code>Ctrl</code> + <code>f</code></td>
+</tr>
+<tr>
+<td>向前移动一个词</td>
+<td><code>Option</code> + <code>f</code></td>
+</tr>
+<tr>
+<td>向后移动一个词</td>
+<td><code>Option</code> + <code>b</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong> 需要先设置 <code>Option</code> 键为 <code>+Esc</code> ，在 <code>Preferences &gt; Profiles &gt; Keys</code> 中设置 </strong></p>
+<h2 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h2><table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>快捷方式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>删除当前字符</td>
+<td><code>Ctrl</code> + <code>d</code></td>
+</tr>
+<tr>
+<td>向前删除字符</td>
+<td><code>Ctrl</code> + <code>h</code></td>
+</tr>
+<tr>
+<td>向前删除单词</td>
+<td><code>Ctrl</code> + <code>w</code> 或 <code>Option</code> + <code>Backspace</code></td>
+</tr>
+<tr>
+<td>向后删除单词</td>
+<td><code>Option</code> + <code>d</code></td>
+</tr>
+<tr>
+<td>删除到行尾</td>
+<td><code>Ctrl</code> + <code>k</code></td>
+</tr>
+<tr>
+<td>删除整行</td>
+<td><code>Ctrl</code> + <code>u</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="粘贴命令"><a href="#粘贴命令" class="headerlink" title="粘贴命令"></a>粘贴命令</h2><table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>快捷方式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loop through and paste previously cut text</td>
+<td><code>Option</code> + <code>y</code></td>
+</tr>
+<tr>
+<td>Loop through and paste the last argument of previous commands</td>
+<td><code>Option</code> + <code>.</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="清屏与撤销命令"><a href="#清屏与撤销命令" class="headerlink" title="清屏与撤销命令"></a>清屏与撤销命令</h2><table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>快捷方式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>清屏</td>
+<td><code>⌘</code> + <code>r</code> 或 <code>Ctrl</code> +<code>l</code></td>
+</tr>
+<tr>
+<td>清除当前窗口buffer</td>
+<td><code>⌘</code> + <code>k</code></td>
+</tr>
+<tr>
+<td>撤销操作</td>
+<td><code>Ctrl</code> + <code>-</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="搜索与历史命令"><a href="#搜索与历史命令" class="headerlink" title="搜索与历史命令"></a>搜索与历史命令</h2><table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>快捷方式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>历史输入搜索</td>
+<td><code>Ctrl</code> + <code>r</code> 输入搜索命令; 重复触发 <code>Ctrl</code> + <code>r</code> 遍历结果</td>
+</tr>
+<tr>
+<td>最后记住的搜索命令</td>
+<td>重复输入 <code>Ctrl</code> + <code>r</code></td>
+</tr>
+<tr>
+<td>End the search at current history entry</td>
+<td><code>Ctrl</code> + <code>y</code></td>
+</tr>
+<tr>
+<td>取消搜索并返回原始命令</td>
+<td><code>Ctrl</code> + <code>g</code></td>
+</tr>
+<tr>
+<td>上一条命令</td>
+<td><code>Ctrl</code> + <code>p</code></td>
+</tr>
+<tr>
+<td>弹出历史命令选项列表</td>
+<td><code>⌘</code> + <code>;</code></td>
+</tr>
+<tr>
+<td>弹出剪切板</td>
+<td><code>⌘</code> + <code>shift</code> + <code>h</code></td>
+</tr>
+<tr>
+<td>扩展搜索匹配</td>
+<td><code>tab</code> 向后扩展搜索匹配，<code>shift</code> + <code>tab</code>向前扩展</td>
+</tr>
+<tr>
+<td>把匹配粘贴到输入行</td>
+<td><code>option</code> + <code>enter</code></td>
+</tr>
+<tr>
+<td>进入回放模式</td>
+<td><code>cmd</code> + <code>option</code> + <code>b</code></td>
+</tr>
+<tr>
+<td>进入<strong>espose tab</strong> 模式</td>
+<td><code>cmd</code> + <code>option</code> + <code>e</code></td>
+</tr>
+<tr>
+<td>高亮当前光标位置</td>
+<td><code>⌘</code> + <code>/</code></td>
+</tr>
+<tr>
+<td>高亮当前光标行</td>
+<td><code>⌘</code> + <code>alt</code> + <code>;</code></td>
+</tr>
+<tr>
+<td>显示右侧时间栏</td>
+<td><code>⌘</code> + <code>shift</code> + <code>e</code></td>
+</tr>
+</tbody>
+</table>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/13/iterm2/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

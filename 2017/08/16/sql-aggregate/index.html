@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SQL 函数 - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="SQL 函数 — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SQL 函数 — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#NULL-函数"><span class="my-toc-text">NULL 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#DATETIME-类型与-TIMESTAMP-类型的区别"><span class="my-toc-text">DATETIME 类型与 TIMESTAMP 类型的区别</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#Aggregate-functions"><span class="my-toc-text">Aggregate functions</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#AVG"><span class="my-toc-text">AVG</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#COUNT"><span class="my-toc-text">COUNT</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#FIRST"><span class="my-toc-text">FIRST</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#LAST"><span class="my-toc-text">LAST</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#MAX"><span class="my-toc-text">MAX</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#MIN"><span class="my-toc-text">MIN</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#SUM"><span class="my-toc-text">SUM</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#HAVING-子句"><span class="my-toc-text">HAVING 子句</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#Scalar-functions"><span class="my-toc-text">Scalar functions</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#UCASE"><span class="my-toc-text">UCASE</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#LCASE"><span class="my-toc-text">LCASE</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#MID"><span class="my-toc-text">MID</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#LENGTH"><span class="my-toc-text">LENGTH</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#ROUND"><span class="my-toc-text">ROUND</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#日期计算"><span class="my-toc-text">日期计算</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#TIMESTAMPDIFF"><span class="my-toc-text">TIMESTAMPDIFF</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#DATEDIFF"><span class="my-toc-text">DATEDIFF</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#YEAR-MONTH-DAY-DATE-TIME"><span class="my-toc-text">YEAR / MONTH / DAY / DATE / TIME</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#CONVERT-TZ"><span class="my-toc-text">CONVERT_TZ</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#ADDDATE-SUBDATE"><span class="my-toc-text">ADDDATE / SUBDATE</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#ADDTIME"><span class="my-toc-text">ADDTIME</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#NOW-CURDATE-CURTIME"><span class="my-toc-text">NOW / CURDATE / CURTIME /</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#DATE-FORMAT"><span class="my-toc-text">DATE_FORMAT</span></a></li></ol></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>SQL 函数</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-16
+  </h4>
+  <h2 id="NULL-函数"><a href="#NULL-函数" class="headerlink" title="NULL 函数"></a>NULL 函数</h2><blockquote>
+<p>NULL 值不能用等于 <code>=</code> 或 <code>!=</code> 来判断</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">IFNULL(col, val) # 如果列的值为 NULL 则取值 val</div><div class="line"></div><div class="line">COALESCE(col, val)</div></pre></td></tr></table></figure>
+<h2 id="DATETIME-类型与-TIMESTAMP-类型的区别"><a href="#DATETIME-类型与-TIMESTAMP-类型的区别" class="headerlink" title="DATETIME 类型与 TIMESTAMP 类型的区别"></a>DATETIME 类型与 TIMESTAMP 类型的区别</h2><ul>
+<li>两种格式都会返回相同的格式 <strong>YYYY-MM-DD HH:MM:SS</strong></li>
+</ul>
+<blockquote>
+<p>Timestamps in MySQL generally used to track changes to records, and are often updated every time the record is changed. If you want to store a specific value you should use a datetime field.</p>
+<p>If you meant that you want to decide between using a UNIX timestamp or a native MySQL datetime field, go with the <strong>native format</strong>.</p>
+<p>You can do calculations within MySQL that way</p>
+<p><code>(&quot;SELECT DATE_ADD(my_datetime, INTERVAL 1 DAY)&quot;)</code></p>
+<p>and it is simple to change the format of the value to a UNIX timestamp</p>
+<p><code>(&quot;SELECT UNIX_TIMESTAMP(my_datetime)&quot;)</code></p>
+<p>when you query the record if you want to operate on it with PHP.</p>
+<p><a href="https://stackoverflow.com/a/409305" target="_blank" rel="external">参考</a></p>
+</blockquote>
+<h2 id="Aggregate-functions"><a href="#Aggregate-functions" class="headerlink" title="Aggregate functions"></a>Aggregate functions</h2><p>操作一系列的值，返回单一值，通常结合 <code>GROUP BY</code> 语句。</p>
+<p>可以对一个以上的列应用 <code>GROUP BY</code> 语句</p>
+<h3 id="AVG"><a href="#AVG" class="headerlink" title="AVG"></a>AVG</h3><h3 id="COUNT"><a href="#COUNT" class="headerlink" title="COUNT"></a>COUNT</h3><p>返回指定列的值的数目，<strong> NULL 不计入</strong></p>
+<p><code>COUNT(DISTINCT col)</code> 函数返回指定列的<strong>不同值</strong>的数目</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT COUNT(DISTINCT col) FROM table_name;</div></pre></td></tr></table></figure>
+<h3 id="FIRST"><a href="#FIRST" class="headerlink" title="FIRST"></a>FIRST</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT FIRST(col) FROM table_name;</div></pre></td></tr></table></figure>
+<h3 id="LAST"><a href="#LAST" class="headerlink" title="LAST"></a>LAST</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT LAST(col) FROM table_name;</div></pre></td></tr></table></figure>
+<h3 id="MAX"><a href="#MAX" class="headerlink" title="MAX"></a>MAX</h3><p>MAX 函数返回一列中的最大值，<strong> NULL 值不包括在计算中</strong></p>
+<blockquote>
+<p>MIN MAX 用于文本列中，以获得按字母顺序排列的最低或最高值</p>
+</blockquote>
+<h3 id="MIN"><a href="#MIN" class="headerlink" title="MIN"></a>MIN</h3><h3 id="SUM"><a href="#SUM" class="headerlink" title="SUM"></a>SUM</h3><h3 id="HAVING-子句"><a href="#HAVING-子句" class="headerlink" title="HAVING 子句"></a>HAVING 子句</h3><p>在 SQL 中增加 HAVING 子句的原因是：WHERE 关键字无法与 Aggregate function 一起使用。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT col1, SUM(col2) FROM table_name</div><div class="line">GROUP BY col1</div><div class="line">HAVING SUM(col2) &gt; 1000;</div></pre></td></tr></table></figure>
+<h2 id="Scalar-functions"><a href="#Scalar-functions" class="headerlink" title="Scalar functions"></a>Scalar functions</h2><p>操作单一的值，返回单一的值。</p>
+<h3 id="UCASE"><a href="#UCASE" class="headerlink" title="UCASE"></a>UCASE</h3><p>UCASE 函数把字段值转为大写</p>
+<h3 id="LCASE"><a href="#LCASE" class="headerlink" title="LCASE"></a>LCASE</h3><p>LCASE 函数把字段值转为小写</p>
+<h3 id="MID"><a href="#MID" class="headerlink" title="MID"></a>MID</h3><p>用于从文本字段中提取字符</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT MID(col, start[, length]) FROM table_name;</div></pre></td></tr></table></figure>
+<ul>
+<li>col 必需，要提取字符的字段</li>
+<li>start 必需，开始的位置，从1开始</li>
+<li>length 可选，返回字符数</li>
+</ul>
+<h3 id="LENGTH"><a href="#LENGTH" class="headerlink" title="LENGTH"></a>LENGTH</h3><p>返回文本字段值的长度</p>
+<h3 id="ROUND"><a href="#ROUND" class="headerlink" title="ROUND"></a>ROUND</h3><p>把数值字段舍入指定的小数位数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT ROUND(col, decimals) FROM table_name;</div></pre></td></tr></table></figure>
+<ul>
+<li>col 必需</li>
+<li>decimals 可选，保留的小数位数</li>
+</ul>
+<h2 id="日期计算"><a href="#日期计算" class="headerlink" title="日期计算"></a>日期计算</h2><h3 id="TIMESTAMPDIFF"><a href="#TIMESTAMPDIFF" class="headerlink" title="TIMESTAMPDIFF"></a>TIMESTAMPDIFF</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT TIMESTAMPDIFF(DAY, updatedAt, CURDATE()) as days from admins;</div></pre></td></tr></table></figure>
+<ul>
+<li>unit 比较的单位 SECOND / MINUTE / HOUR / DAY / MONTH / YEAR</li>
+<li>from_time 比较的开始时间</li>
+<li>to_time 比较的结束时间</li>
+</ul>
+<h3 id="DATEDIFF"><a href="#DATEDIFF" class="headerlink" title="DATEDIFF"></a>DATEDIFF</h3><p>DATEDIFF(expr1, expr2) returns <code>expr1 - expr2</code> expressed as a value in days.</p>
+<h3 id="YEAR-MONTH-DAY-DATE-TIME"><a href="#YEAR-MONTH-DAY-DATE-TIME" class="headerlink" title="YEAR / MONTH / DAY / DATE / TIME"></a>YEAR / MONTH / DAY / DATE / TIME</h3><p>exrtract specific part of the column.</p>
+<p><strong>注意 DATE 函数是提取日期部分</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 找出下个月生日的宠物</div><div class="line">SELECT name, birth FROM pet</div><div class="line">WHERE MONTH(birth) = MONTH(DATE_ADD(CURDATE(), INTERVAL 1 MONTH));</div><div class="line"></div><div class="line"># 另一方法，使用 MOD 函数</div><div class="line">SELECT name, birth FROM pet</div><div class="line">WHERE MONTH(birth) = MOD(MONTH(CURDATE()), 12) + 1;</div></pre></td></tr></table></figure>
+<h3 id="CONVERT-TZ"><a href="#CONVERT-TZ" class="headerlink" title="CONVERT_TZ"></a>CONVERT_TZ</h3><p>时区转换</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT CONVERT_TZ(&apos;2017-08-15 01:00:00&apos;, &apos;+00:00&apos;, &apos;+08:00&apos;);</div></pre></td></tr></table></figure>
+<h3 id="ADDDATE-SUBDATE"><a href="#ADDDATE-SUBDATE" class="headerlink" title="ADDDATE / SUBDATE"></a>ADDDATE / SUBDATE</h3><p>语法：</p>
+<ul>
+<li><code>ADDDATE(date, INTERVAL n unit)</code></li>
+<li><code>ADDDATE(expr, days)</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT DATE_ADD(&apos;2008-01-02&apos;, INTERVAL 31 DAY);</div><div class="line"> -&gt; &apos;2008-02-02&apos;</div><div class="line">SELECT ADDDATE(&apos;2008-01-02&apos;, INTERVAL 31 DAY);</div><div class="line"> -&gt; &apos;2008-02-02&apos;</div><div class="line">SELECT ADDDATE(&apos;2008-01-02&apos;, 31);</div><div class="line"> -&gt; &apos;2008-02-02&apos;</div></pre></td></tr></table></figure>
+<p>同义词：</p>
+<ul>
+<li><code>ADDDATE</code> / <code>DATE_ADD</code></li>
+<li><code>SUBDATE</code> / <code>DATE_SUB</code></li>
+</ul>
+<h3 id="ADDTIME"><a href="#ADDTIME" class="headerlink" title="ADDTIME"></a>ADDTIME</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT ADDTIME(&apos;2007-12-31 23:59:59.999999&apos;, &apos;1 1:1:1.000002&apos;);</div><div class="line"> -&gt; &apos;2008-01-02 01:01:01.000001&apos;</div><div class="line">SELECT ADDTIME(&apos;01:00:00.999999&apos;, &apos;02:00:00.999998&apos;);</div><div class="line"> -&gt; &apos;03:00:01.999997&apos;</div></pre></td></tr></table></figure>
+<h3 id="NOW-CURDATE-CURTIME"><a href="#NOW-CURDATE-CURTIME" class="headerlink" title="NOW / CURDATE / CURTIME /"></a>NOW / CURDATE / CURTIME /</h3><p>同义词：</p>
+<ul>
+<li><code>CURRENT_DATE</code> / <code>CURDATE</code></li>
+<li><code>CURRENT_TIME</code> / <code>CURTIME</code></li>
+<li><code>CURRENT_TIMESTAMP</code> / <code>NOW</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT NOW();</div><div class="line">SELECT CURDATE();</div><div class="line">SELECT CURTIME();</div></pre></td></tr></table></figure>
+<h3 id="DATE-FORMAT"><a href="#DATE-FORMAT" class="headerlink" title="DATE_FORMAT"></a>DATE_FORMAT</h3><p>格式化函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT DATE_FORMAT(NOW(), &apos;%Y-%m-%d %H:%i:%S&apos;);</div></pre></td></tr></table></figure>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/16/sql-aggregate/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

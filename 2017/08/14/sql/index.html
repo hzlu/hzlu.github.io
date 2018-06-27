@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MySQL - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="MySQL — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="MySQL — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#服务器元数据"><span class="my-toc-text">服务器元数据</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#描述表结构"><span class="my-toc-text">描述表结构</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#ALTER-TABLE"><span class="my-toc-text">ALTER TABLE</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#CONSTRAINT"><span class="my-toc-text">CONSTRAINT</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#PRIMARY-KEY"><span class="my-toc-text">PRIMARY KEY</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#UNIQUE"><span class="my-toc-text">UNIQUE</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#INDEX"><span class="my-toc-text">INDEX</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-4"><a class="my-toc-link" href="#使用全文索引语法"><span class="my-toc-text">使用全文索引语法</span></a></li></ol></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#FOREIGN-KEY"><span class="my-toc-text">FOREIGN KEY</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#CHECK"><span class="my-toc-text">CHECK</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#DEFAULT"><span class="my-toc-text">DEFAULT</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#视图"><span class="my-toc-text">视图</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#管理用户"><span class="my-toc-text">管理用户</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#重新载入授权表"><span class="my-toc-text">重新载入授权表</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#查看安全策略"><span class="my-toc-text">查看安全策略</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#正则匹配"><span class="my-toc-text">正则匹配</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#事务"><span class="my-toc-text">事务</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#创建临时表"><span class="my-toc-text">创建临时表</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#复制表的思路"><span class="my-toc-text">复制表的思路</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#通过复制表删除重复数据"><span class="my-toc-text">通过复制表删除重复数据</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#导出导入数据"><span class="my-toc-text">导出导入数据</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#SELECT-INTO-OUTFILE"><span class="my-toc-text">SELECT INTO OUTFILE</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#mysqldump"><span class="my-toc-text">mysqldump</span></a></li></ol></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>MySQL</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-14
+  </h4>
+  <h2 id="服务器元数据"><a href="#服务器元数据" class="headerlink" title="服务器元数据"></a>服务器元数据</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SELECT VERSION()</code></td>
+<td>版本信息</td>
+</tr>
+<tr>
+<td><code>SELECT DATABASE()</code></td>
+<td>当前数据库名</td>
+</tr>
+<tr>
+<td><code>SELECT USER()</code></td>
+<td>当前用户名</td>
+</tr>
+<tr>
+<td><code>SHOW STATUS</code></td>
+<td>服务器状态</td>
+</tr>
+<tr>
+<td><code>SHOW VARIABLES</code></td>
+<td>配置变量</td>
+</tr>
+</tbody>
+</table>
+<h2 id="描述表结构"><a href="#描述表结构" class="headerlink" title="描述表结构"></a>描述表结构</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DESCRIBE table_name;</div><div class="line">SHOW CREATE TABLE table_name;</div><div class="line">SHOW COLUMNS FROM table_name;</div><div class="line">SHOW INDEX FROM table_name;</div><div class="line">SHOW TABLE STATUS LIKE &apos;table_name&apos;\G</div></pre></td></tr></table></figure>
+<h2 id="ALTER-TABLE"><a href="#ALTER-TABLE" class="headerlink" title="ALTER TABLE"></a>ALTER TABLE</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 添加列</div><div class="line">ALTER TABLE table_name</div><div class="line">ADD column_name datatype;</div><div class="line"></div><div class="line"># 删除列</div><div class="line">ALTER TABLE table_name</div><div class="line">DROP COLUMN column_name;</div><div class="line"></div><div class="line"># 修改列的数据类型</div><div class="line">ALTER TABLE table_name</div><div class="line">CHANGE COLUMN old_col new_col datatype;</div><div class="line"></div><div class="line"># 改变 AUTO_INCREMENT 的起始值</div><div class="line">ALTER TABLE table_name AUTO_INCREMENT=100;</div></pre></td></tr></table></figure>
+<h2 id="CONSTRAINT"><a href="#CONSTRAINT" class="headerlink" title="CONSTRAINT"></a>CONSTRAINT</h2><h3 id="PRIMARY-KEY"><a href="#PRIMARY-KEY" class="headerlink" title="PRIMARY KEY"></a>PRIMARY KEY</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ALTER TABLE table_name</div><div class="line">ADD PRIMARY KEY (col);</div><div class="line"># 或多个列定义</div><div class="line">ADD CONSTRAINT pk_name PRIMARY KEY (col1,col2);</div></pre></td></tr></table></figure>
+<p>撤销 PRIMARY KEY 约束</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ALTER TABLE table_name</div><div class="line">DROP PRIMARY KEY;</div></pre></td></tr></table></figure>
+<h3 id="UNIQUE"><a href="#UNIQUE" class="headerlink" title="UNIQUE"></a>UNIQUE</h3><p>a unique constrait is also an <strong>index</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ALTER TABLE table_name</div><div class="line">ADD UNIQUE (col);</div><div class="line"># 或命名 UNIQUE 约束，并定义多个列的 UNIQUE 约束</div><div class="line">ADD CONSTRAINT constraint_name UNIQUE (col1,col2);</div></pre></td></tr></table></figure>
+<p>要 drop 掉表中的唯一约束先要找出索引的名字，<code>Key_name</code> 便是索引的名字</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SHOW INDEX FROM table_name;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DROP INDEX index_name ON table_name;</div><div class="line"># 或者使用 alter 语法</div><div class="line">ALTER TABLE table_name</div><div class="line">DROP INDEX index_name;</div></pre></td></tr></table></figure>
+<h3 id="INDEX"><a href="#INDEX" class="headerlink" title="INDEX"></a>INDEX</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CREATE INDEX index_name</div><div class="line">ON table_name(col1,col2);</div><div class="line"></div><div class="line"># 创建唯一索引</div><div class="line">CREATE UNIQUE INDEX index_name</div><div class="line">ON table_name(column_name);</div></pre></td></tr></table></figure>
+<p>使用 <code>ALTER</code> 命令添加索引</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ALTER TABLE table_name ADD PRIMARY KEY (col...);</div><div class="line"></div><div class="line"># 唯一索引，指定索引长度</div><div class="line">ALTER TABLE table_name ADD UNIQUE index_name (col(20));</div><div class="line"></div><div class="line">ALTER TABLE table_name ADD INDEX index_name (col...);</div><div class="line"></div><div class="line"># 全文索引</div><div class="line">ALTER TABLE table_name ADD FULLTEXT index_name (col...);</div></pre></td></tr></table></figure>
+<h4 id="使用全文索引语法"><a href="#使用全文索引语法" class="headerlink" title="使用全文索引语法"></a>使用全文索引语法</h4><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT * FROM table_name</div><div class="line">WHERE MATCH(`col1`, `col2`) AGAINST(&apos;foo bar&apos;);</div></pre></td></tr></table></figure>
+<h3 id="FOREIGN-KEY"><a href="#FOREIGN-KEY" class="headerlink" title="FOREIGN KEY"></a>FOREIGN KEY</h3><p>外键约束能防止非法数据插入外键列，它必须是它指向的那个表中的值之一</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CREATE TABLE orders</div><div class="line">(</div><div class="line">o_id int NOT NULL,</div><div class="line">order_no int NOT NULL,</div><div class="line">u_id int,</div><div class="line">PRIMARY KEY (o_id),</div><div class="line">FOREIGN KEY (u_id) REFERENCES users(u_id)</div><div class="line"># 或命名外键</div><div class="line">CONSTRAINT fk_name FOREIGN KEY (u_id) REFERENCES users(u_id) ON DELETE CASCADE</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>已经存在表后添加外键约束</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ALTER TABLE table_name</div><div class="line">ADD CONSTRAINT fk_name</div><div class="line">FOREIGN KEY (u_id)</div><div class="line">REFERENCES users(u_id);</div></pre></td></tr></table></figure>
+<p>drop 掉外键约束</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ALTER TABLE table_name</div><div class="line">DROP FOREIGN KEY fk_name;</div></pre></td></tr></table></figure>
+<h3 id="CHECK"><a href="#CHECK" class="headerlink" title="CHECK"></a>CHECK</h3><p>限制列中的值的范围</p>
+<blockquote>
+<p>MySQL 不支持 check 约束，可以定义约束，但不会起作用<br>PostgreSQL 支持</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CREATE TABLE table_name</div><div class="line">(</div><div class="line">...</div><div class="line">CHECK (col1 &gt; 0)</div><div class="line">CONSTRAINT check_name CHECK (col2 &gt; 0 AND col3 = &apos;foo&apos;)</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>已存在的表添加 CHECK 约束</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ALTER TABLE table_name</div><div class="line">ADD CHECK (col1 &gt; 0);</div><div class="line"># 或命名 check</div><div class="line">CONSTRAINT check_name CHECK (col2 &gt; 0 AND col3 = &apos;foo&apos;)</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>drop 掉 check 约束</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ALTER TABLE table_name</div><div class="line">DROP CHECK check_name;</div><div class="line"># 或</div><div class="line">DROP CONSTRAINT check_name;</div></pre></td></tr></table></figure>
+<h3 id="DEFAULT"><a href="#DEFAULT" class="headerlink" title="DEFAULT"></a>DEFAULT</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ALTER TABLE table_name</div><div class="line">ALTER col SET DEFAULT &apos;value&apos;;</div><div class="line"># 或</div><div class="line">ALTER COLUMN col SET DEFAULT &apos;value&apos;;</div></pre></td></tr></table></figure>
+<p>drop DEFAULT</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">alter table table_name</div><div class="line">alter col DROP DEFAULT;</div><div class="line"># 或</div><div class="line">alter column col DROP DEFAULT;</div></pre></td></tr></table></figure>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CREATE VIEW view_name AS</div><div class="line">SELECT col1,col2 FROM table_name;</div><div class="line"></div><div class="line">SHOW CREATE TABLE view_name;</div><div class="line">SHOW CREATE VIEW view_name;</div><div class="line"></div><div class="line">ALTER VIEW view_name AS new_defination...;</div><div class="line"></div><div class="line">DROP VIEW view_name;</div></pre></td></tr></table></figure>
+<h2 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 添加用户</div><div class="line">INSERT INTO user</div><div class="line">(host, user, password, select_priv)</div><div class="line">VALUES</div><div class="line">(&apos;localhost&apos;, &apos;foo&apos;, PASSWORD(&apos;password&apos;), &apos;Y&apos;);</div><div class="line"></div><div class="line"># 添加用户</div><div class="line">CREATE USER &apos;foo&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;password&apos;;</div><div class="line"></div><div class="line"># 添加用户并指定权限</div><div class="line">GRANT ALL PRIVILEGES</div><div class="line">ON some_db.*</div><div class="line">To &apos;user&apos;@&apos;localhost&apos;</div><div class="line">IDENTIFIED BY &apos;password&apos;;</div><div class="line"></div><div class="line">GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP</div><div class="line">ON some_db.*</div><div class="line">TO &apos;foo&apos;@&apos;localhost&apos;</div><div class="line">IDENTIFIED BY &apos;password&apos;;</div><div class="line"></div><div class="line"># 显示用户权限</div><div class="line">SHOW GRANTS FOR &apos;root&apos;@&apos;localhost&apos;;</div><div class="line"></div><div class="line"># 删除用户</div><div class="line">DROP USER &apos;foo&apos;@&apos;localhost&apos;;</div></pre></td></tr></table></figure>
+<h3 id="重新载入授权表"><a href="#重新载入授权表" class="headerlink" title="重新载入授权表"></a>重新载入授权表</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
+<h3 id="查看安全策略"><a href="#查看安全策略" class="headerlink" title="查看安全策略"></a>查看安全策略</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SHOW VARIABLES LIKE &apos;validate_password%&apos; ;</div><div class="line"></div><div class="line"># 改变变量值</div><div class="line">SET GLOBAL variable=value;</div></pre></td></tr></table></figure>
+<h2 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h2><p>不同于 <code>LIKE</code> 使用 <code>REGEXP</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT col FROM table_name</div><div class="line">WHERE col REGEXP &apos;^foo.&#123;3&#125;$&apos;;</div></pre></td></tr></table></figure>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><blockquote>
+<p>只有使用了 <code>Innodb</code> 数据库引擎的数据库或表才支持事务。</p>
+</blockquote>
+<h2 id="创建临时表"><a href="#创建临时表" class="headerlink" title="创建临时表"></a>创建临时表</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CREATE TEMPORARY TABLE table_name</div><div class="line">(</div><div class="line">...</div><div class="line">)</div></pre></td></tr></table></figure>
+<h2 id="复制表的思路"><a href="#复制表的思路" class="headerlink" title="复制表的思路"></a>复制表的思路</h2><ol>
+<li>使用 <code>SHOW CREATE TABLE table_name \G</code> 获取表完整结构；</li>
+<li>修改SQL 语句的表名，并执行创建新表；</li>
+<li>执行 <code>INSERT INTO ... SELECT</code> 复制完整数据</li>
+</ol>
+<h3 id="通过复制表删除重复数据"><a href="#通过复制表删除重复数据" class="headerlink" title="通过复制表删除重复数据"></a>通过复制表删除重复数据</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">CREATE TABLE tmp</div><div class="line">SELECT col1, col2, ...</div><div class="line">FROM table_name</div><div class="line">GROUP BY (col1, col2, ...);</div><div class="line"></div><div class="line">DROP TABLE table_name;</div><div class="line"></div><div class="line">ALTER TABLE tmp RENAME TO table_name;</div></pre></td></tr></table></figure>
+<h2 id="导出导入数据"><a href="#导出导入数据" class="headerlink" title="导出导入数据"></a>导出导入数据</h2><h3 id="SELECT-INTO-OUTFILE"><a href="#SELECT-INTO-OUTFILE" class="headerlink" title="SELECT INTO OUTFILE"></a>SELECT INTO OUTFILE</h3><p>指定分隔符，导出成 CSV 格式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">SELECT * FROM table_name</div><div class="line">INTO OUTFILE &apos;/path/to/file.txt&apos;</div><div class="line">FIELDS TERMINATED BY &apos;,&apos;</div><div class="line">OPTIONALLY ENCLOSED BY &apos;&quot;&apos;</div><div class="line">LINES TERMINATED BY &apos;\r\n&apos;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">LOAD DATA LOCAL INFILE &apos;dump.txt&apos; INTO TABLE table_name;</div></pre></td></tr></table></figure>
+<h3 id="mysqldump"><a href="#mysqldump" class="headerlink" title="mysqldump"></a>mysqldump</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ mysqldump -u user -p database [table_name] &gt; dump.sql</div><div class="line">$ mysqldump -u user -p --no-create-info database [table_name] &gt; dump.sql</div><div class="line">$ mysqldump -u user -p --all-databases &gt; dump.sql</div></pre></td></tr></table></figure>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/14/sql/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

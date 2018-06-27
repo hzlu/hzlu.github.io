@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>APUE 文件和目录 - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="APUE 文件和目录 — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="APUE 文件和目录 — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#stat-fstat-lstat-函数"><span class="my-toc-text">stat fstat lstat 函数</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#文件类型"><span class="my-toc-text">文件类型</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#设置用户ID和设置组ID"><span class="my-toc-text">设置用户ID和设置组ID</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#打开设置用户id位"><span class="my-toc-text">打开设置用户id位</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#文件访问权限"><span class="my-toc-text">文件访问权限</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#文件访问权限测试"><span class="my-toc-text">文件访问权限测试</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#新文件和目录的所有权"><span class="my-toc-text">新文件和目录的所有权</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#access-函数"><span class="my-toc-text">access 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#umask-函数"><span class="my-toc-text">umask 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#chmod-fchmod-函数"><span class="my-toc-text">chmod fchmod 函数</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#改变文件的权限位要求"><span class="my-toc-text">改变文件的权限位要求</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#参数mode"><span class="my-toc-text">参数mode</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#粘滞位-S-ISVTX"><span class="my-toc-text">粘滞位 S_ISVTX</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#chmod-fchown-lchown函数"><span class="my-toc-text">chmod fchown lchown函数</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#非超级用户调用，设置位会被清除"><span class="my-toc-text">非超级用户调用，设置位会被清除</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#文件长度"><span class="my-toc-text">文件长度</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#文件空洞"><span class="my-toc-text">文件空洞</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#文件截短"><span class="my-toc-text">文件截短</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#文件系统"><span class="my-toc-text">文件系统</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#普通文件的链接计数"><span class="my-toc-text">普通文件的链接计数</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#目录的链接计数"><span class="my-toc-text">目录的链接计数</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#link-unlink-remove-rename函数"><span class="my-toc-text">link unlink remove rename函数</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#link"><span class="my-toc-text">link</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#unlink"><span class="my-toc-text">unlink</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#remove"><span class="my-toc-text">remove</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#rename"><span class="my-toc-text">rename</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#符号链接"><span class="my-toc-text">符号链接</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#symlink-和-readlink函数"><span class="my-toc-text">symlink 和 readlink函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#文件的时间"><span class="my-toc-text">文件的时间</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#utime-函数"><span class="my-toc-text">utime 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#mkdir-和-rmdir-函数"><span class="my-toc-text">mkdir 和 rmdir 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#读目录"><span class="my-toc-text">读目录</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#chdir-fchdir-getcwd-函数"><span class="my-toc-text">chdir fchdir getcwd 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#设备特殊文件"><span class="my-toc-text">设备特殊文件</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>APUE 文件和目录</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-09-22
+  </h4>
+  <h2 id="stat-fstat-lstat-函数"><a href="#stat-fstat-lstat-函数" class="headerlink" title="stat fstat lstat 函数"></a>stat fstat lstat 函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">stat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, struct stat *<span class="keyword">restrict</span> buf)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fstat</span><span class="params">(<span class="keyword">int</span> filedes, struct stat *buf)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lstat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> pathname, struct stat *<span class="keyword">restrict</span> buf)</span></span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>lstat 返回符号链接的有关信息，而不是由符号链接引用的文件的信息</li>
+<li>指针 buf 指向一个我们提供的结构</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stat</span> &#123;</span></div><div class="line">  <span class="keyword">mode_t</span> st_mode; <span class="comment">/* 文件类型 &amp; 权限位 */</span></div><div class="line">  <span class="keyword">ino_t</span> st_ino; <span class="comment">/* i节点编号 */</span></div><div class="line">  <span class="keyword">dev_t</span> st_dev; <span class="comment">/* 设备号（文件系统） */</span></div><div class="line">  <span class="keyword">dev_t</span> st_rdev; <span class="comment">/* 特殊文件设备号，XSI扩展 */</span></div><div class="line">  <span class="keyword">nlink_t</span> st_nlink; <span class="comment">/* 链接数 */</span></div><div class="line">  <span class="keyword">uid_t</span> st_uid; <span class="comment">/* 文件所有者用户ID */</span></div><div class="line">  <span class="keyword">gid_t</span> st_gid; <span class="comment">/* 文件所有者组ID */</span></div><div class="line">  <span class="keyword">off_t</span> st_size; <span class="comment">/* 普通文件字节大小 */</span></div><div class="line">  <span class="keyword">time_t</span> st_atime; <span class="comment">/* 最后访问时间 */</span></div><div class="line">  <span class="keyword">time_t</span> st_mtime; <span class="comment">/* 文件内容最后修改时间 */</span></div><div class="line">  <span class="keyword">time_t</span> st_ctime; <span class="comment">/* 文件属性最后更改时间 */</span></div><div class="line">  <span class="keyword">blksize_t</span> st_blksize; <span class="comment">/* 最优I/O块大小，XSI扩展 */</span></div><div class="line">  <span class="keyword">blkcnt_t</span> st_blocks; <span class="comment">/* 分配的块数目，XSI扩展 */</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h3><ul>
+<li>普通文件<ul>
+<li>文本还是二进制对于Unix内核而言无区别</li>
+<li>二进制可执行文件应该遵循一种格式，以使内核能确定程序文本和数据的加载位置</li>
+</ul>
+</li>
+<li>目录文件<ul>
+<li>包含了其他 <em>文件的名字</em> 以及指向这些文件有关 <em>信息的指针</em></li>
+<li>对目录文件具有 <em>读权限</em> 的进程可以读取该目录的内容</li>
+<li>只有内核可以直接写目录文件</li>
+<li>进程必须使用特定函数才能更改目录</li>
+</ul>
+</li>
+<li>块特殊文件 block special file<ul>
+<li>提供对设备 <em>带缓冲</em> 的访问</li>
+<li>每次访问以固定长度为单位进行</li>
+</ul>
+</li>
+<li>字符特殊文件 character special file<ul>
+<li>提供对设备 <em>不带缓冲</em> 的访问</li>
+<li>每次访问长度可变</li>
+</ul>
+</li>
+<li>FIFO<ul>
+<li>用于进程间通信</li>
+<li>有时也称为 <em>命名管道</em> named pipe</li>
+</ul>
+</li>
+<li>socket<ul>
+<li>用于进程间网络通信</li>
+<li>也可用于一台宿主机上进程间非网络通信</li>
+</ul>
+</li>
+<li>符号链接 symbolic link</li>
+</ul>
+<p>可用宏去确定文件类型，宏的参数是 <code>stat.st_mode</code></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISDIR(mode) ((mode) &amp; S_IFMT == S_IFDIR) <span class="comment">/* 宏的定义 */</span></span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>S_ISREG()</code></li>
+<li><code>S_ISDIR()</code></li>
+<li><code>S_ISCHR()</code> 字符特殊文件</li>
+<li><code>S_ISBLK()</code> 块特殊文件</li>
+<li><code>S_ISFIFO()</code> 管道或FIFO</li>
+<li><code>S_ISLNK()</code> 符号链接</li>
+<li><code>S_ISSOCK()</code> 套接字</li>
+</ul>
+<h2 id="设置用户ID和设置组ID"><a href="#设置用户ID和设置组ID" class="headerlink" title="设置用户ID和设置组ID"></a>设置用户ID和设置组ID</h2><ul>
+<li>我们实际上谁<ul>
+<li>实际用户 ID</li>
+<li>实际组 ID</li>
+</ul>
+</li>
+<li>用于文件访问权限检查<ul>
+<li>有效用户 ID</li>
+<li>有效组 ID</li>
+<li>附加组 ID</li>
+</ul>
+</li>
+<li><p>由exec函数保存</p>
+<ul>
+<li>保存的设置用户 ID</li>
+<li>保存的设置组 ID</li>
+<li>在执行一个程序时包含了有效用户ID 有效组ID的副本</li>
+</ul>
+</li>
+<li><p>进程的有效用户ID通常是实际用户ID</p>
+<ul>
+<li>当文件模式 <code>st_mode</code> 设置了 <em>设置用户ID</em> 或 <em>设置组ID</em> 后</li>
+<li>可以使得进程的有效用户ID 或 有效组ID 设置为 <em>文件所有者或所有组</em> 的ID</li>
+<li>这种进程是一个 <em>设置用户(组)ID程序</em></li>
+<li>可用常量<code>S_ISUID</code> 和 <code>S_ISGID</code> 测试设置ID位</li>
+</ul>
+</li>
+</ul>
+<h3 id="打开设置用户id位"><a href="#打开设置用户id位" class="headerlink" title="打开设置用户id位"></a>打开设置用户id位</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># chown u+s foo</span></div></pre></td></tr></table></figure>
+<h2 id="文件访问权限"><a href="#文件访问权限" class="headerlink" title="文件访问权限"></a>文件访问权限</h2><ul>
+<li><code>S_IRUSR</code></li>
+<li><code>S_IWUSR</code></li>
+<li><code>S_IXUSR</code></li>
+<li><code>S_IRGRP</code></li>
+<li><code>S_IWGRP</code></li>
+<li><code>S_IXGRP</code></li>
+<li><code>S_IROTH</code></li>
+<li><code>S_IWOTH</code></li>
+<li><p><code>S_IXOTH</code></p>
+</li>
+<li><p>对路径中的每个目录都应该具有 <em>执行权限</em></p>
+</li>
+<li>目录执行权限位常被称为 <em>搜索位</em></li>
+<li>对目录的读权限允许获取该目录的文件名列表 与目录执行权限不同，注意区别</li>
+<li>如果PATH环境变量指定了一个我们不具有执行权限的目录，shell不会在该目录下找到可执行文件</li>
+<li>删除一个现有的文件，必须对包含该文件的目录具有写权限和执行权限，对文件本身不需要读写权限</li>
+</ul>
+<h3 id="文件访问权限测试"><a href="#文件访问权限测试" class="headerlink" title="文件访问权限测试"></a>文件访问权限测试</h3><p>内核进行的测试是：</p>
+<ul>
+<li>若进程的有效用户ID是0 则允许访问</li>
+<li>若进程有效用户ID等于文件所有者ID，若 <em>所有者</em> 适当的访问权限(rwx)被设置，允许访问，否则拒绝访问</li>
+<li>若进程有效组ID或进程附加组ID之一等于文件组ID，若 <em>组</em> 适当的访问权限位被设置 …</li>
+<li>若其他用户适当的访问权限位被设置 …</li>
+</ul>
+<p>匹配了第二步（有效用户ID），就不会看第三步（有效组ID）</p>
+<h2 id="新文件和目录的所有权"><a href="#新文件和目录的所有权" class="headerlink" title="新文件和目录的所有权"></a>新文件和目录的所有权</h2><ul>
+<li>新文件的用户ID设置为进程的有效用户ID</li>
+<li>新文件的组ID<ul>
+<li>可以是进程的有效组ID</li>
+<li>可以是它所在目录的组ID （继承目录的组ID）</li>
+</ul>
+</li>
+</ul>
+<h2 id="access-函数"><a href="#access-函数" class="headerlink" title="access 函数"></a>access 函数</h2><p>access函数是按 <em>实际用户ID</em> 和 <em>实际组ID</em> 进行访问权限测试的<br>测试也分为四步，与上面的有效ID测试差不多，但把有效ID改为实际ID</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">access</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> mode)</span></span>;</div><div class="line"><span class="comment">/* 测试通过返回0 否则-1 */</span></div></pre></td></tr></table></figure>
+<p>mode是下面常量的 <strong>位或</strong></p>
+<ul>
+<li>R_OK</li>
+<li>W_OK</li>
+<li>X_OK</li>
+<li>F_OK 测试文件是否存在</li>
+</ul>
+<h2 id="umask-函数"><a href="#umask-函数" class="headerlink" title="umask 函数"></a>umask 函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">mode_t</span> umask(<span class="keyword">mode_t</span> cmask);</div><div class="line"><span class="comment">/* 返回以前的文件模式创建屏蔽字 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li>文件模式创建屏蔽字</li>
+<li>屏蔽字与进程相关联，umask函数则可以为进程设置屏蔽字</li>
+<li>参数 <code>cmask</code> 是由那9个常量中若干个 <em>按位或</em> 构成的</li>
+<li>屏蔽字中为1的位，在文件mode中相应位则一定被关闭</li>
+<li>更改进程的文件模式创建屏蔽字并 <em>不影响</em> 父进程的屏蔽字</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ <span class="built_in">umask</span> -S <span class="comment"># 以符号形式打印屏蔽字</span></div></pre></td></tr></table></figure>
+<h2 id="chmod-fchmod-函数"><a href="#chmod-fchmod-函数" class="headerlink" title="chmod fchmod 函数"></a>chmod fchmod 函数</h2><p>更改现有文件的访问权限</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">chmod</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchmod</span><span class="params">(<span class="keyword">int</span> filedes, <span class="keyword">mode_t</span> mode)</span></span>;</div><div class="line"><span class="comment">/* 成功返回0 否则-1 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li>新创建文件的组ID 可能不是调用进程所属的组，新文件的组ID可能是父目录的组ID</li>
+<li>如果新文件的组ID不等于进程的有效组ID或进程附加组ID中的一个，以及进程没有超级用户权限，那么 <strong>设置组ID位将自动关闭</strong></li>
+<li>防止用户创建一个设置组ID文件</li>
+<li>只有超级用户才能设置普通文件的粘滞位</li>
+</ul>
+<h3 id="改变文件的权限位要求"><a href="#改变文件的权限位要求" class="headerlink" title="改变文件的权限位要求"></a>改变文件的权限位要求</h3><ul>
+<li>进程有效用户ID 等于 文件所有者ID</li>
+<li>或者进程具有超级用户权限</li>
+</ul>
+<h3 id="参数mode"><a href="#参数mode" class="headerlink" title="参数mode"></a>参数mode</h3><p>mode 由下面常量按位或组成</p>
+<ul>
+<li>S_ISUID 执行时设置用户ID</li>
+<li>S_ISGID 执行时设置组ID</li>
+<li>S_ISVTX 保存正文常量 <em>粘滞位</em></li>
+<li>S_IRWXU 组合常量<ul>
+<li>S_IRUSR</li>
+<li>S_IWUSR</li>
+<li>S_IXUSR</li>
+</ul>
+</li>
+<li>S_IRWXG 组合常量<ul>
+<li>S_IRGRP</li>
+<li>S_IWGRP</li>
+<li>S_IXGRP</li>
+</ul>
+</li>
+<li>S_IRWXO 组合常量<ul>
+<li>S_IROTH</li>
+<li>S_IWOTH</li>
+<li>S_IXOTH</li>
+</ul>
+</li>
+</ul>
+<h2 id="粘滞位-S-ISVTX"><a href="#粘滞位-S-ISVTX" class="headerlink" title="粘滞位 S_ISVTX"></a>粘滞位 S_ISVTX</h2><p>sticky bit</p>
+<p>早期粘滞位作用</p>
+<ul>
+<li>早期的Unix系统未使用分页技术，设置了粘滞位的可执行程序正文部分（机器指令部分）会保存副本在交换区（使得下次执行程序能更快装入内存区）</li>
+<li>交换区占用连续磁盘空间，可视为连续文件（一般文件的数据块可能是随机存放的，不是连续文件）</li>
+<li>系统再次自举前，文件的正文部分总是在交换区中，所以使用了名字 <em>粘住</em> 后来称为 <em>保存正文位</em></li>
+<li>现在的Unix系统都有配置 <strong>虚拟存储系统</strong> 以及 <strong>快速文件系统</strong> 所以不再需要这种技术</li>
+</ul>
+<p>现在粘滞位的使用</p>
+<p>对目录设置粘滞位，可以保护目录下的文件不会轻易被删除或改名，需要满足以下条件才能删改：</p>
+<ul>
+<li>对目录具有写权限</li>
+<li>三选一<ul>
+<li>拥有此文件</li>
+<li>拥有此目录</li>
+<li>是超级用户</li>
+</ul>
+</li>
+</ul>
+<p>实际应用是 <code>/tmp</code> 目录的权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 设置粘滞位</span></div><div class="line">chmod +t /foo</div><div class="line">chmod 1777 /foo</div><div class="line"><span class="comment"># 清除粘滞位</span></div><div class="line">chmod -t /foo</div><div class="line">chmod 0777 /foo</div></pre></td></tr></table></figure>
+<h2 id="chmod-fchown-lchown函数"><a href="#chmod-fchown-lchown函数" class="headerlink" title="chmod fchown lchown函数"></a>chmod fchown lchown函数</h2><p>更改文件的用户ID和组ID</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">chown</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchown</span><span class="params">(<span class="keyword">int</span> filedes, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lchown</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">uid_t</span> owner, <span class="keyword">gid_t</span> group)</span></span>;</div><div class="line"><span class="comment">/* 成功返回0 否则返回-1 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li>若参数 <code>owner</code> 或 <code>group</code> 任意一个是 <em>-1</em> 则对应的ID <strong>不变</strong></li>
+</ul>
+<p>若 <code>_POSIX_CHOWN_RESTRICTED</code> 对指定的文件起作用</p>
+<ul>
+<li>只有超级用户进程能更改文件的用户ID</li>
+<li>满足以下条件，一个非超级用户进程可以更改该文件的 <strong>组ID</strong><ul>
+<li>进程拥有此文件（有效用户ID等于文件用户ID）</li>
+<li>参数owner等于-1 或文件的用户ID ，并且参数 group 等于进程的有效组ID或附加组ID之一</li>
+</ul>
+</li>
+</ul>
+<p>以上意味着当<code>_POSIX_CHOWN_RESTRICTED</code>起作用时，</p>
+<ul>
+<li>不能更改其他用户文件的用户ID</li>
+<li>可以更改你拥有的文件的组ID，但只能改到你所属的组</li>
+</ul>
+<h3 id="非超级用户调用，设置位会被清除"><a href="#非超级用户调用，设置位会被清除" class="headerlink" title="非超级用户调用，设置位会被清除"></a>非超级用户调用，设置位会被清除</h3><p>如果函数由 <em>非超级用户</em> 调用，则在成功返回时，该文件的 <em>设置用户ID位</em> 和 <em>设置组ID位</em> 会被清除</p>
+<h2 id="文件长度"><a href="#文件长度" class="headerlink" title="文件长度"></a>文件长度</h2><ul>
+<li>stat 结构成员 st_size表示</li>
+<li>以字节为单位的文件长度</li>
+<li>读文件长度为0时，将得到 end-of-file 指示</li>
+<li>此字段只对普通文件、目录文件和符号链接有意义</li>
+<li>符号链接文件长度是文件名中的实际字节数</li>
+<li>st_blksize 是对文件I/O较合适的块长度</li>
+<li>st_blocks 是分配的实际512字节块数量 (不同Unix版本其st_blocks所用单位可能不是512字节)</li>
+</ul>
+<h3 id="文件空洞"><a href="#文件空洞" class="headerlink" title="文件空洞"></a>文件空洞</h3><ul>
+<li>空洞是由所设置的偏移量超过文件尾端，并写了某些数据后造成的</li>
+<li>空洞影响文件大小，但不占用磁盘空间</li>
+</ul>
+<h2 id="文件截短"><a href="#文件截短" class="headerlink" title="文件截短"></a>文件截短</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">truncate</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">off_t</span> length)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">ftruncate</span><span class="params">(<span class="keyword">int</span> filedes, <span class="keyword">off_t</span> length)</span></span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>这两个函数将把现有文件的长度截短为length字节，超过部分不再能访问。</li>
+<li>如果length大于以前的长度，遵循XSI的系统可以增加文件长度，填入空洞。</li>
+</ul>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><ul>
+<li>一个磁盘分成一个或多个<strong>分区</strong></li>
+<li>每个分区包含一个<strong>文件系统</strong></li>
+<li>文件系统里有多个柱面组</li>
+<li>每个柱面组里有 <em>i节点部分</em> 和 <em>数据块部分</em> <em>目录块部分</em></li>
+<li>目录项指向i节点项</li>
+<li>节点项指向数据块</li>
+<li>每个i节点都有 <em>链接计数</em> （指向该i节点的目录项数）</li>
+<li>链接计数包含在 <code>st_nlink</code> 成员中，类型为 <code>nlink_t</code> 这种链接类型为 <em>硬链接</em></li>
+<li>符号链接文件的i节点中的文件类型是 <code>S_IFLNK</code> 文件实际内容包含了指向的文件的名字</li>
+<li>i节点包含的信息<ul>
+<li>文件类型</li>
+<li>文件访问权限位</li>
+<li>文件长度</li>
+<li>指向文件所占用的数据块指针</li>
+<li>但 <strong>文件名</strong> 是存放在目录项中的</li>
+<li><strong>i节点编号</strong> 是存放在目录项中的</li>
+</ul>
+</li>
+<li>i节点编号的数据类型是 <code>ino_t</code></li>
+<li>每个文件系统对它们的i节点进行编号，因此不能使一个目录项指向另一个文件系统的i节点</li>
+<li>因此硬链接不能跨文件系统</li>
+<li>在同一文件系统下为文件改名的步骤<ul>
+<li>构建一个指向现有i节点的新目录项</li>
+<li>解除旧目录项的链接</li>
+<li>这就是mv命令的通常操作</li>
+</ul>
+</li>
+</ul>
+<h3 id="普通文件的链接计数"><a href="#普通文件的链接计数" class="headerlink" title="普通文件的链接计数"></a>普通文件的链接计数</h3><p>目录块.目录项.i节点号 -&gt; i节点.数据块指针(可能有多个指针) -&gt; 文件内容数据块(可能有多个数据块)</p>
+<h3 id="目录的链接计数"><a href="#目录的链接计数" class="headerlink" title="目录的链接计数"></a>目录的链接计数</h3><p>目录块.目录项(.或..或其它目录文件).i节点号 -&gt; i节点.数据块指针 -&gt; 目录块</p>
+<ul>
+<li>任何一个叶目录的链接计数总是2</li>
+<li>父目录中的每一个子目录会使该父目录的链接计数增加1</li>
+</ul>
+<h2 id="link-unlink-remove-rename函数"><a href="#link-unlink-remove-rename函数" class="headerlink" title="link unlink remove rename函数"></a>link unlink remove rename函数</h2><h3 id="link"><a href="#link" class="headerlink" title="link"></a>link</h3><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">link</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *existingpaht, <span class="keyword">const</span> <span class="keyword">char</span> *newpath)</span></span>;</div><div class="line"><span class="comment">/* 成功返回0 否则-1 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li>创建一个指向现有文件的链接</li>
+<li>很多文件系统不允许对目录硬链接</li>
+<li>如果文件系统允许创建目录硬链接，也仅限于超级管理员</li>
+</ul>
+<h3 id="unlink"><a href="#unlink" class="headerlink" title="unlink"></a>unlink</h3><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">unlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div><div class="line"><span class="comment">/* 成功返回0 否则-1 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li>函数用于删除目录项，并将文件的链接计数减1</li>
+<li>解除链接需要对包含该目录项的<strong>目录</strong>有 <em>写</em> 和 <em>执行</em> 的权限</li>
+<li>还要看目录是否设置了粘滞位<ul>
+<li>设置了粘滞位则需要满足以下条件之一才能解除链接</li>
+<li>拥有该文件</li>
+<li>拥有该目录</li>
+<li>具有超级用户权限</li>
+</ul>
+</li>
+<li>只有当链接计数达到0，文件内容才会被删除</li>
+<li>另外如果有进程打开了该文件，内容也不能删除</li>
+<li>关闭一个文件时，<strong>内核</strong>先检查打开该文件的进程，再检查链接数，最后才决定删除</li>
+<li>这种性质经常被程序用来确保及时在程序崩溃时，程序创建的临时文件也不会遗留下来<ul>
+<li>进程用open或creat创建一个文件</li>
+<li>然后立即调用unlink</li>
+<li>当进程关闭该文件或终止时，文件内容会被删除</li>
+</ul>
+</li>
+</ul>
+<h3 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h3><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">remove</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div><div class="line"><span class="comment">/* 成功返回0 否则-1 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li>对于文件 remove 相当于 unlink</li>
+<li>对于目录 remove相当于 rmdir</li>
+<li>ISO C指定remove函数删除一个文件，原因是实现C标准的大多数非UNIX系统不支持文件链接</li>
+</ul>
+<h3 id="rename"><a href="#rename" class="headerlink" title="rename"></a>rename</h3><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rename</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *oldname, <span class="keyword">const</span> <span class="keyword">char</span> *newname)</span></span>;</div><div class="line"><span class="comment">/* 成功返回0 否则-1 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li>如果引用符号链接，则处理的是符号链接本身</li>
+<li>如果两个参数引用同一个文件，则函数不做任何更改而成功返回</li>
+<li>可以对目录改名，newname如果存在则应该是空目录，newname不能包含oldname作为起路径前缀</li>
+<li>如果newname是一个存在的文件，则会删除newname目录项，然后再更名</li>
+</ul>
+<h2 id="符号链接"><a href="#符号链接" class="headerlink" title="符号链接"></a>符号链接</h2><ul>
+<li>任何用户都可创建指向目录的符号链接</li>
+<li>没有文件系统的限制</li>
+<li>要留意某些函数是否跟随符号链接</li>
+<li>unlink 函数不跟随符号链接</li>
+<li>在一个目录中创建一个符号链接 指向父目录 会构成循环链接</li>
+<li>这种循环可以用unlink消除，但如果是硬链接就很难消除，因此不允许构造指向目录的硬链接</li>
+<li><code>ls -F</code> 会在符号链接的文件名后面加一个 <code>@</code> 符号</li>
+</ul>
+<h2 id="symlink-和-readlink函数"><a href="#symlink-和-readlink函数" class="headerlink" title="symlink 和 readlink函数"></a>symlink 和 readlink函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">symlink</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *actualpath, <span class="keyword">const</span> <span class="keyword">char</span> *sympath)</span></span>;</div><div class="line"><span class="comment">/* 成功返回0 否则-1 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li>symlink函数创建一个符号链接</li>
+<li>不要求actualpath已经存在</li>
+<li>actualpath 和 sympath 并不需要位于同一文件系统中</li>
+<li>open 函数跟随符号链接，readlink函数打开符号链接本身</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="keyword">ssize_t</span> readlink(<span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">restrict</span> pathname, <span class="keyword">char</span> *<span class="keyword">restrict</span> buf, <span class="keyword">size_t</span> bufsize);</div><div class="line"><span class="comment">/* 成功返回读到的字节数 否则-1 */</span></div></pre></td></tr></table></figure>
+<h2 id="文件的时间"><a href="#文件的时间" class="headerlink" title="文件的时间"></a>文件的时间</h2><ul>
+<li>st_atime 文件数据最后访问时间</li>
+<li>st_mtime 文件数据最后修改时间 <em>修改时间</em></li>
+<li>st_ctime i节点状态的最后修改时间 <em>状态时间</em></li>
+<li>系统不会保存i节点的最后一次访问时间 所以access 和stat函数不更改这些时间</li>
+<li>ls命令的时间选项<ul>
+<li><code>-t</code> 默认按修改时间先后排序</li>
+<li><code>-u</code> 按访问时间排序</li>
+<li><code>-c</code> 按状态更改时间排序</li>
+</ul>
+</li>
+</ul>
+<h2 id="utime-函数"><a href="#utime-函数" class="headerlink" title="utime 函数"></a>utime 函数</h2><p>utime函数用来更改一个文件的访问时间和修改时间</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utime.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">utime</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">const</span> struct utimbuf *times)</span></span>;</div><div class="line"><span class="comment">/* 成功返回0 否则-1 */</span></div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">utimbuf</span> &#123;</span></div><div class="line">  <span class="keyword">time_t</span> actime; <span class="comment">/* access time 访问时间 */</span></div><div class="line">  <span class="keyword">time_t</span> modtime; <span class="comment">/* modification time 修改时间 */</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>权限要求：进程的有效用户ID必须等于文件的所有者ID 或超级用户进程</li>
+<li>如果times指针是一个空指针 则两个时间都设置为当前时间</li>
+<li>当调用utime函数时，文件的状态修改时间会自动更新</li>
+</ul>
+<h2 id="mkdir-和-rmdir-函数"><a href="#mkdir-和-rmdir-函数" class="headerlink" title="mkdir 和 rmdir 函数"></a>mkdir 和 rmdir 函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>该函数创建一个新的空目录，其中 . 和 .. 目录项会自动创建</li>
+<li>所指定的文件访问权限 mode 由 <em>进程</em> 的 <em>文件模式创建屏蔽字</em> 修改</li>
+<li>目录通常至少要设置一个 <em>执行权限位</em> 以允许访问该目录中的文件名</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rmdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>删除一个空目录</li>
+<li>使目录的链接计数为0，目录中不能再创建新文件，进程关闭后释放目录占用的空间</li>
+</ul>
+<h2 id="读目录"><a href="#读目录" class="headerlink" title="读目录"></a>读目录</h2><ul>
+<li>对目录有访问权限的用户可以读目录</li>
+<li>但只有内核可以写目录，为了防止文件系统产生混乱</li>
+<li>目录的写权限不表示写目录本身，只是创建新文件和删除文件</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dirent.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function">DIR *<span class="title">opendir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div><div class="line"><span class="comment">/* 成功返回指针，出错返回nul */</span></div><div class="line"></div><div class="line"><span class="function">struct dirent *<span class="title">readdir</span><span class="params">(DIR *dp)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">rewinddir</span><span class="params">(DIR *dp)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">closedir</span><span class="params">(DIR *dp)</span></span>;</div><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">telldir</span><span class="params">(DIR *dp)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">seekdir</span><span class="params">(DIR *dp, <span class="keyword">long</span> loc)</span></span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>DIR 结构是一个内部结构</li>
+<li>该结构保存当前正被读的目录的有关信息</li>
+<li>作用类似 FILE 结构</li>
+<li>目录中各目录项的顺序与实现有关，通常不按字母排序</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">dirent</span> &#123;</span></div><div class="line">  <span class="keyword">ino_t</span> d_ino;</div><div class="line">  <span class="keyword">char</span> d_name[NAME_MAX + <span class="number">1</span>];</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="chdir-fchdir-getcwd-函数"><a href="#chdir-fchdir-getcwd-函数" class="headerlink" title="chdir fchdir getcwd 函数"></a>chdir fchdir getcwd 函数</h2><ul>
+<li>每个进程都有一个当前工作目录</li>
+<li>此目录是搜索相对路径的起点</li>
+<li>当前工作目录是进程的一个属性</li>
+<li>起始目录（口令文件中登录项的一个字段）是登录名的一个属性</li>
+<li>chdir fchdir 函数可以更改当前工作目录</li>
+<li>当前工作目录只影响调用chdir的进城本身，对其他进程不影响</li>
+<li>内核保持有当前工作目录的信息，但只保存指向该目录v节点的指针，并不保存目录名</li>
+<li>getcwd 函数返回当前工作目录的完成路径名</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">chdir</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fchdir</span><span class="params">(<span class="keyword">int</span> filedes)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">getcwd</span><span class="params">(<span class="keyword">char</span> *buf, <span class="keyword">size_t</span> size)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">/* 缓冲地址buf 缓冲长度 size */</span></div><div class="line"><span class="comment">/* 缓冲必须有足够长度容纳绝对路径名再加上一个null终止字符 */</span></div></pre></td></tr></table></figure>
+<h2 id="设备特殊文件"><a href="#设备特殊文件" class="headerlink" title="设备特殊文件"></a>设备特殊文件</h2><ul>
+<li>文件系统由主、次设备号表示</li>
+<li>设备号所用的数据类型是 dev_t</li>
+<li>主设备号标识设备驱动程序</li>
+<li>次设备号标识特定的子设备</li>
+<li>同一磁盘驱动上各个文件系统有相同的主设备号，次设备号不同</li>
+<li>宏 major 宏 minor 访问主次设备号</li>
+<li>文件名相关联的 st_dev 值是文件系统的设备号</li>
+<li>只有字符特殊文件和块特殊文件才有 st_rdev 值，此值包含实际设备的设备号</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line">major(buf.st_dev);</div><div class="line">minor(buf.st_dev);</div></pre></td></tr></table></figure>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/09/22/apue-文件和目录/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

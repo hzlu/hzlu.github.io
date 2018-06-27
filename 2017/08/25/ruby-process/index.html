@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>《理解Unix进程》笔记 - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="《理解Unix进程》笔记 — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="《理解Unix进程》笔记 — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#基础知识"><span class="my-toc-text">基础知识</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#进程都有进程指示符pid"><span class="my-toc-text">进程都有进程指示符pid</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#父进程"><span class="my-toc-text">父进程</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#文件描述符"><span class="my-toc-text">文件描述符</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#标准流"><span class="my-toc-text">标准流</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#进程有资源限制"><span class="my-toc-text">进程有资源限制</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#软限制soft-limit"><span class="my-toc-text">软限制soft limit</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#硬限制hard-limit"><span class="my-toc-text">硬限制hard limit</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#其他的资源限制"><span class="my-toc-text">其他的资源限制</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#进程的环境变量"><span class="my-toc-text">进程的环境变量</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#环境变量实际应用"><span class="my-toc-text">环境变量实际应用</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#传递给进程的参数"><span class="my-toc-text">传递给进程的参数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#进程名"><span class="my-toc-text">进程名</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#进程有退出码"><span class="my-toc-text">进程有退出码</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Kernel-exit"><span class="my-toc-text">Kernel#exit</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Kernel-exit-1"><span class="my-toc-text">Kernel#exit!</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Kernel-abort"><span class="my-toc-text">Kernel#abort</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#raise"><span class="my-toc-text">raise</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#进程衍生forking"><span class="my-toc-text">进程衍生forking</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#孤儿进程"><span class="my-toc-text">孤儿进程</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#写时复制CoW"><span class="my-toc-text">写时复制CoW</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#进程等待Process-wait"><span class="my-toc-text">进程等待Process.wait</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Process-wait2"><span class="my-toc-text">Process.wait2</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Process-waitpid"><span class="my-toc-text">Process.waitpid</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#竞争条件"><span class="my-toc-text">竞争条件</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#僵尸进程"><span class="my-toc-text">僵尸进程</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#Unix信号"><span class="my-toc-text">Unix信号</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#信号并发传递"><span class="my-toc-text">信号并发传递</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#信号基本概念"><span class="my-toc-text">信号基本概念</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#重新定义信号的行为"><span class="my-toc-text">重新定义信号的行为</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#进程间通信"><span class="my-toc-text">进程间通信</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#管道"><span class="my-toc-text">管道</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#共享管道"><span class="my-toc-text">共享管道</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#SOCKET通信"><span class="my-toc-text">SOCKET通信</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#守护进程"><span class="my-toc-text">守护进程</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#调用Process-setsid的作用"><span class="my-toc-text">调用Process.setsid的作用</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#进程组和会话组"><span class="my-toc-text">进程组和会话组</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-4"><a class="my-toc-link" href="#进程组"><span class="my-toc-text">进程组</span></a></li><li class="my-toc-item my-toc-level-4"><a class="my-toc-link" href="#会话组"><span class="my-toc-text">会话组</span></a></li></ol></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#生成终端进程"><span class="my-toc-text">生成终端进程</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Kernel"><span class="my-toc-text">Kernel#`</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#x-cmd"><span class="my-toc-text">%x( cmd )</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Kernel-system"><span class="my-toc-text">Kernel#system</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#exec"><span class="my-toc-text">exec</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Process-spawn"><span class="my-toc-text">Process.spawn</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#IO-popen"><span class="my-toc-text">IO.popen</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Open3-popen3"><span class="my-toc-text">Open3.popen3</span></a></li></ol></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>《理解Unix进程》笔记</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-25
+  </h4>
+  <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><ol>
+<li>Unix系统组成：用户空间<code>userland</code>与内核<code>kernel</code>。</li>
+<li>内核是处在硬件之上的层，内核管理硬件，但程序不可直接访问内核，而是通过<strong>系统调用</strong>来进行通信。</li>
+</ol>
+<h2 id="进程都有进程指示符pid"><a href="#进程都有进程指示符pid" class="headerlink" title="进程都有进程指示符pid"></a>进程都有进程指示符<code>pid</code></h2><p>内核把所有的进程都看成数字，这个数字就是进程指示符。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">puts Process.pid  <span class="comment">#在irb中执行，打印当前irb进程的进程ID</span></div></pre></td></tr></table></figure>
+<p>Ruby的<code>Process.pid</code>封装了<strong>系统调用</strong><code>getpid</code>，Ruby也有一个全局变量<code>$$</code>保存了当前进程的指示符。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ ps -p &lt;pid-of-irb-process&gt;</div><div class="line"><span class="comment"># 在命令行中执行，替换pid，打印刚才的irb进程</span></div></pre></td></tr></table></figure>
+<h2 id="父进程"><a href="#父进程" class="headerlink" title="父进程"></a>父进程</h2><p>系统中运行的每一个进程都有<strong>父进程</strong>。父进程标识符<code>ppid</code>。<br>大多数情况下，进程A的父进程就是调用A进程的进程。比如，<code>iTerm</code>进程是<code>zsh</code>进程的<strong>父进程</strong>，在zsh中执行<code>ls</code>命令，<code>ls</code>进程的<strong>父进程</strong>就是<code>zsh</code>进程。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">puts Process.ppid <span class="comment"># 打印当前进程的父进程id</span></div></pre></td></tr></table></figure>
+<p>Ruby的<code>Process.ppid</code>是对应系统调用<code>getppid</code>。</p>
+<h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p><strong>文件描述符代表打开的文件</strong>。</p>
+<p>在一个进程中打开一个文件（设备，管道，socket等）就会分配一个文件描述符，文件描述符在不相关的进程间<strong>不会共享</strong>，进程退出后，进程中的资源文件就会关闭。</p>
+<p>在Ruby中，<code>IO</code>类描述了打开的资源。任意一个IO对象都有一个相关联的<strong>文件描述符编号</strong>，可以使用<code>IO#fileno</code>进行访问。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">passwd = File.open(<span class="string">'/etc/passwd'</span>)</div><div class="line">puts passwd.fileno</div></pre></td></tr></table></figure>
+<p><code>内核</code>通过唯一的数字标识<strong>跟踪</strong><code>进程</code>所用的<strong>资源</strong>。只是用来跟踪打开的资源，已关闭资源没有文件描述符。</p>
+<ol>
+<li>文件描述符优先分配最小可用的整数，</li>
+<li>如果之前打开的文件关闭了，那么这个文件占用的描述符就会空出来随时准备分配。</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 当尝试读取一个关闭的文件的描述符时，会引发异常</span></div><div class="line">passwd = File.open(<span class="string">'/etc/passwd'</span>)</div><div class="line">passwd.close</div><div class="line">puts passwd.fileno    <span class="comment">#IOError: closed stream</span></div></pre></td></tr></table></figure>
+<h3 id="标准流"><a href="#标准流" class="headerlink" title="标准流"></a>标准流</h3><p>每个unix进程都分配3个打开的资源：</p>
+<ol>
+<li><strong>STDIN</strong> <code>0</code> 标准输入</li>
+<li><strong>STDOUT</strong> <code>1</code> 标准输出</li>
+<li><strong>STDERR</strong> <code>2</code> 标准错误</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">puts STDIN.fileno</div><div class="line">puts STDOUT.fileno</div><div class="line">puts STDERR.fileno</div></pre></td></tr></table></figure>
+<blockquote>
+<p>对应的系统调用指令有<code>open close read write pipe fsync stat</code></p>
+<p>可以通过<code>man</code>指令获得详细文档 <code>man 2 open</code></p>
+</blockquote>
+<h2 id="进程有资源限制"><a href="#进程有资源限制" class="headerlink" title="进程有资源限制"></a>进程有资源限制</h2><figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">p Process.getrlimit(<span class="symbol">:NOFILE</span>)</div><div class="line"><span class="comment"># 返回一个二元数组，比如[1024, 4096]</span></div></pre></td></tr></table></figure>
+<h3 id="软限制soft-limit"><a href="#软限制soft-limit" class="headerlink" title="软限制soft limit"></a>软限制<code>soft limit</code></h3><blockquote>
+<p>软限制并不是真正的限制，当进程打开文件超过软限制时会引发异常<strong>Error::EMFILE</strong>，但你可以更改这个限制。</p>
+</blockquote>
+<p><strong>使用场景</strong>：httperf进程需要创建5000个网络连接，这个时候就需要修改<code>soft limit</code>。或者使用第三方代码库需要限制它打开的资源。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 把限制都设成4096 =&gt; [4096, 4096]</span></div><div class="line">Process.setrlimit(<span class="symbol">:NOFILE</span>, <span class="number">4096</span>)</div><div class="line"></div><div class="line"><span class="comment"># 把软限制提高到硬限制水平</span></div><div class="line">Process.setrlimit(<span class="symbol">:NOFILE</span>, Process.getrlimit(<span class="symbol">:NOFILE</span>)[<span class="number">1</span>])</div></pre></td></tr></table></figure>
+<h3 id="硬限制hard-limit"><a href="#硬限制hard-limit" class="headerlink" title="硬限制hard limit"></a>硬限制<code>hard limit</code></h3><blockquote>
+<p>硬限制只能通过超级用户修改，有兴趣的可以参考<code>$man 8 sysctl</code>。</p>
+</blockquote>
+<p>注意设置hard limit的过程是不可逆的，设低了就不能调高了。</p>
+<h3 id="其他的资源限制"><a href="#其他的资源限制" class="headerlink" title="其他的资源限制"></a>其他的资源限制</h3><figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 当前用户所允许的最大并发进程数</span></div><div class="line">Process.getrlimit(<span class="symbol">:NPROC</span>)</div><div class="line"></div><div class="line"><span class="comment"># 可创建的最大文件</span></div><div class="line">Process.getrlimit(<span class="symbol">:FSIZE</span>)</div><div class="line"></div><div class="line"><span class="comment"># 进程栈的最大段的大小</span></div><div class="line">Process.getrlimit(<span class="symbol">:STACK</span>)</div></pre></td></tr></table></figure>
+<p>相关的封装的系统调用指令<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ man 2 getrlimit</div><div class="line">$ man 2 setrlimit</div></pre></td></tr></table></figure></p>
+<h2 id="进程的环境变量"><a href="#进程的环境变量" class="headerlink" title="进程的环境变量"></a>进程的环境变量</h2><p>每个进程都从它们各自的父进程中<strong>继承</strong>了环境变量。注意，环境变量具有<strong><code>全局性</code></strong>！</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ MESSAGE=<span class="string">'wing it'</span> ruby -e <span class="string">"puts ENV['MESSAGE']"</span></div></pre></td></tr></table></figure>
+<p>在bash中可以通过<code>VAR=value</code>的语法设置环境变量，通过<code>$VAR</code>获取环境变量的值。而在Ruby中则从ENV常量获取或设置环境变量：</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">ENV[<span class="string">'MESSAGE'</span>] = <span class="string">'wing it'</span></div><div class="line">system <span class="string">"echo $MESSAGE"</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Ruby的<code>ENV</code> 不是哈希，它实现了<code>Enumerable</code>和部分<code>Hash API</code></p>
+</blockquote>
+<h3 id="环境变量实际应用"><a href="#环境变量实际应用" class="headerlink" title="环境变量实际应用"></a>环境变量实际应用</h3><p>环境变量通常被用于<strong>把输入传递到命令行程序中</strong>的通用方法，用环境变量作为命令行程序的输入比使用<em>选项</em><code>开销更低</code>。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ RAILS_ENV=production rails server</div><div class="line">$ QUEUE=default rake resque:work</div></pre></td></tr></table></figure>
+<blockquote>
+<p>系统没有提供相应的系统调用去操作环境变量，但有C库函数可以<code>setenv(3) getenv(3) environ(7)</code></p>
+</blockquote>
+<h2 id="传递给进程的参数"><a href="#传递给进程的参数" class="headerlink" title="传递给进程的参数"></a>传递给进程的参数</h2><p>每个进程都能访问一个特殊的数组<code>ARGV</code>（或叫<code>argument vector</code> 参数向量）,它保存着在命令行中传递给进程的参数。在Ruby中它就是一个数组对象。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">ARGV.<span class="keyword">include</span>?(<span class="string">'--help'</span>)</div><div class="line"><span class="comment">#获取-c选项的值</span></div><div class="line">ARGV.<span class="keyword">include</span>?(<span class="string">'-c'</span>) &amp;&amp; ARGV[ARGV.index(<span class="string">'-c'</span>) + <span class="number">1</span>]</div></pre></td></tr></table></figure>
+<h2 id="进程名"><a href="#进程名" class="headerlink" title="进程名"></a>进程名</h2><p>在Ruby中可以通过全局变量<code>$PROGRAM_NAME</code>（别名<code>$0</code>）来<strong>获取</strong>或<strong>修改</strong>当前进程名，改变进程名没什么意义。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">$PROGRAM_NAME</div><div class="line">$PROGRAM_NAME = <span class="string">'fuck name'</span></div></pre></td></tr></table></figure>
+<h2 id="进程有退出码"><a href="#进程有退出码" class="headerlink" title="进程有退出码"></a>进程有退出码</h2><p>退出码范围（<code>0-255</code>）除了<code>0</code>以外，其他退出码都表示<strong>异常退出</strong>，退出码是进程通信的方式之一。</p>
+<p>Ruby的退出方式<code>Kernel#exit</code>，最简单的进程退出方式，返回退出码<code>0</code>，也是脚本执行结束的默认退出方式。</p>
+<h3 id="Kernel-exit"><a href="#Kernel-exit" class="headerlink" title="Kernel#exit"></a><code>Kernel#exit</code></h3><figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 退出码0 正常退出</span></div><div class="line">exit</div><div class="line"><span class="comment"># 进程退出前调用</span></div><div class="line">at_exit &#123;puts <span class="string">'last!'</span>&#125;</div><div class="line">exit</div><div class="line"><span class="comment"># 返回退出码22</span></div><div class="line">exit <span class="number">22</span></div></pre></td></tr></table></figure>
+<h3 id="Kernel-exit-1"><a href="#Kernel-exit-1" class="headerlink" title="Kernel#exit!"></a><code>Kernel#exit!</code></h3><blockquote>
+<p>退出前不会执行 <code>at_exit</code> 块中的代码！！！</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 返回默认退出码1</span></div><div class="line">exit!</div><div class="line">exit! <span class="number">33</span>  <span class="comment">#返回退出码33</span></div></pre></td></tr></table></figure>
+<h3 id="Kernel-abort"><a href="#Kernel-abort" class="headerlink" title="Kernel#abort"></a><code>Kernel#abort</code></h3><ul>
+<li><code>abort</code> 提供了从错误进程中退出的通用方式</li>
+<li>传递的消息会在进程退出前打印到 <code>STDERR</code></li>
+<li>返回默认退出码 <code>1</code></li>
+<li><code>abort</code> 退出会调用 <code>at_exit</code> 块</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">abort</div><div class="line">abort <span class="string">"something wrong"</span></div><div class="line">at_exit &#123;puts <span class="string">'last!'</span>&#125;</div><div class="line">abort</div></pre></td></tr></table></figure>
+<h3 id="raise"><a href="#raise" class="headerlink" title="raise"></a><code>raise</code></h3><ul>
+<li>不会马上使进程结束，但如果没有 <code>rescue</code> 处理这个异常，进程就会退出返回退出码 <code>1</code>。</li>
+<li><code>at_exit</code> 块会被调用，异常信息打印到 STDERR</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">raise <span class="string">'hell'</span></div></pre></td></tr></table></figure>
+<h2 id="进程衍生forking"><a href="#进程衍生forking" class="headerlink" title="进程衍生forking"></a>进程衍生<code>forking</code></h2><ol>
+<li>衍生出的子进程继承了父进程所有的<strong>内存拷贝</strong></li>
+<li>子进程<strong>随意更改</strong>内存内容而不会对父进程造成影响</li>
+<li>也继承了父进程的<strong>文件描述符</strong></li>
+<li>也获得了父进程的所有文件描述符的<strong>编号</strong></li>
+<li>进程间就共享了这些打开的文件或sockets，以便<strong>进程间通信</strong></li>
+<li>子进程是一个全新的进程，有自己的<strong>pid</strong></li>
+<li>衍生<strong>调用很快</strong>，几乎瞬间完成。</li>
+<li>衍生可能造成<strong>内存过载</strong></li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">puts <span class="string">"parent pid is <span class="subst">#&#123;Process.pid&#125;</span>"</span></div><div class="line"><span class="keyword">if</span> fork</div><div class="line">  puts <span class="string">"enter if from <span class="subst">#&#123;Process.pid&#125;</span>"</span>   <span class="comment">#父进程执行</span></div><div class="line"><span class="keyword">else</span></div><div class="line">  puts <span class="string">"enter else from <span class="subst">#&#123;Process.pid&#125;</span>"</span> <span class="comment">#子进程执行</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>在子进程中<code>fork</code>返回<code>nil</code>，父进程中<code>fork</code>返回创建的子进程<code>pid</code>。</p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 父进程跳过块，块在子进程中执行，执行后子进程会退出。</span></div><div class="line">fork <span class="keyword">do</span></div><div class="line">  xxx</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>系统调用<code>$ man 2 fork</code></p>
+</blockquote>
+<h2 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h2><ul>
+<li>当父进程退出后，<strong>子进程未退出</strong>，子进程就变成了孤儿进程</li>
+<li>父进程退出后，子进程照常运行，父进程不会带着子进程同归于尽</li>
+<li><strong>守护进程是孤儿进程</strong>，有意让守护进程安静的保持运行</li>
+<li>可以通过<code>Unix信号</code>与脱离终端会话的进程进行通信，从而管理孤儿进程。</li>
+</ul>
+<h2 id="写时复制CoW"><a href="#写时复制CoW" class="headerlink" title="写时复制CoW"></a>写时复制<code>CoW</code></h2><p><code>CoW</code>，copy-on-write，fork 出的子进程如果直接物理拷贝开销会很大，于是现代的unix系统提出了一个CoW的概念，延迟内存拷贝，直接它需要对内存进行写操作。所以父子进程会共享同一片物理内存数据，直到它们当中某一个进程需要改变内存数据。其他没变的内存数据还是共享的。</p>
+<p>但不幸的是<strong>MRI</strong>或<strong>Rubinius</strong>并不支持CoW，因为MRI的垃圾回收使用<code>mark-and-sweep</code>标记清除算法，当GC时，会迭代每个对象并写入信息。fork之后，当第一次GC，写时复制带来的好处会被撤销。</p>
+<blockquote>
+<p>Ruby企业版<code>REE</code>是<code>CoW</code>友好的。</p>
+</blockquote>
+<h2 id="进程等待Process-wait"><a href="#进程等待Process-wait" class="headerlink" title="进程等待Process.wait"></a>进程等待<code>Process.wait</code></h2><p><strong>阻塞调用</strong>，会让父进程等待它<strong>任意一个</strong>子进程退出，然后才会继续执行下去。该方法<strong>返回值</strong>是退出的子程序<code>pid</code>，表示等到的退出的子程序。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">Process.wait</div></pre></td></tr></table></figure>
+<h3 id="Process-wait2"><a href="#Process-wait2" class="headerlink" title="Process.wait2"></a><code>Process.wait2</code></h3><p>返回<code>pid</code>和<code>status</code>，<code>status</code>是一个<code>Process::Status</code>实例对象，包含大量有用信息。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># Process.wait2</span></div><div class="line"><span class="comment"># ==</span></div><div class="line">fork <span class="keyword">do</span></div><div class="line">  exit <span class="number">111</span></div><div class="line"><span class="keyword">end</span></div><div class="line">pid, status = Process.wait2</div><div class="line">puts status.exitstatus  <span class="comment">#返回111</span></div><div class="line"><span class="comment"># ==</span></div><div class="line"><span class="comment"># 进程间通信就不需要依赖文件系统和网络！</span></div></pre></td></tr></table></figure>
+<h3 id="Process-waitpid"><a href="#Process-waitpid" class="headerlink" title="Process.waitpid"></a><code>Process.waitpid</code></h3><p>等待<strong>特定</strong>的子进程</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">Process.waitpid &lt;pid&gt;</div><div class="line">Process.waitpid2 &lt;pid&gt;</div><div class="line"></div><div class="line"><span class="comment"># 等同于 Process.wait</span></div><div class="line">Process.waitpid -<span class="number">1</span></div><div class="line"></div><div class="line"><span class="comment"># 等同于 Process.waitpid 111</span></div><div class="line">Process.wait <span class="number">111</span></div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">favourite = fork <span class="keyword">do</span></div><div class="line">  exit <span class="number">77</span></div><div class="line"><span class="keyword">end</span></div><div class="line">middle_child = fork <span class="keyword">do</span></div><div class="line">  abort <span class="string">"I want to be waited on!"</span></div><div class="line"><span class="keyword">end</span></div><div class="line">pid, status = Process.waitpid2 favourite</div><div class="line">puts status.exitstatus</div></pre></td></tr></table></figure>
+<h3 id="竞争条件"><a href="#竞争条件" class="headerlink" title="竞争条件"></a>竞争条件</h3><blockquote>
+<p>问：当处理退出进程的代码还在运行时，有别的子进程退出，会发生什么？<br>答：内核会把退出进程的信息放入队列，所以父进程能<strong>依次</strong>接收子进程的退出信息。</p>
+</blockquote>
+<p>如果没有子进程执行时去<code>wait</code>会触发异常<code>Errno::ECHILD</code>，所以要记录好创建了多少个子进程。</p>
+<p>关注子进程的做法是一个很普遍的UNIX编程模式，通常叫做<strong>看顾进程</strong>、<code>master/worker</code> 或者<code>preforking</code>。<br>核心概念是，一个主进程fork出多个子进程来并行，主进程负责管理子进程，确保子进程响应或者对子进程退出做出回应。</p>
+<blockquote>
+<p>系统调用 <code>$man 2 waitpid</code></p>
+</blockquote>
+<h2 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h2><p>内核会一直<strong>保留</strong>已退出的子进程的<strong>状态信息</strong>，直到父进程使用<code>Process.wait</code>请求这些信息。<br>如果父进程一直不请求这些状态，内核就不会回收资源。任何子进程如果在结束时父进程仍在运行，那么这个子进程很快就会变成<strong>僵尸进程</strong>。</p>
+<p>如果你不打算使用<code>Process.wait</code>来等待某个子进程退出，那么你需要分离<code>detach</code>这些子进程。以免变成<strong>僵尸进程</strong>。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">pid = fork <span class="keyword">do</span></div><div class="line">  xxx</div><div class="line"><span class="keyword">end</span></div><div class="line">Process.detach(pid)</div></pre></td></tr></table></figure>
+<p><code>detach</code>的工作就是生出一个新的线程，<strong>唯一的任务就是等待这个特定的子进程结束</strong>。<code>detach</code>就保证了内核不会保留不需要的状态信息。</p>
+<p><code>$ ps -ho pid,state -p &lt;pid of zombie&gt;</code></p>
+<h2 id="Unix信号"><a href="#Unix信号" class="headerlink" title="Unix信号"></a>Unix信号</h2><p>通过捕获<code>:CHLD</code>信号，当有子进程退出时，父进程会被内核通知。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">trap(<span class="symbol">:CHLD</span>) <span class="keyword">do</span></div><div class="line">  puts Process.wait</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h3 id="信号并发传递"><a href="#信号并发传递" class="headerlink" title="信号并发传递"></a>信号并发传递</h3><p><strong>信号传递是不可靠的</strong>，当代码在处理CHLD信息时，有其他子进程退出，你可能会也可能不会收到第二个CHLD信号。</p>
+<p>要正确处理<code>CHLD</code>，必须在一个循环中调用<code>Process.wait</code>，查找所有已经结束的子进程。</p>
+<p>要避免<code>Process.wait</code>阻塞，可以使用wait方法的第二个参数，告诉内核如果没有子进程退出，就不需要进行阻塞。</p>
+<blockquote>
+<p><code>Process.wait(-1, Process::WNOHANG)</code></p>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">child_processes = <span class="number">3</span></div><div class="line">dead_processes = <span class="number">0</span></div><div class="line"><span class="comment"># 衍生出3个子进程</span></div><div class="line">child_processes.times <span class="keyword">do</span></div><div class="line">  fork <span class="keyword">do</span></div><div class="line">    sleep <span class="number">3</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">$stdout.sync = <span class="literal">true</span></div><div class="line"></div><div class="line">trap(<span class="symbol">:CHLD</span>) <span class="keyword">do</span></div><div class="line">  <span class="keyword">begin</span></div><div class="line">    <span class="keyword">while</span> pid = Process.wait(-<span class="number">1</span>, Process::WNOHANG)</div><div class="line">      puts pid</div><div class="line">      dead_processes += <span class="number">1</span></div><div class="line">      exit <span class="keyword">if</span> dead_processes == child_processes</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">rescue</span> Errno::ECHILD</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">loop <span class="keyword">do</span></div><div class="line">  (Math.sqrt(rand(<span class="number">44</span>)) ** <span class="number">8</span> ).floor</div><div class="line">  sleep <span class="number">1</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<h3 id="信号基本概念"><a href="#信号基本概念" class="headerlink" title="信号基本概念"></a>信号基本概念</h3><p>信号是一种<strong>异步通信机制</strong>。当进程从内核那里接收到信号时，它可以做以下事情：</p>
+<ol>
+<li>忽略信号</li>
+<li>执行特定操作</li>
+<li>执行默认操作</li>
+</ol>
+<p>信号从一个进程发送到另一个进程，借助内核作为中介。</p>
+<blockquote>
+<p>信号最初的设计目的是为了以不同的方式去终结进程。</p>
+</blockquote>
+<p>以下代码是一个进程给另一进程发信号，用<code>Process.kill</code></p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 进程一</span></div><div class="line">puts Process.pid</div><div class="line">sleep</div><div class="line"></div><div class="line"><span class="comment"># 进程二</span></div><div class="line">Process.kill(<span class="symbol">:INT</span>, &lt;pid-of-first-process&gt;)</div></pre></td></tr></table></figure>
+<h3 id="重新定义信号的行为"><a href="#重新定义信号的行为" class="headerlink" title="重新定义信号的行为"></a>重新定义信号的行为</h3><figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">trap(<span class="symbol">:INT</span>) &#123;print <span class="string">"nananana"</span>&#125;</div><div class="line">trap(<span class="symbol">:INT</span>, <span class="string">"IGNORE"</span>) <span class="comment"># 忽略信号</span></div></pre></td></tr></table></figure>
+<p>现在我们的进程就算收到INT信号也不会退出。</p>
+<p>只有<code>SIGKILL</code>信号是不会被重定义的。一般我们还是<strong>不要重定义这些信号</strong>，要重定义，就重定义<code>SIGUSR1</code>和<code>SIGUSR2</code>信号</p>
+<p>全部信号定义</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">Signal.list</div></pre></td></tr></table></figure>
+<p>重定义信号的行为是全局性的，因此要小心不要影响到其他代码。</p>
+<blockquote>
+<p>系统调用<br><code>$ man 2 sigaction</code><br><code>$ man 7 signal</code></p>
+</blockquote>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><p><strong>进程间通信</strong>，<code>IPC</code>, <code>Inter-process communication</code><br>常用的方式是管道<code>pipes</code>和套接字对<code>socket pairs</code></p>
+<h3 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h3><p>管道是单向数据流，一个进程拥有管道的一端，另一进程拥有另一端。</p>
+<p>如果不关闭<code>writer</code>端，<code>reader</code>端会不断尝试读取数据，直到读到<code>EOF</code>，在这之前reader会<strong>阻塞</strong>。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">reader, writer = IO.pipe</div><div class="line"><span class="comment"># =&gt; [#&lt;IO:fd 5&gt;, #&lt;IO:fd 6&gt;]</span></div><div class="line"></div><div class="line">writer.write(<span class="string">"Into the pipe I go"</span>)</div><div class="line">writer.close</div><div class="line">puts reader.read</div></pre></td></tr></table></figure>
+<h3 id="共享管道"><a href="#共享管道" class="headerlink" title="共享管道"></a>共享管道</h3><figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">reader, writer = IO.pipe</div><div class="line">fork <span class="keyword">do</span></div><div class="line">  <span class="comment"># 子进程中写数据</span></div><div class="line">  reader.close</div><div class="line">  <span class="number">10</span>.times <span class="keyword">do</span></div><div class="line">    writer.puts <span class="string">"xxx"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">writer.close</div><div class="line"><span class="comment"># 父进程读数据</span></div><div class="line"><span class="keyword">while</span> message = reader.gets</div><div class="line">  $stdout.puts message</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>由于文件描述符会拷贝，现在就有4个实例，只要两个用于通信，另外两个就需要关闭。</p>
+<p>注意这里用<code>gets</code>和<code>puts</code>，在管道中传递的是数据流<code>stream</code>，有特定的分隔符<code>\n</code>，当读取数据流时，每次只会读取一截，以分隔符分隔。</p>
+<h3 id="SOCKET通信"><a href="#SOCKET通信" class="headerlink" title="SOCKET通信"></a><code>SOCKET</code>通信</h3><p>可以使用<code>消息</code>代替流进行通信，但无法在管道中使用消息，不过在<code>Unix套接字</code>中就可以。</p>
+<p><code>Unix套接字</code>是套接字的一种类型，它只能在同一台物理机器上进行通信。因此比<code>TCP套接字</code>要快很多。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 创建一对可以通过*消息*来通信的Unix套接字</span></div><div class="line"><span class="comment"># 一对已经互相连接好的套接字，不使用流，而是使用数据报通信，写入整个消息，无需分隔符</span></div><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line">Socket.pair(<span class="symbol">:UNIX</span>, <span class="symbol">:DGRAM</span>, <span class="number">0</span>)</div><div class="line"><span class="comment"># =&gt; [#&lt;Socket:fd 15&gt;, #&lt;Socket:fd 16&gt;]</span></div></pre></td></tr></table></figure>
+<p>管道提供的是单向通信，套接字对提供的是双向通信。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'socket'</span></div><div class="line">child_socket, parent_socket = Socket.pair(<span class="symbol">:UNIX</span>, <span class="symbol">:DGRAM</span>, <span class="number">0</span>)</div><div class="line">maxlen = <span class="number">1000</span></div><div class="line">fork <span class="keyword">do</span></div><div class="line">  parent_socket.close</div><div class="line">  <span class="number">4</span>.times <span class="keyword">do</span></div><div class="line">    instruction = child_socket.recv(maxlen)</div><div class="line">    child_socket.send(<span class="string">"<span class="subst">#&#123;instruction&#125;</span> accomplished"</span>, <span class="number">0</span>)</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line">child_socket.close</div><div class="line"><span class="number">2</span>.times <span class="keyword">do</span></div><div class="line">  parent_socket.send(<span class="string">"Heavy"</span>, <span class="number">0</span>)</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="number">2</span>.times <span class="keyword">do</span></div><div class="line">  parent_socket.send(<span class="string">"Feather"</span>, <span class="number">0</span>)</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="number">4</span>.times <span class="keyword">do</span></div><div class="line">  $stdout.puts parent_socket.recv(maxlen)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>系统调用<br><code>$man 2 pipe</code><br><code>$man 2 socketpair</code><br><code>$man 2 recv</code><br><code>$man 2 send</code></p>
+</blockquote>
+<h2 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h2><p>首个进程<code>init</code>进程，<code>pid</code>为<code>1</code>，就是一个<strong>守护进程</strong>。它的<code>ppid</code>为<code>0</code></p>
+<p>任意进程都能变成守护进程，这里拿rack项目为例</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">daemonize_app</span></span></div><div class="line">  <span class="keyword">if</span> RUBY_VERSION &lt; <span class="string">"1.9"</span></div><div class="line">    <span class="comment"># 父进程退出，调用脚本的终端会认为命令已经结束</span></div><div class="line">    <span class="comment"># 返回控制权给终端。</span></div><div class="line">    <span class="comment"># 子进程变成了孤儿进程，孤儿进程的PPID为1</span></div><div class="line">    exit <span class="keyword">if</span> fork</div><div class="line"></div><div class="line">    <span class="comment"># 使衍生进程成为一个新进程组和会话组的leader</span></div><div class="line">    <span class="comment"># 新的会话组就不会有控制终端了</span></div><div class="line">    <span class="comment"># 只能从子进程调用，如果进程已经是组长，调用会失败</span></div><div class="line">    Process.setsid</div><div class="line"></div><div class="line">    <span class="comment"># 控制终端只能分配给会话领导，再次衍生的进程就绝不会有</span></div><div class="line">    <span class="comment"># 确保脱离控制终端，独立运行，守护进程</span></div><div class="line">    exit <span class="keyword">if</span> fork</div><div class="line"></div><div class="line">    <span class="comment"># 确保守护进程的工作目录不会消失</span></div><div class="line">    Dir.chdir <span class="string">"/"</span></div><div class="line"></div><div class="line">    <span class="comment"># 把标准输入输出干掉，因为不需要，但不能直接close</span></div><div class="line">    <span class="comment"># 其他程序还是需要它们的</span></div><div class="line">    STDIN.reopen <span class="string">"/dev/null"</span></div><div class="line">    STDOUT.reopen <span class="string">"/dev/null"</span>, <span class="string">"a"</span></div><div class="line">    STDERR.reopen <span class="string">"/dev/null"</span>, <span class="string">"a"</span></div><div class="line">  <span class="keyword">else</span></div><div class="line">    <span class="comment"># 1.9版本后才附带的方法，把当前进程变成守护进程</span></div><div class="line">    Process.daemon</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>衍生的进程虽然摆脱了终端，但依然继承了gid和sid，终端依然有办法能给fork出的进程发信号。但我们需要我们的进程彻底摆脱（<code>detach</code>）终端。<code>Process.setsid</code>会使得当前进程成为<strong>新的</strong>进程组和session组的leader。（leader能被终端发送信号）</p>
+<p>变leader之后需要再fork一个新的子进程出来，然后leader退出，最后这个子进程（既没有控制它的终端，也不是leader）就是需要的守护进程了！！！</p>
+</blockquote>
+<h3 id="调用Process-setsid的作用"><a href="#调用Process-setsid的作用" class="headerlink" title="调用Process.setsid的作用"></a>调用<code>Process.setsid</code>的作用</h3><ol>
+<li>该进程变成一个新会话的会话领导</li>
+<li>该进程变成一个新进程组的组长</li>
+<li>该进程没有控制终端</li>
+</ol>
+<h3 id="进程组和会话组"><a href="#进程组和会话组" class="headerlink" title="进程组和会话组"></a>进程组和会话组</h3><h4 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h4><ol>
+<li>每个进程都有一个所属的<strong>组</strong>，每个组都有唯一的id（通常是<code>leader</code>进程的<code>pid</code>，也是在终端里输入命令启动的进程id）</li>
+<li>一个进程组是一些相关进程的集合，通常是父进程和它的子进程们的集合。</li>
+<li>也可以任意组合进程组</li>
+<li><strong>终端</strong>接收信号，会将信号转发给<strong>前台进程组</strong>中的<strong>每个进程</strong>，因此如果在终端发送信息，进程组里的所有进程都会受影响。</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 通常这个组id会跟组leader进程的pid相同</span></div><div class="line">Process.getpgrp</div><div class="line"><span class="comment"># 设置进程的组ID</span></div><div class="line">Process.setpgrp(new_group_id)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>系统调用<code>$ man 2 getpgrp</code></p>
+</blockquote>
+<h4 id="会话组"><a href="#会话组" class="headerlink" title="会话组"></a>会话组</h4><p>会话组是更高一级的抽象，是进程组的集合。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">git <span class="built_in">log</span> | grep shipped | less</div></pre></td></tr></table></figure>
+<p>这些指令创建了3个独立的进程组，但ctrl-c还是能一次性把它们都干掉，因为它们处于同一个会话组。在<code>shell</code>中的每<strong>一次调用</strong>都会获得自己的<code>会话租</code>（<strong>一次调用</strong>可以是单个命令，也可以是由管道连接的一串命令）</p>
+<blockquote>
+<p>系统调用 <code>$man 2 getsid</code> 能获取当前的会话组ID<br>但Ruby没有相应的接口，使用<code>Process.setsid</code>会新建一个会话组并返回会话组ID</p>
+</blockquote>
+<h2 id="生成终端进程"><a href="#生成终端进程" class="headerlink" title="生成终端进程"></a>生成终端进程</h2><p>Ruby程序中一个常见的交互是在程序中通过shelling out的方式在终端执行某个命令，这在编写Ruby脚本来将若干常用命令粘合在一起时尤为常见。（在Ruby中生成进程来执行终端命令）</p>
+<h3 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel#`"></a>Kernel#`</h3><p>返回字符串</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="string">`ls`</span></div><div class="line"><span class="string">`ls --help`</span></div></pre></td></tr></table></figure>
+<h3 id="x-cmd"><a href="#x-cmd" class="headerlink" title="%x( cmd )"></a><code>%x( cmd )</code></h3><p>反引号与<code>%x</code>作用相同</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="string">%x[git log | tail -10]</span></div></pre></td></tr></table></figure>
+<h3 id="Kernel-system"><a href="#Kernel-system" class="headerlink" title="Kernel#system"></a><code>Kernel#system</code></h3><p><code>Kernel#system</code> 返回 <code>true</code> 或者 <code>false</code> ，当终端命令退出码是 <code>0</code> 时，方法返回 <code>true</code>。</p>
+<p>生成的进程与当前进程共享标准流（stdout stdin stderr），但会<strong>阻塞调用</strong></p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">system(<span class="string">'ls'</span>)</div><div class="line">system(<span class="string">'ls'</span>, <span class="string">'--help'</span>)</div></pre></td></tr></table></figure>
+<h3 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h3><ul>
+<li><code>exec</code> 命令能让你把当前进程替换成一个不同的进程。</li>
+<li><code>exec</code> 替换进程后是不会返回到原来的进程的。</li>
+<li>需要联合使用<code>fork+exec</code>。专门fork出一个进程来exec，这时候可以使用之前的<code>Process.wait</code>来等待退出码。</li>
+</ul>
+<p>你可以把当前的Ruby进程转换成一个Python进程或者一个<code>ls</code>进程。</p>
+<p><code>exec</code>不会关闭文件，也不做内存清理，以下代码是在Ruby中打开文件，然后生成一个Python进程去读取这个文件，在Ruby中打开了，在Python中就不需要再次打开了</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">hosts = File.open(<span class="string">'/etc/hosts'</span>)</div><div class="line">exec <span class="string">'python'</span>, <span class="string">'-c'</span>, <span class="string">"import os; print os.fdopen(<span class="subst">#&#123;hosts.fileno&#125;</span>).read()"</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>$man 2 exec</code></p>
+</blockquote>
+<p>参数可以是<code>字符串</code>，也可以是<code>数组</code>，之间有微妙的不同。</p>
+<ul>
+<li>字符串参数表示它会启动一个<code>shell进程</code>，然后把字符串参数传给shell去解析；</li>
+<li>数组参数的话，它会跳过shell进程，而直接把数组作为新进程的<code>ARGV参数</code>。</li>
+</ul>
+<p>推荐使用数组参数，字符串参数有安全问题。</p>
+<h3 id="Process-spawn"><a href="#Process-spawn" class="headerlink" title="Process.spawn"></a><code>Process.spawn</code></h3><p><code>Process.spawn</code> 非阻塞调用，返回<code>shelling out</code>进程的PID</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">Process.spawn(&#123;<span class="string">'RAILS_ENV'</span> =&gt; <span class="string">'test'</span>&#125;, <span class="string">'rails server'</span>)</div><div class="line">system <span class="string">'sleep 5'</span>  <span class="comment">#阻塞</span></div><div class="line">Process.spawn <span class="string">'sleep 5'</span>   <span class="comment">#非阻塞</span></div><div class="line"></div><div class="line">pid = Process.spawn <span class="string">'sleep 5'</span></div><div class="line">Process.waitpid(pid)</div></pre></td></tr></table></figure>
+<h3 id="IO-popen"><a href="#IO-popen" class="headerlink" title="IO.popen"></a><code>IO.popen</code></h3><p><code>IO.popen</code>是用纯Ruby实现的unix管道，在底层，它还是在做<code>fork+exec</code>的事情，不过它同时也建立<strong>管道</strong>来跟<strong>生成的进程</strong><code>通信</code>。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="comment"># IO对象stream传进代码块中，打开stream进行写入。</span></div><div class="line"><span class="comment"># 将stream设置成生成进程的STDIN</span></div><div class="line">IO.popen(<span class="string">'less'</span>, <span class="string">'w'</span>) <span class="keyword">do</span> <span class="params">|stream|</span></div><div class="line">  stream.puts <span class="string">"some\ndata"</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 因此这个流设置成了派生进程的标准输入，如果打开流来读，那么流就是派生进程的标准输出。你只能选一端</span></div></pre></td></tr></table></figure>
+<h3 id="Open3-popen3"><a href="#Open3-popen3" class="headerlink" title="Open3.popen3"></a><code>Open3.popen3</code></h3><figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'open3'</span></div><div class="line">Open3.popen3(<span class="string">'grep'</span>, <span class="string">'data'</span>) &#123; <span class="params">|stdin, stdout, stderr|</span></div><div class="line">  stdin.puts <span class="string">"some\ndata"</span></div><div class="line">  stdin.close</div><div class="line">  puts stdout.read</div><div class="line">&#125;</div><div class="line">Open3.popen3(<span class="string">'ls'</span>, <span class="string">'-uhh'</span>, <span class="symbol">:err</span> =&gt; <span class="symbol">:out</span>) &#123; <span class="params">|stdin, stdout, stderr|</span></div><div class="line">  puts stdout.read</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/25/ruby-process/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

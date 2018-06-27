@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>awk 使用 - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="awk 使用 — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="awk 使用 — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#背景知识"><span class="my-toc-text">背景知识</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#工作方式"><span class="my-toc-text">工作方式</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#语法"><span class="my-toc-text">语法</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#内建变量"><span class="my-toc-text">内建变量</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#格式化输出，类似C语言的printf"><span class="my-toc-text">格式化输出，类似C语言的printf</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#条件过滤"><span class="my-toc-text">条件过滤</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#指定分隔符"><span class="my-toc-text">指定分隔符</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#字符串匹配"><span class="my-toc-text">字符串匹配 ~</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#拆分文件"><span class="my-toc-text">拆分文件</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#使用环境变量"><span class="my-toc-text">使用环境变量</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#从-awk-中读取命令输出"><span class="my-toc-text">从 awk 中读取命令输出</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#循环"><span class="my-toc-text">循环</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#Awk-脚本"><span class="my-toc-text">Awk 脚本</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-4"><a class="my-toc-link" href="#执行脚本"><span class="my-toc-text">执行脚本</span></a></li></ol></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#示例"><span class="my-toc-text">示例</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>awk 使用</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-12
+  </h4>
+  <h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><ul>
+<li>上世纪 70 年代在贝尔实验室开发出来</li>
+<li>名字是由几个作者的姓组合而来的 Alfred Aho， Peter Weinberger， 以及 Brian Kernaghan</li>
+<li>Sed is used to process and modify text</li>
+<li>Awk is mostly used as a tool for <strong>analysis</strong> and <strong>reporting</strong></li>
+<li>有迭代 iteration 和 变量 variables，对比<code>Sed</code> 更像一门编程语言</li>
+<li>结合 sed 和 awk 一起使用会有 <strong>incredibly power</strong></li>
+<li><a href="http://www.delorie.com/gnu/docs/gawk/gawk.html#SEC_Top" target="_blank" rel="external">Guide</a></li>
+</ul>
+<h2 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h2><p>Awk works by reading a text file or input stream one line at a time. Each line is scanned to see if it matches a predefined pattern. If a match is found, an action is performed.</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li>Awk 语句只能被<strong>单引号包含</strong></li>
+<li><code>$1</code>..<code>$n</code> 表示第n列，<code>$0</code>表示整行，默认以<strong>空格</strong>或<strong>tab</strong>分隔</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">awk <span class="string">'&#123;print $1, $4&#125;'</span> file</div></pre></td></tr></table></figure>
+<h3 id="内建变量"><a href="#内建变量" class="headerlink" title="内建变量"></a>内建变量</h3><table>
+<thead>
+<tr>
+<th>内建变量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FS</code></td>
+<td>输入字段分隔符，默认为空格或tab</td>
+</tr>
+<tr>
+<td><code>OFS</code></td>
+<td>输出字段分隔符</td>
+</tr>
+<tr>
+<td><code>RS</code></td>
+<td>输入行分隔符，默认为<code>\n</code></td>
+</tr>
+<tr>
+<td><code>ORS</code></td>
+<td>输出行分隔符</td>
+</tr>
+<tr>
+<td><code>NF</code></td>
+<td>当前记录有多少列（字段数）</td>
+</tr>
+<tr>
+<td><code>NR</code></td>
+<td>行号，从1开始，多个文件会累加</td>
+</tr>
+<tr>
+<td><code>FNR</code></td>
+<td>各文件自己的行号</td>
+</tr>
+<tr>
+<td><code>FILENAME</code></td>
+<td>当前输入文件的名字</td>
+</tr>
+</tbody>
+</table>
+<h3 id="格式化输出，类似C语言的printf"><a href="#格式化输出，类似C语言的printf" class="headerlink" title="格式化输出，类似C语言的printf"></a>格式化输出，类似C语言的<code>printf</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">awk <span class="string">'&#123;printf "%-8s %-8s %-15s\n", $1, $2, $3&#125;'</span> file</div></pre></td></tr></table></figure>
+<h3 id="条件过滤"><a href="#条件过滤" class="headerlink" title="条件过滤"></a>条件过滤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">awk <span class="string">'$3==0 &amp;&amp; $6=="LISTEN"'</span> file</div><div class="line">awk <span class="string">'$3&gt;0 &#123;print $0&#125;'</span> file</div><div class="line">awk <span class="string">'$3==0 &amp;&amp; $6=="LISTEN" || NR==1'</span> file <span class="comment"># 保留第一行</span></div></pre></td></tr></table></figure>
+<h3 id="指定分隔符"><a href="#指定分隔符" class="headerlink" title="指定分隔符"></a>指定分隔符</h3><ul>
+<li>BEGIN 块中assign <strong>FS</strong> 变量</li>
+<li>使用 <code>-F</code> option</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">awk <span class="string">'BEGIN&#123;FS=":"&#125; &#123;print $1, $3, $6&#125;'</span> file</div><div class="line">awk -F: <span class="string">'&#123;print $1, $3, $6&#125;'</span> file</div><div class="line">awk -F <span class="string">'[;:]'</span> <span class="string">'&#123;print $1, $3, $6&#125;'</span> file <span class="comment"># 指定多个分隔符</span></div><div class="line">awk -F: <span class="string">'&#123;print $1, $3, $6&#125;'</span> OFS=<span class="string">"\t"</span> file <span class="comment"># 指定输出分隔符</span></div></pre></td></tr></table></figure>
+<h3 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配 ~"></a>字符串匹配 <strong>~</strong></h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">awk <span class="string">'$6 ~ /pattern/ || NR==1 &#123;print NR, $4, $5&#125;'</span> OFS=<span class="string">"\t"</span> file</div><div class="line">awk <span class="string">'/pattern/'</span> file</div><div class="line">awk <span class="string">'!/pattern/'</span> file <span class="comment"># 模式取反</span></div><div class="line">awk <span class="string">'$6 ~ /pattern1|pattern2/ &#123;print $4, $5&#125;'</span> file</div></pre></td></tr></table></figure>
+<h3 id="拆分文件"><a href="#拆分文件" class="headerlink" title="拆分文件"></a>拆分文件</h3><p>根据某一列使用重定向符号</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">awk <span class="string">'NR!=1 &#123;print &gt; $6&#125;'</span> file</div><div class="line">awk <span class="string">'NR!=1 &#123;print $4, $5 &gt; $6&#125;'</span> file</div></pre></td></tr></table></figure>
+<h3 id="使用环境变量"><a href="#使用环境变量" class="headerlink" title="使用环境变量"></a>使用环境变量</h3><p>将外部变量值传递给 awk，借助 <code>-v</code> 选项，或放在语句块后面</p>
+<p><code>-v</code>和<code>ENVIRON</code> （ENVIRON的变量需要export）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">awk -v val=<span class="variable">$x</span> <span class="string">'&#123;print $1, ENVIRON["y"]&#125;'</span> file</div></pre></td></tr></table></figure>
+<p>放在 <code>BEGIN</code> <code>{}</code> <code>END</code> 语句块后面<strong>不需要</strong>使用 <code>-v</code> 选项</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">awk <span class="string">'&#123;print v1, v2&#125;'</span> v1=<span class="variable">$var1</span> v2=<span class="variable">$var2</span> filename</div></pre></td></tr></table></figure>
+<h3 id="从-awk-中读取命令输出"><a href="#从-awk-中读取命令输出" class="headerlink" title="从 awk 中读取命令输出"></a>从 awk 中读取命令输出</h3><p>通过使用 <code>getline</code> 将外部 shell 命令的输出读入变量 cmdout</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="string">"cmd"</span> | getline cmdout;</div><div class="line"><span class="built_in">echo</span> | awk <span class="string">'&#123; "grep root /etc/passwd" | getline cmdout; print cmdout &#125;'</span></div></pre></td></tr></table></figure>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight awk"><table><tr><td class="code"><pre><div class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</div><div class="line">  print <span class="variable">$i</span></div><div class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> array)</div><div class="line">  print array[i]</div></pre></td></tr></table></figure>
+<h3 id="Awk-脚本"><a href="#Awk-脚本" class="headerlink" title="Awk 脚本"></a>Awk 脚本</h3><p>假设有以下统计脚本 <strong>wordCount.awk</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><div class="line"><span class="comment">#!/bin/awk -f</span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= NF; i++)</div><div class="line">    freq[<span class="variable">$i</span>]++</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">END</span> &#123;</div><div class="line">  <span class="keyword">for</span> (word <span class="keyword">in</span> freq)</div><div class="line">    printf <span class="string">"%s\t%d\n"</span>, word, freq[word]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="执行脚本"><a href="#执行脚本" class="headerlink" title="执行脚本"></a>执行脚本</h4><p>使用 <code>-f</code> 选项</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">awk -f wordCount.awk DATA_FILE</div></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">./wordCount.awk DATA_FILE</div></pre></td></tr></table></figure>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 批量删除 git 分支</span></div><div class="line">git branch -r | awk -F/ <span class="string">'/origin\/feature\/*/ &#123;print $2,$3&#125;'</span> OFS=<span class="string">'\/'</span> | xargs -I &#123;&#125; git push origin :&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment"># 查找并删除重复文件脚本</span></div><div class="line"></div><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">ls -lS --time-style=long-iso | awk <span class="string">'BEGIN &#123;</span></div><div class="line"><span class="string">  getline; getline; # 忽略第一行的统计信息，从第二行开始</span></div><div class="line"><span class="string">  name1=$8; size=$5 # 第8列是文件名，第5列是文件大小</span></div><div class="line"><span class="string">&#125;</span></div><div class="line"><span class="string">&#123;</span></div><div class="line"><span class="string">  # 下一个文件从第三行开始</span></div><div class="line"><span class="string">  name2=$8;</span></div><div class="line"><span class="string">  if (size==$5)</span></div><div class="line"><span class="string">  &#123;</span></div><div class="line"><span class="string">    "md5sum "name1 | getline; csum1=$1; # 读取外部命令的输出</span></div><div class="line"><span class="string">    "md5sum "name2 | getline; csum2=$1;</span></div><div class="line"><span class="string">    if ( csum1==csum2 )</span></div><div class="line"><span class="string">    &#123;</span></div><div class="line"><span class="string">      print name1; print name2 # 大小相同，且校验和相同则认为两个文件重复，awk打印两行</span></div><div class="line"><span class="string">    &#125;</span></div><div class="line"><span class="string">  &#125;;</span></div><div class="line"><span class="string">  size=$5; name1=name2;</span></div><div class="line"><span class="string">&#125;'</span> | sort -u &gt; duplicate_files</div><div class="line"><span class="comment"># 所有重复的行排序后取唯一保存</span></div><div class="line"></div><div class="line"><span class="comment"># 把一堆有关联的文件行依次求校验和，排序，按32个字符的md5值取唯一再拿到唯一后的文件名就是不重复的文件。</span></div><div class="line">cat duplicate_files | xargs -I &#123;&#125; md5sum &#123;&#125; | sort | uniq -w 32 | awk <span class="string">'&#123; print $2 &#125;'</span> | sort -u &gt; duplicate_sample</div><div class="line"></div><div class="line"><span class="built_in">echo</span> Removing...</div><div class="line">comm duplicate_files duplicate_sample -2 -3 | tee /dev/stderr | xargs rm</div><div class="line"><span class="built_in">echo</span> Removed duplicates files successfully.</div></pre></td></tr></table></figure>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/12/awk/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

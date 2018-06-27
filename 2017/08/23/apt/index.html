@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>apt 使用 - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="apt 使用 — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="apt 使用 — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#apt-get"><span class="my-toc-text">apt-get</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#dpkg-reconfigure"><span class="my-toc-text">dpkg-reconfigure</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#add-apt-repository"><span class="my-toc-text">add-apt-repository</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#apt-key"><span class="my-toc-text">apt-key</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#sources-list"><span class="my-toc-text">sources.list</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#档案类型"><span class="my-toc-text">档案类型</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#仓库地址"><span class="my-toc-text">仓库地址</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#发行版"><span class="my-toc-text">发行版</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#软件包分类"><span class="my-toc-text">软件包分类</span></a></li></ol></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>apt 使用</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-23
+  </h4>
+  <h2 id="apt-get"><a href="#apt-get" class="headerlink" title="apt-get"></a>apt-get</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get upgrade</div><div class="line">sudo apt-get install -y redis-server</div><div class="line">sudo apt-get install -y python-software-properties</div><div class="line">sudo apt-get remove redis-server</div><div class="line">sudo apt-get autoremove</div></pre></td></tr></table></figure>
+<h2 id="dpkg-reconfigure"><a href="#dpkg-reconfigure" class="headerlink" title="dpkg-reconfigure"></a>dpkg-reconfigure</h2><p>重新配置已经安装过的软件包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo dpkg-reconfigure locales</div></pre></td></tr></table></figure>
+<h2 id="add-apt-repository"><a href="#add-apt-repository" class="headerlink" title="add-apt-repository"></a>add-apt-repository</h2><p>add-apt-repository is a script for <strong>adding apt sources.list entries</strong>.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo add-apt-repository -y ppa:xxx/xxx</div><div class="line">sudo add-apt-repository --remove ppa:xxx/xxx</div></pre></td></tr></table></figure>
+<p>可用选项</p>
+<table>
+<thead>
+<tr>
+<th>option</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-h –help</td>
+<td>显示帮助信息</td>
+</tr>
+<tr>
+<td>-m –massive-debug</td>
+<td>会显示一堆debug信息</td>
+</tr>
+<tr>
+<td>-r –remove</td>
+<td>把 sources.list.d 目录中的 repository 删除</td>
+</tr>
+<tr>
+<td>-k –keyserver</td>
+<td>keyserver</td>
+</tr>
+<tr>
+<td>-y</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>-s –enable-source</td>
+<td>下载包源码</td>
+</tr>
+<tr>
+<td>-u –update</td>
+<td>添加后更新包缓存</td>
+</tr>
+</tbody>
+</table>
+<h2 id="apt-key"><a href="#apt-key" class="headerlink" title="apt-key"></a>apt-key</h2><p>用法</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">apt-key [--keyring file] [<span class="built_in">command</span>] [arguments]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果没有提供 <code>keyring</code> 文件，则命令将应用在所有的 <code>keyring</code> 文件</p>
+</blockquote>
+<p>Manage apt’s list of trusted keys</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">apt-key add &lt;file&gt;          - add the key contained <span class="keyword">in</span> &lt;file&gt; <span class="string">'-'</span> 表示标准输入</div><div class="line">apt-key del &lt;keyid&gt;         - remove the key &lt;keyid&gt;</div><div class="line">apt-key <span class="built_in">export</span> &lt;keyid&gt;      - output the key &lt;keyid&gt;</div><div class="line">apt-key exportall           - 导出本地 trusted 数据库中的所有 key</div><div class="line">apt-key update              - 通过 keyring package 更新 key</div><div class="line">apt-key net-update          - 通过网络更新 key</div><div class="line">apt-key list                - 列出所有 key</div><div class="line">apt-key finger              - 列出所有验证指纹</div><div class="line">apt-key adv                 - 高级配置</div></pre></td></tr></table></figure>
+<p>示例</p>
+<p>下载并添加 virtualbox 的 key</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -</div></pre></td></tr></table></figure>
+<h2 id="sources-list"><a href="#sources-list" class="headerlink" title="sources.list"></a>sources.list</h2><p>记录软件包仓库位置的配置文件 <code>/etc/apt/sources.list</code> <code>/etc/apt/sources.list.d/*</code></p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><div class="line">deb <span class="string">http:</span><span class="comment">//security.ubuntu.com/ubuntu xenial-security main restricted</span></div><div class="line">deb-src <span class="string">http:</span><span class="comment">//security.ubuntu.com/ubuntu xenial-security main restricted</span></div></pre></td></tr></table></figure>
+<p>档案类型 - 仓库地址 - 发行版 - 软件包分类</p>
+<h3 id="档案类型"><a href="#档案类型" class="headerlink" title="档案类型"></a>档案类型</h3><ul>
+<li>deb 二进制编译软件包</li>
+<li>deb-src 用于编译二进制软件包的源码</li>
+</ul>
+<h3 id="仓库地址"><a href="#仓库地址" class="headerlink" title="仓库地址"></a>仓库地址</h3><p>我们可以更换为其他镜像源地址来提高下载速度</p>
+<h3 id="发行版"><a href="#发行版" class="headerlink" title="发行版"></a>发行版</h3><p>有多种分类方法：</p>
+<ul>
+<li>发行版的具体代号 <code>xenial</code> <code>trusty</code> <code>precise</code></li>
+<li>发行版的发行类型 <code>oldstable</code> <code>stable</code> <code>testing</code> <code>unstable</code></li>
+<li>发行版后进一步指定 <code>xenial-security</code> <code>trusty-security</code></li>
+</ul>
+<h3 id="软件包分类"><a href="#软件包分类" class="headerlink" title="软件包分类"></a>软件包分类</h3><p>Ubuntu 对软件包的分类可以用下表来表示</p>
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>自有软件</th>
+<th>非自由软件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>官方支持的</td>
+<td>Main</td>
+<td>Restricted</td>
+</tr>
+<tr>
+<td>非官方支持的</td>
+<td>Universe</td>
+<td>Multiverse</td>
+</tr>
+</tbody>
+</table>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/23/apt/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

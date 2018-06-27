@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>sudo - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="sudo — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="sudo — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#查看"><span class="my-toc-text">查看</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#使用-visudo-修改"><span class="my-toc-text">使用 visudo 修改</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#配置"><span class="my-toc-text">配置</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#密码有效时间"><span class="my-toc-text">密码有效时间</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#E-选项"><span class="my-toc-text">-E 选项</span></a></li><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#sudo-与重定向"><span class="my-toc-text">sudo 与重定向</span></a></li></ol></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>sudo</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-23
+  </h4>
+  <h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo -ll <span class="comment"># 显示当前sudo配置</span></div><div class="line">sudo -lU user <span class="comment"># 查看某个特定用户的设置</span></div></pre></td></tr></table></figure>
+<h2 id="使用-visudo-修改"><a href="#使用-visudo-修改" class="headerlink" title="使用 visudo 修改"></a>使用 visudo 修改</h2><blockquote>
+<p>/etc/sudoers 格式错误会导致 sudo 不可用，因此必须使用 visudo 编辑该文件防止出错。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">EDITOR=vim visudo <span class="comment"># 可以指定其他编辑器</span></div></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>允许某用户可以执行所有命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">用户名 ALL=(ALL) ALL</div><div class="line">deploy ALL=(ALL) NOPASSWD: ALL <span class="comment"># 无需密码</span></div></pre></td></tr></table></figure>
+<p>只允许以某个<strong>主机名</strong>登录用户执行命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">用户名 主机名=(ALL) ALL</div></pre></td></tr></table></figure>
+<p>允许用户组成员无密码使用sudo</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">%组名 ALL=(ALL) NOPASSWD: ALL</div></pre></td></tr></table></figure>
+<p>不询问某个用户的密码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">Defaults:用户 !authenticate</div></pre></td></tr></table></figure>
+<p>只为用户启用部分命令的执行权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">用户名 主机名=/sbin/halt/,/sbin/poweroff,/sbin/reboot -Syu</div><div class="line">用户名 主机名= NOPASSWD: /sbin/halt/,/sbin/poweroff,/sbin/reboot -Syu <span class="comment"># 不用输入密码</span></div></pre></td></tr></table></figure>
+<h3 id="密码有效时间"><a href="#密码有效时间" class="headerlink" title="密码有效时间"></a>密码有效时间</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">Defaults:用户名 timestamp_timeout=20 <span class="comment"># 20分钟内不需要输入密码</span></div><div class="line">Defaults:用户名 timestamp_timeout=0  <span class="comment"># 0 总是询问密码</span></div></pre></td></tr></table></figure>
+<h3 id="E-选项"><a href="#E-选项" class="headerlink" title="-E 选项"></a>-E 选项</h3><p>当前用户的环境变量不会应用到sudo启动的程序，除非使用 -E 选项</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo -E ...</div></pre></td></tr></table></figure>
+<h3 id="sudo-与重定向"><a href="#sudo-与重定向" class="headerlink" title="sudo 与重定向"></a>sudo 与重定向</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sudo sh -c <span class="string">'echo xxx &gt; /etc/xxx'</span></div><div class="line"><span class="built_in">echo</span> xxx &gt; sudo tee /etc/xxx</div></pre></td></tr></table></figure>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/23/sudo/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

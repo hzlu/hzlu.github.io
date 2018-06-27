@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>wget - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="wget — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="wget — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#对比-curl"><span class="my-toc-text">对比 curl</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#常用选项"><span class="my-toc-text">常用选项</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#示例"><span class="my-toc-text">示例</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>wget</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-10
+  </h4>
+  <p>用于文件下载的命令行工具，特点在于 <strong>批量下载(batch files)</strong> 和 <strong>后台任务(cron jobs)</strong>。</p>
+<h2 id="对比-curl"><a href="#对比-curl" class="headerlink" title="对比 curl"></a>对比 <code>curl</code></h2><table>
+<thead>
+<tr>
+<th>wegt</th>
+<th>curl</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>纯粹的命令行工具</td>
+<td>由 <code>libcurl</code> 库支持</td>
+</tr>
+<tr>
+<td>支持的协议有限 <code>http</code> <code>https</code> <code>ftp</code></td>
+<td>支持更多协议</td>
+</tr>
+<tr>
+<td>仅支持 <code>http 1.0</code></td>
+<td>默认支持 <code>http 1.1</code></td>
+</tr>
+<tr>
+<td>支持递归下载，并行下载</td>
+<td>批量下载要求 url 有特定模式</td>
+</tr>
+<tr>
+<td>后台自动下载</td>
+<td>不支持</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>wget</code>支持<strong>自动下载</strong>，就是说你启动wget任务后用户可以登出系统，<code>wget</code><strong>将在后台执行</strong>直到任务完成。</p>
+</blockquote>
+<p>总而言之，仅仅是下载文件，<code>wget</code> 是更好的选择。</p>
+<h2 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h2><figure class="highlight routeros"><table><tr><td class="code"><pre><div class="line">wget -b -c <span class="attribute">--tries</span>=NUMBER URL</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-h</code></td>
+<td>帮助</td>
+</tr>
+<tr>
+<td><code>-b</code></td>
+<td>后台执行</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>断点续传，需要服务器支持</td>
+</tr>
+<tr>
+<td><code>-t</code> <code>--tries</code></td>
+<td>重试次数<br><code>-t 3</code> 重试3次<br><code>-t 0</code> 不停重试</td>
+</tr>
+<tr>
+<td><code>-O</code> <code>--output-file=FILE</code></td>
+<td>指定输出文件</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>用于写入日志</td>
+</tr>
+<tr>
+<td><code>--limit-rate</code></td>
+<td>下载限速<code>--limit-rate 20k</code><br><code>--limit-rate 20m</code></td>
+</tr>
+<tr>
+<td><code>-Q</code> <code>--quota</code></td>
+<td>限制下载总量<code>-Q 100m</code></td>
+</tr>
+<tr>
+<td><code>-m</code> <code>--mirror</code></td>
+<td>制作镜像站点</td>
+</tr>
+<tr>
+<td><code>-w 5</code> <code>--await=5</code></td>
+<td>请求间等待的时间，默认单位为秒</td>
+</tr>
+<tr>
+<td><code>--accept jpg</code></td>
+<td>指定下载特定的文件后缀</td>
+</tr>
+<tr>
+<td><code>--reject jpg</code></td>
+<td>不下载的文件</td>
+</tr>
+<tr>
+<td><code>-k</code> <code>--convert-links</code></td>
+<td>将页面的连接地址转为本地地址</td>
+</tr>
+<tr>
+<td><code>--level 0</code></td>
+<td>0 表示不限制递归层级</td>
+</tr>
+<tr>
+<td><code>--user</code> <code>--passworld</code> <code>--ask-password</code></td>
+<td>密码和认证<code>--user foo --password bar</code></td>
+</tr>
+<tr>
+<td><code>-U</code> <code>--user-agent=AGENT</code></td>
+<td>指定 UA</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>递归下载</td>
+</tr>
+<tr>
+<td><code>-x</code></td>
+<td>强制建立服务器上一模一样的目录</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>批量下载，需要把url写到文件中，每个url写一行</td>
+</tr>
+<tr>
+<td><code>-V</code></td>
+<td>显示版本</td>
+</tr>
+<tr>
+<td><code>-a</code> <br><code>--append-output FILE</code></td>
+<td>把记录追加到FILE</td>
+</tr>
+<tr>
+<td><code>-q</code></td>
+<td>安静模式</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>冗长模式</td>
+</tr>
+<tr>
+<td><code>--spider</code></td>
+<td>不下载任何文件</td>
+</tr>
+<tr>
+<td><code>-e robots=off</code></td>
+<td>e执行命令</td>
+</tr>
+</tbody>
+</table>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">wget URL</div><div class="line">wget URL1 URL2 <span class="comment"># 指定多个url下载</span></div><div class="line">wget -i WGET_DOWNLOADS.txt <span class="comment"># 通过文件批量下载</span></div><div class="line">wget -r -N -l -k DEPTH http://www.foo.com</div><div class="line">wget --mirror --convert-links foo.com</div><div class="line">wget --spider -o wget.log -e robots=off --<span class="built_in">wait</span> 1 -r -p http://luhaozhao.com <span class="comment"># 生成一个日志文件检测出坏链接</span></div></pre></td></tr></table></figure>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/10/wget/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

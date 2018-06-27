@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vim 备忘 - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Vim 备忘 — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vim 备忘 — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#基本移动操作"><span class="my-toc-text">基本移动操作</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#多文件"><span class="my-toc-text">多文件</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#插入替换操作"><span class="my-toc-text">插入替换操作</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#删除操作"><span class="my-toc-text">删除操作</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#复制到系统剪切板"><span class="my-toc-text">复制到系统剪切板</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#从系统剪切板中粘贴"><span class="my-toc-text">从系统剪切板中粘贴</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#命令模式替换文本"><span class="my-toc-text">命令模式替换文本</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#大小写切换"><span class="my-toc-text">大小写切换</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#可视化模式"><span class="my-toc-text">可视化模式</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#寄存器"><span class="my-toc-text">寄存器</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#宏"><span class="my-toc-text">宏</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#其他"><span class="my-toc-text">其他</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>Vim 备忘</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-22
+  </h4>
+  <p>记录我自己不熟悉的命令</p>
+<h2 id="基本移动操作"><a href="#基本移动操作" class="headerlink" title="基本移动操作"></a>基本移动操作</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{</code> <code>}</code></td>
+<td>移动到上一个、下一个段落</td>
+</tr>
+<tr>
+<td><code>0</code> <code>gm</code></td>
+<td>当前行的开头、结尾</td>
+</tr>
+<tr>
+<td><code>nG</code> <code>ngg</code></td>
+<td>移动到 <code>n</code> 行，默认是最后一个行、第一行</td>
+</tr>
+<tr>
+<td><code>n%</code></td>
+<td>移动到当前文档的百分之 <code>n</code> 的位置</td>
+</tr>
+<tr>
+<td><code>n/</code></td>
+<td>当前行第 <code>n</code> 列</td>
+</tr>
+<tr>
+<td><code>Ff</code></td>
+<td>同一行向左找字符f</td>
+</tr>
+<tr>
+<td><code>ff</code></td>
+<td>同一行向右找字符f</td>
+</tr>
+<tr>
+<td><code>tf</code></td>
+<td>移动到字符f出现的位置的前一个字符</td>
+</tr>
+<tr>
+<td><code>Tf</code></td>
+<td>移动到上一个字符f出现的位置的后一个字符</td>
+</tr>
+<tr>
+<td><code>zz</code></td>
+<td>移动屏幕使光标居中</td>
+</tr>
+<tr>
+<td><code>Ctrl</code> + <code>d</code></td>
+<td>向前滚半屏幕</td>
+</tr>
+<tr>
+<td><code>Ctrl</code> + <code>u</code></td>
+<td>向后滚半屏幕</td>
+</tr>
+</tbody>
+</table>
+<h2 id="多文件"><a href="#多文件" class="headerlink" title="多文件"></a>多文件</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ctrl + w + s</td>
+<td>水平分割窗口</td>
+</tr>
+<tr>
+<td>ctrl + w + v</td>
+<td>垂直分割窗口</td>
+</tr>
+<tr>
+<td>ctrl + w + h/j/k/l/w</td>
+<td>窗口切换</td>
+</tr>
+<tr>
+<td>ctrl + w + q</td>
+<td>窗口关闭</td>
+</tr>
+</tbody>
+</table>
+<h2 id="插入替换操作"><a href="#插入替换操作" class="headerlink" title="插入替换操作"></a>插入替换操作</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ea</code></td>
+<td>从当前<strong>单词</strong>末尾开始插入</td>
+</tr>
+<tr>
+<td><code>cc</code> 或 <code>S</code></td>
+<td>整行删除然后插入</td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td>删除光标到行尾，然后插入</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>改变光标下一个字符，然后插入</td>
+</tr>
+<tr>
+<td><code>3&lt;&lt;</code></td>
+<td>3行左移</td>
+</tr>
+<tr>
+<td><code>3&gt;&gt;</code></td>
+<td>3行右移</td>
+</tr>
+<tr>
+<td><code>gI</code></td>
+<td>在第一列插入</td>
+</tr>
+<tr>
+<td><code>grc</code></td>
+<td>不会影响布局</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>gR</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>cm</code></td>
+<td>基于移动 <code>m</code> 改变文本</td>
+</tr>
+<tr>
+<td><code>gum</code> <code>gUm</code></td>
+<td>基于移动操作 <code>m</code> 变为小写、大写</td>
+</tr>
+<tr>
+<td><code>&lt;m</code> <code>&gt;m</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dm</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>J</code> <code>gJ</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>:rd 回车</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>:rdx 回车</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="复制到系统剪切板"><a href="#复制到系统剪切板" class="headerlink" title="复制到系统剪切板"></a>复制到系统剪切板</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&quot;+y</code></td>
+<td>选中文本后输入</td>
+</tr>
+<tr>
+<td><code>:w !pbcopy</code></td>
+<td>选中文本后输入</td>
+</tr>
+<tr>
+<td><code>:%w !pbcopy</code></td>
+<td>复制整个文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="从系统剪切板中粘贴"><a href="#从系统剪切板中粘贴" class="headerlink" title="从系统剪切板中粘贴"></a>从系统剪切板中粘贴</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&quot;+p</code></td>
+<td>在待粘贴位置输入</td>
+</tr>
+<tr>
+<td><code>:r !pbpaste</code></td>
+<td>在待粘贴位置输入</td>
+</tr>
+</tbody>
+</table>
+<h2 id="命令模式替换文本"><a href="#命令模式替换文本" class="headerlink" title="命令模式替换文本"></a>命令模式替换文本</h2><figure class="highlight vim"><table><tr><td class="code"><pre><div class="line">:%s/<span class="built_in">line</span>/Line/gc</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%</code></td>
+<td>表示从第一行到最后一行，或 <code>1,5</code> 或 <code>1,$</code></td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>表示替换需要执行确认按键</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>执行替换</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>跳过这个匹配</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>对这个匹配及随后的匹配字符串执行替换</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>或 <code>&lt;esc&gt;</code>退出替换操作</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>执行这次最后的替换后退出，表示 <code>last</code></td>
+</tr>
+<tr>
+<td><code>C-e</code> 或 <code>C-y</code></td>
+<td>分别向下、向上滚动，用于查看替换的上下文</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight vim"><table><tr><td class="code"><pre><div class="line">:<span class="number">1</span>,<span class="number">10</span>g/pattern/d</div></pre></td></tr></table></figure>
+<p>从第一行到第10行满足pattern的内容执行Ex命令d</p>
+<h2 id="大小写切换"><a href="#大小写切换" class="headerlink" title="大小写切换"></a>大小写切换</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gu</code></td>
+<td>选中后切换成小写</td>
+</tr>
+<tr>
+<td><code>gU</code></td>
+<td>选中后切换成大写</td>
+</tr>
+<tr>
+<td><code>gJ</code></td>
+<td>合并多行，不保留空格</td>
+</tr>
+</tbody>
+</table>
+<h2 id="可视化模式"><a href="#可视化模式" class="headerlink" title="可视化模式"></a>可视化模式</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>o</code></td>
+<td>切换光标到选择区开头/结尾</td>
+</tr>
+<tr>
+<td><code>gv</code></td>
+<td>切换到上一次的高亮区域</td>
+</tr>
+<tr>
+<td><code>aw as ap</code></td>
+<td>选中一个词，一个句子，一个段落</td>
+</tr>
+<tr>
+<td><code>ab</code></td>
+<td>选择被()包裹的区域</td>
+</tr>
+<tr>
+<td><code>aB</code></td>
+<td>选择被{}包裹的区域</td>
+</tr>
+<tr>
+<td><code>ib</code></td>
+<td>选择被()包裹的区域，不含括号</td>
+</tr>
+<tr>
+<td><code>iB</code></td>
+<td>选择被{}包裹的区域，不含括号</td>
+</tr>
+</tbody>
+</table>
+<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:reg</code></td>
+<td>显示所有寄存器的内容</td>
+</tr>
+<tr>
+<td><code>&quot;a10yj</code></td>
+<td>往下复制10行到命名寄存器 a 中</td>
+</tr>
+<tr>
+<td><code>&quot;a5p</code></td>
+<td>粘贴寄存器 a 的内容5遍</td>
+</tr>
+<tr>
+<td><code>:reg a</code></td>
+<td>显示寄存器a的内容</td>
+</tr>
+</tbody>
+</table>
+<h2 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>qa</code></td>
+<td>录制宏a</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>停止录制</td>
+</tr>
+<tr>
+<td><code>@a</code></td>
+<td>执行宏a</td>
+</tr>
+<tr>
+<td><code>@@</code></td>
+<td>重新执行上次执行的宏</td>
+</tr>
+<tr>
+<td><code>:@a</code></td>
+<td>把宏a当做Ex命令执行</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ga</code></td>
+<td>显示光标下的字符编码</td>
+</tr>
+<tr>
+<td><code>gf</code></td>
+<td>打开光标下的文件</td>
+</tr>
+<tr>
+<td><code>g + ctrl + G</code></td>
+<td>显示光标下的列、行位置信息</td>
+</tr>
+<tr>
+<td><code>ctrl + G</code></td>
+<td>显示文件名及位置</td>
+</tr>
+<tr>
+<td><code>K</code></td>
+<td>查看光标下的关键字man信息</td>
+</tr>
+<tr>
+<td><code>ctrl + [</code></td>
+<td>切换回normal模式</td>
+</tr>
+<tr>
+<td><code>:w !sudo tee %</code></td>
+<td>使用sudo保存当前文件</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>参考文档 <a href="http://tnerual.eriogerg.free.fr/vimqrc.html" target="_blank" rel="external">VIM QUICK REFERENCE CARD</a></li>
+<li>参考文档 <a href="https://vim.rtorr.com/lang/zh_cn/" target="_blank" rel="external">VIM Cheat Sheet</a></li>
+</ul>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/22/vim/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

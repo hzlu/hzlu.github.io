@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link current"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link current"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+  </div>
+</div>
+
+      
+
+  
+  
+    
+    
+    <section class="archives-wrap">
+      <div class="archive-year-wrap">
+        <a href="/archives/2017" class="archive-year">2017</a>
+      </div>
+      <ul class="archives">
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/10/21/tmux-usage/" class="archive-article-date">
+  <time datetime="2017-10-21T15:06:59.000Z" itemprop="datePublished">2017-10-21</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/10/21/tmux-usage/">
+      使用Tmux
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/10/16/rails-decorator-pattern/" class="archive-article-date">
+  <time datetime="2017-10-16T17:13:46.000Z" itemprop="datePublished">2017-10-16</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/10/16/rails-decorator-pattern/">
+      rails-decorator-pattern
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/10/11/apue-进程环境/" class="archive-article-date">
+  <time datetime="2017-10-11T15:40:12.000Z" itemprop="datePublished">2017-10-11</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/10/11/apue-进程环境/">
+      APUE 进程环境
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/10/10/apue-系统数据文件/" class="archive-article-date">
+  <time datetime="2017-10-10T18:23:22.000Z" itemprop="datePublished">2017-10-10</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/10/10/apue-系统数据文件/">
+      APUE 系统数据文件
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/10/09/apue-标准IO库/" class="archive-article-date">
+  <time datetime="2017-10-09T10:30:13.000Z" itemprop="datePublished">2017-10-09</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/10/09/apue-标准IO库/">
+      APUE 标准IO库
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/09/22/apue-文件和目录/" class="archive-article-date">
+  <time datetime="2017-09-22T15:11:19.000Z" itemprop="datePublished">2017-09-22</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/09/22/apue-文件和目录/">
+      APUE 文件和目录
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/09/21/apue-文件IO/" class="archive-article-date">
+  <time datetime="2017-09-21T16:31:04.000Z" itemprop="datePublished">2017-09-21</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/09/21/apue-文件IO/">
+      APUE 文件I/O
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/09/20/apue-基础知识/" class="archive-article-date">
+  <time datetime="2017-09-20T14:53:58.000Z" itemprop="datePublished">2017-09-20</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/09/20/apue-基础知识/">
+      APUE 基础知识
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/30/shellscript/" class="archive-article-date">
+  <time datetime="2017-08-30T15:44:31.000Z" itemprop="datePublished">2017-08-30</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/30/shellscript/">
+      Shell 脚本编程
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/25/ruby-process/" class="archive-article-date">
+  <time datetime="2017-08-25T12:00:21.000Z" itemprop="datePublished">2017-08-25</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/25/ruby-process/">
+      《理解Unix进程》笔记
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/24/gpg/" class="archive-article-date">
+  <time datetime="2017-08-24T16:06:36.000Z" itemprop="datePublished">2017-08-24</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/24/gpg/">
+      GPG 备忘
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/24/openssl/" class="archive-article-date">
+  <time datetime="2017-08-24T16:06:30.000Z" itemprop="datePublished">2017-08-24</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/24/openssl/">
+      OpenSSL 用法备忘
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/23/sudo/" class="archive-article-date">
+  <time datetime="2017-08-23T15:39:23.000Z" itemprop="datePublished">2017-08-23</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/23/sudo/">
+      sudo
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/23/apt/" class="archive-article-date">
+  <time datetime="2017-08-23T14:48:10.000Z" itemprop="datePublished">2017-08-23</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/23/apt/">
+      apt 使用
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/22/vim/" class="archive-article-date">
+  <time datetime="2017-08-22T11:26:30.000Z" itemprop="datePublished">2017-08-22</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/22/vim/">
+      Vim 备忘
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/20/iptables/" class="archive-article-date">
+  <time datetime="2017-08-20T21:54:17.000Z" itemprop="datePublished">2017-08-20</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/20/iptables/">
+      iptables
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/16/sql-aggregate/" class="archive-article-date">
+  <time datetime="2017-08-16T14:03:36.000Z" itemprop="datePublished">2017-08-16</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/16/sql-aggregate/">
+      SQL 函数
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/14/sql/" class="archive-article-date">
+  <time datetime="2017-08-14T18:06:41.000Z" itemprop="datePublished">2017-08-14</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/14/sql/">
+      MySQL
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/13/rvm/" class="archive-article-date">
+  <time datetime="2017-08-13T14:51:14.000Z" itemprop="datePublished">2017-08-13</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/13/rvm/">
+      RVM 使用
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/13/iterm2/" class="archive-article-date">
+  <time datetime="2017-08-13T13:41:05.000Z" itemprop="datePublished">2017-08-13</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/13/iterm2/">
+      iTerm2 操作小结
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/12/sed/" class="archive-article-date">
+  <time datetime="2017-08-12T16:34:36.000Z" itemprop="datePublished">2017-08-12</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/12/sed/">
+      sed 使用
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/12/awk/" class="archive-article-date">
+  <time datetime="2017-08-12T16:00:17.000Z" itemprop="datePublished">2017-08-12</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/12/awk/">
+      awk 使用
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/10/wget/" class="archive-article-date">
+  <time datetime="2017-08-10T17:37:33.000Z" itemprop="datePublished">2017-08-10</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/10/wget/">
+      wget
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/10/curl/" class="archive-article-date">
+  <time datetime="2017-08-10T17:37:21.000Z" itemprop="datePublished">2017-08-10</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/10/curl/">
+      curl
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+  
+  
+  <li class="archive-post">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/08/09/git-cheat-sheet/" class="archive-article-date">
+  <time datetime="2017-08-09T22:36:57.000Z" itemprop="datePublished">2017-08-09</time>
+</a>
+      
+  <h1 itemprop="name">
+    <a class="archive-article-title" href="/2017/08/09/git-cheat-sheet/">
+      Git 命令小结
+    </a>
+  </h1>
+
+
+    </header>
+  </div>
+</article>
+
+  </li>
+
+
+  </ul></section>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

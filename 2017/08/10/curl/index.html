@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>curl - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="curl — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="curl — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#部分常用-option"><span class="my-toc-text">部分常用 option</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#示例"><span class="my-toc-text">示例</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>curl</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-08-10
+  </h4>
+  <p>通常将下载文件输出到 <code>stdout</code> ，将进度信息输出到 <code>stderr</code> ，要避免显示进度信息请使用 <code>--slient</code> 选项。</p>
+<h2 id="部分常用-option"><a href="#部分常用-option" class="headerlink" title="部分常用 option"></a>部分常用 option</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">curl -h <span class="comment"># 查看帮助信息</span></div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-O</code></td>
+<td>保存网页到文件，文件名通过URL解析自动得到</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>手动指定文件名<code>-o new_filename</code></td>
+</tr>
+<tr>
+<td><code>-C -</code></td>
+<td>自动推断出正确的续传位置<code>curl -C - http://foo.com</code></td>
+</tr>
+<tr>
+<td><code>-I</code> <code>--head</code></td>
+<td>只列出响应头</td>
+</tr>
+<tr>
+<td><code>-H</code> <code>--header</code></td>
+<td>设置请求头信息，用多个选项设置多个头<br><code>-H &quot;Host: XXX&quot; -H &quot;Accept-language: en&quot;</code></td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>返回响应头和响应体</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>可以显示一次http通信的整个过程，包括端口连接和http request头信息</td>
+</tr>
+<tr>
+<td><code>-s</code> <code>--silent</code></td>
+<td>不显示进度信息</td>
+</tr>
+<tr>
+<td><code>-#</code> <code>--progress-bar</code> <code>--progress</code></td>
+<td>显示 ### 进度条</td>
+</tr>
+<tr>
+<td><code>-e</code> <code>--referer</code></td>
+<td>设定referer 欺骗服务器，实现盗链</td>
+</tr>
+<tr>
+<td><code>-A</code> <code>--user-agent</code></td>
+<td>设置用户代理</td>
+</tr>
+<tr>
+<td><code>--limit-rate</code></td>
+<td>限制下载速度<br><code>--limit-rate 20k</code></td>
+</tr>
+<tr>
+<td><code>--max-filesize</code></td>
+<td>指定最大下载量</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>使用POST方法，提交表单，字符串参数的形式类似GET请求<br>每对<code>var=value</code>之间用<code>&amp;</code>分隔</td>
+</tr>
+<tr>
+<td><code>-F upload=@localfile</code></td>
+<td>通过POST表单上传文件</td>
+</tr>
+<tr>
+<td><code>-X</code></td>
+<td>使用其他HTTP方法<code>-X POST</code></td>
+</tr>
+<tr>
+<td><code>-x</code></td>
+<td>使用代理服务器及其端口访问</td>
+</tr>
+<tr>
+<td><code>-D</code></td>
+<td>把http的response里面的cookie信息存到一个文件中<br><code>-D cookie_file</code></td>
+</tr>
+<tr>
+<td><code>-b</code></td>
+<td>把上次的cookie信息追加到http request里进行访问</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>用于分块下载</td>
+</tr>
+<tr>
+<td><code>-u</code></td>
+<td>用于http或ftp认证<code>-u name:passwd</code></td>
+</tr>
+<tr>
+<td><code>-T</code> <code>--upload-file</code></td>
+<td>ftp上传，使用<code>PUT</code>方法</td>
+</tr>
+<tr>
+<td><code>-E</code></td>
+<td>使用本地证书<code>-E localcert.pem</code></td>
+</tr>
+<tr>
+<td><code>--cookie</code></td>
+<td>指定cookie字符串</td>
+</tr>
+<tr>
+<td><code>--cookie-jar</code></td>
+<td>通过文件指定cookie<br><code>--cookie-jar cookie_file</code></td>
+</tr>
+<tr>
+<td><code>--trace FILE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--trace-ascii FILE</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">curl -A <span class="string">"Mozilla/4.0 (compatible;MSIE 6.0;Windows NT 5.0)"</span> ...</div><div class="line">curl --referer http://xx.com http://xx.com</div><div class="line">curl -u name:passwd ftp://ip:port/path/file</div><div class="line"></div><div class="line">curl —trace output.txt www.baidu.com</div><div class="line">curl —trace-ascii output.txt www.baidu.com</div><div class="line"></div><div class="line">curl -O http://www.example.com/screen[1-10].JPG</div><div class="line"><span class="comment"># [1-10]产生1-10的文件名</span></div><div class="line"><span class="comment"># &#123;zzh,nick&#125;产生zzh或nick的文件名</span></div><div class="line"><span class="comment"># 自定义文件名下载</span></div><div class="line">curl -o <span class="comment">#2_#1.jpg http://www.example.com/&#123;zzh,nick&#125;/[001-201].JPG</span></div><div class="line"></div><div class="line"><span class="comment"># post a form</span></div><div class="line">curl -d <span class="string">"ser=nick&amp;password=12345"</span> http://...</div><div class="line"></div><div class="line"><span class="comment"># -X option to indicate a method</span></div><div class="line">curl -X DELETE http://...</div><div class="line"></div><div class="line">curl --user-agent <span class="string">"[User Agent]"</span> URL</div><div class="line">curl --header <span class="string">"Content-Type:application/json"</span> URL</div><div class="line"></div><div class="line"><span class="comment"># 分块下载</span></div><div class="line">curl -r 0-10240 -o <span class="string">"part1"</span> http://...&amp;\</div><div class="line">curl -r 20241-20480 -o <span class="string">"part2"</span> http://...&amp;\</div><div class="line">curl -r 40961- -o <span class="string">"zhao.partn"</span> http://...</div><div class="line"><span class="comment"># 需要把下载好的破碎的文件合并起来 cat part* &gt; whole_file</span></div><div class="line"></div><div class="line"><span class="comment"># -C - 选项可以在被打断后续传</span></div><div class="line">curl -o magazine.pdf -C - https://www.linuxvoice.com/issues/016/Linux-Voice-Issue-016.pdf</div><div class="line"><span class="comment"># -u option to log in</span></div><div class="line">curl -u username:password -O ftp://ftp.protectedserver.com/files/example.txt</div><div class="line"><span class="comment"># -T option to transfer file</span></div><div class="line">curl -u username:password -T /home/user/Documents/test.txt ftp://ftp.myserver.com</div><div class="line"><span class="comment"># -F option POST file</span></div><div class="line">curl -F <span class="string">'clbin=@some-image.jpg'</span> https://clbin.com</div><div class="line"><span class="comment"># use curl to upload file</span></div><div class="line">cat textfile.txt | curl -F <span class="string">'clbin=&lt;-'</span> https://clbin.com</div></pre></td></tr></table></figure>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/08/10/curl/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

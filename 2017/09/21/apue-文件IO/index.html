@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>APUE 文件I/O - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="APUE 文件I/O — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="APUE 文件I/O — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#基础概念"><span class="my-toc-text">基础概念</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#open-函数"><span class="my-toc-text">open 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#creat-函数"><span class="my-toc-text">creat 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#close-函数"><span class="my-toc-text">close 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#lseek-函数"><span class="my-toc-text">lseek 函数</span></a><ol class="my-toc-child"><li class="my-toc-item my-toc-level-3"><a class="my-toc-link" href="#不能对管道、FIFO或套接字-设置偏移量"><span class="my-toc-text">不能对管道、FIFO或套接字 设置偏移量</span></a></li></ol></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#read-函数"><span class="my-toc-text">read 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#write-函数"><span class="my-toc-text">write 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#I-O的效率"><span class="my-toc-text">I/O的效率</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#文件共享"><span class="my-toc-text">文件共享</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#原子操作"><span class="my-toc-text">原子操作</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#dup函数和dup2函数"><span class="my-toc-text">dup函数和dup2函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#sync-fsync-和-fdatasync-函数"><span class="my-toc-text">sync fsync 和 fdatasync 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#fcntl-函数"><span class="my-toc-text">fcntl 函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#dev-fd-目录"><span class="my-toc-text">/dev/fd 目录</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>APUE 文件I/O</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-09-21
+  </h4>
+  <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><ul>
+<li>不带缓冲的I/O unbuffered I/O</li>
+<li>术语不带缓冲指的是每个read 和 write 都调用内核中的一个系统调用</li>
+<li>文件描述符，内核向进程返回</li>
+<li>open create 返回文件描述符</li>
+<li>read write 用文件描述符作为参数</li>
+<li>0 1 2 应该分别由符号常量 STDIN_FILENO STDOUT_FILENO STDERR_FILENO 替换</li>
+<li>这些符号常量定义在头文件 <code>&lt;unistd.h&gt;</code> 中</li>
+<li>文件描述符的变化范围是 0 ~ OPEN_MAX</li>
+</ul>
+<h2 id="open-函数"><a href="#open-函数" class="headerlink" title="open 函数"></a>open 函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">int</span> oflag, ... <span class="comment">/* mode_t mode */</span>)</span></span>;</div><div class="line"><span class="comment">/* 成功返回文件描述符，失败返回 -1 */</span></div></pre></td></tr></table></figure>
+<p><code>oflag</code> 说明函数的选项，用下列常量进行 <strong>或</strong> 运算构成</p>
+<ul>
+<li>O_RDONLY 只读打开</li>
+<li>O_WRONLY 只写打开</li>
+<li>O_RDWR   读、写打开</li>
+</ul>
+<p>常量定义在头文件 <code>&lt;fcntl.h&gt;</code> 中</p>
+<p>其余可选的选项常量</p>
+<ul>
+<li>O_APPEND 写追加文件尾</li>
+<li>O_CREAT 若文件不存在则创建，需要指定新文件访问权限位的第三个参数 mode</li>
+<li>O_EXCL 如果同时指定 O_CREAT 而文件又存在时，就会出错。使得测试和创建两者成为一个原子操作</li>
+<li>O_TRUNC 如文件存在，且为只写或读写，则长度截短为0</li>
+<li>O_NOCTTY 如果路径是终端设备，则不将该设备分配为进程的控制终端</li>
+<li>O_NONBLOCK 如果路径是 FIFO 块特殊文件 字符特殊文件 则设置为非阻塞模式</li>
+<li>O_DSYNC 使每次write等待物理操作完成，可以不等待文件属性更新</li>
+<li>O_RSYNC 使read操作等待，等待写操作完成才进行read</li>
+<li>O_SYNC 使每次write都等待物理I/O完成，包括文件属性的更新</li>
+</ul>
+<h2 id="creat-函数"><a href="#creat-函数" class="headerlink" title="creat 函数"></a>creat 函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">creat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</div><div class="line"><span class="comment">/* 相当于调用 */</span></div><div class="line">open(pathname, O_WRONLY | O_CREAT | O_TRUNC, mode);</div></pre></td></tr></table></figure>
+<p>早起UNIX无法打开一个尚未存在的文件，因此需要系统调用 creat，现在open函数提供了新选项，也就不再需要creat</p>
+<h2 id="close-函数"><a href="#close-函数" class="headerlink" title="close 函数"></a>close 函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> filedes)</span></span>;</div><div class="line"><span class="comment">/* 关闭成功返回0 否则返回 -1 */</span></div></pre></td></tr></table></figure>
+<p>当进程终止时，内核会自动关闭进程打开的所有文件，因此可以不显式调用close关闭打开文件</p>
+<h2 id="lseek-函数"><a href="#lseek-函数" class="headerlink" title="lseek 函数"></a>lseek 函数</h2><ul>
+<li>与文件有一个关联的 <strong>当前文件偏移量</strong></li>
+<li>除非指定 O_APPEND 选项，否则打开文件时偏移量设置为0</li>
+<li>调用 lseek 显示设置偏移量</li>
+<li>偏移量大于文件当前长度，下一次写操作将加长该文件，中间构成空洞</li>
+<li>文件空洞不占用磁盘空间，空洞会被读为0</li>
+<li>使用 od 命令可以看到文件的实际内容</li>
+<li>最大文件偏移量根据 off_t 数据类型长度决定，不同实现长度不同</li>
+<li>偏移量仅仅记录在内核中，不引起任何I/O操作</li>
+<li><strong>只修改文件表项中的当前文件偏移量，没进行I/O操作</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">off_t</span> lseek(<span class="keyword">int</span> filedes, <span class="keyword">off_t</span> offset, <span class="keyword">int</span> whence);</div><div class="line"><span class="comment">/* 返回新的偏移量或 -1 */</span></div></pre></td></tr></table></figure>
+<p>whence 的取值</p>
+<ul>
+<li>SEEK_SET 距文件开始处 offset 个字节</li>
+<li>SEEK_CUR 设置为当前值加offset 可正可负</li>
+<li>SEEK_END 设置为文件长度加offet 可正可负</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="keyword">off_t</span> currpos;</div><div class="line">currpos = lseek(fd, <span class="number">0</span>, SEEK_CUR);</div><div class="line"><span class="comment">/* 确定打开文件的当前偏移量 */</span></div></pre></td></tr></table></figure>
+<h3 id="不能对管道、FIFO或套接字-设置偏移量"><a href="#不能对管道、FIFO或套接字-设置偏移量" class="headerlink" title="不能对管道、FIFO或套接字 设置偏移量"></a>不能对管道、FIFO或套接字 设置偏移量</h3><h2 id="read-函数"><a href="#read-函数" class="headerlink" title="read 函数"></a>read 函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="keyword">ssize_t</span> read(<span class="keyword">int</span> filedes, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes);</div><div class="line"><span class="comment">/* 返回读到的字节数 或到文件尾返回0 或出错返回-1 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li><code>void *</code> 用于表示通用指针</li>
+<li><code>ssize_t</code> 是一个带符号整数</li>
+<li><code>size_t</code> 第三个参数是不带符号整数</li>
+</ul>
+<h2 id="write-函数"><a href="#write-函数" class="headerlink" title="write 函数"></a>write 函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="keyword">ssize_t</span> read(<span class="keyword">int</span> filedes, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes);</div><div class="line"><span class="comment">/* 返回已写的字节数 或出错返回-1 */</span></div></pre></td></tr></table></figure>
+<p>返回值通常与参数nbytes相同，否则表示出错<br>写出错的原因：</p>
+<ul>
+<li>磁盘写满</li>
+<li>超过一个给定进程的文件长度限制</li>
+</ul>
+<h2 id="I-O的效率"><a href="#I-O的效率" class="headerlink" title="I/O的效率"></a>I/O的效率</h2><p>BUFFsize 设置为文件系统块长度时性能最好，块长由 <code>st_blksize</code> 表示。</p>
+<p>大多数文件系统为改善性能都采用预读 <strong>read ahead</strong> 技术。当检测到正进行顺序读取时，<br>系统企图读入比应用程序所要求的更多数据，并假想应用程序很快就会读这些数据。</p>
+<h2 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h2><ul>
+<li>UNIX 支持不同进程之间共享打开的文件。</li>
+<li>内核使用三种数据结构表示打开的文件。</li>
+<li>打开文件描述符表<ul>
+<li>每个进程在进程表中有一个记录项，记录项包含了这张文件描述符表</li>
+<li>也可存放在用户空间，而非进程表中</li>
+<li>描述符表项包含：</li>
+<li>a) 文件描述符标志</li>
+<li>b) 指向文件表项的指针</li>
+</ul>
+</li>
+<li>文件表<ul>
+<li>内核为所有<strong>打开文件</strong>维持一张文件表</li>
+<li>每个进程都有自己的文件表项，使得进程有自己对文件的当前偏移量</li>
+<li>文件表项包含：</li>
+<li>a) 文件状态标志</li>
+<li>b) 当前文件偏移量</li>
+<li>c) 指向 <strong>文件v节点表</strong> 的指针</li>
+</ul>
+</li>
+<li><p>v节点结构</p>
+<ul>
+<li>Linux 没有使用v节点，而是使用通用i节点结构</li>
+<li>每个打开的文件或设备都有一个v节点结构</li>
+<li>一个给定的文件只有一个v节点表项</li>
+<li>v节点包含：</li>
+<li>1) 文件类型</li>
+<li>2) 对此文件进行操作的函数的指针</li>
+<li>3) i节点 i-node 索引节点 （文件所有者 文件长度 文件所在设备 指向文件实际数据块在磁盘上所在位置的指针等）</li>
+</ul>
+</li>
+<li><p>如果使用O_APPEND 标志打开一个文件，则相应标志也被设置到 <em>文件表项</em> 的 <em>文件状态标志</em> 中。</p>
+</li>
+<li><strong>每次</strong> 对具有添写标志的文件执行写操作时，当前文件偏移量首先被设置为 <em>i节点</em> 表项中的文件长度。</li>
+<li><strong>每次写都会设置偏移量</strong></li>
+<li>可能有多个文件描述符项指向同一个文件表项</li>
+<li>当多个进程同写一个文件时，可能会产生预期不到的结果，需要原子操作避免</li>
+</ul>
+<h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><ul>
+<li>任何一个需要多个函数调用的操作都不可能是原子操作，在函数调用之间，内核可能会临时挂起进程</li>
+<li>设置O_APPEND 标志可以保证每次写之前都会设置偏移量到文件尾端</li>
+<li>对open 函数使用 O_CREAT 和 O_EXCL 选项能保证原子操作</li>
+<li>pread函数 和 pwrite函数 是原子操作 (属于 XSI 扩展)</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> pread(<span class="keyword">int</span> filedes, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">off_t</span> offset);</div><div class="line"><span class="comment">/* 相当于原子顺序调用 lseek 和 read */</span></div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> pwrite(<span class="keyword">int</span> filedes, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">off_t</span> offset);</div><div class="line"><span class="comment">/* 相当于原子顺序调用 lseek 和 write */</span></div></pre></td></tr></table></figure>
+<h2 id="dup函数和dup2函数"><a href="#dup函数和dup2函数" class="headerlink" title="dup函数和dup2函数"></a>dup函数和dup2函数</h2><p>用于复制文件描述符</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> filedes)</span></span>;</div><div class="line"><span class="comment">/* 返回可用描述符 */</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> filedes, <span class="keyword">int</span> filedes2)</span></span>;</div><div class="line"><span class="comment">/* 指定新描述符数值 filedes2 */</span></div></pre></td></tr></table></figure>
+<ul>
+<li>如果filedes2已经打开，先将其关闭</li>
+<li>如果filedes 等于 filedes2，则不关闭filedes2 而直接返回 filedes2</li>
+<li>这些函数返回的新描述符与参数 filedes <em>共享</em> 同一个文件表项</li>
+<li>新描述符的执行时关闭 <code>close-on-exec</code> 标志会由dup函数清除（标志被清除表示 该描述符在经过一个exec时仍保持有效）</li>
+<li>复制一个描述符的另一方法是使用 fcntl 函数</li>
+</ul>
+<h2 id="sync-fsync-和-fdatasync-函数"><a href="#sync-fsync-和-fdatasync-函数" class="headerlink" title="sync fsync 和 fdatasync 函数"></a>sync fsync 和 fdatasync 函数</h2><p>延时写 <strong>delayed write</strong><br>输出方式：当数据写入文件时，内核通常先将数据复制到其中一个缓冲区中，<br>如果该缓冲区未写满，则不会将其排入输出队列，<br>等待其写满或内核需要重用该缓冲区（以便存放其他磁盘块数据）时，再讲缓冲排入输出队列，<br>然后等待其到达队首时才进行实际的 I/O 操作。</p>
+<p>延迟写减少了磁盘读写次数，但却降低了文件内容的更新速度，<br>当发生故障时这种延迟写可能造成文件更新内容的丢失，<br><em>为了保证磁盘上实际文件系统与高速缓存中内容的一致性，</em><br>UNIX 系统提供了 sync fsync 和 fdatasync 三个函数。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fsync</span><span class="params">(<span class="keyword">int</span> filedes)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fdatasync</span><span class="params">(<span class="keyword">int</span> filedes)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">sync</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>sync函数不等待实际写磁盘操作结束，只将修改过的块缓冲排入写队列</li>
+<li>命令 sync 也调用sync函数</li>
+<li>系统守护进程会周期调用 sync函数，保证定期冲洗内核的块缓冲区</li>
+<li>fsync 对指定的描述符起作用，等待写磁盘操作完成，包括数据部分和更新文件属性</li>
+<li>fdatasync 类似fsync 但只影响文件的数据部分</li>
+</ul>
+<h2 id="fcntl-函数"><a href="#fcntl-函数" class="headerlink" title="fcntl 函数"></a>fcntl 函数</h2><p>可以改变已打开的文件的性质</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fidedes, <span class="keyword">int</span> cmd, ... <span class="comment">/* int arg */</span>)</span></span>;</div></pre></td></tr></table></figure>
+<p>作用：</p>
+<ul>
+<li>复制一个现有的描述符 cmd=F_DUPFD</li>
+<li>获得或设置 文件描述符标记 cmd=F_GETFD 或 F_SETFD</li>
+<li>获得或设置 文件状态标志 cmd=F_GETFL 或 F_SETFL<ul>
+<li>三个访问方式标志 O_RDONLY O_WRONLY O_RDWR 并不各占1位，因此首先要用屏蔽字 O_ACCMODE 取得访问模式位，然后将结果进行比较</li>
+<li>可以设置的几个标志是 O_APPEND O_NONBLOCK O_SYNC O_DSYNC O_RSYNC O_FSYNC O_ASYNC</li>
+</ul>
+</li>
+<li>获得或设置 异步I/O所有权 cmd=F_GETOWN 或 F_SETOWN<ul>
+<li>取得当前接收 SIGIO 和 SIGURG 信号的进程ID或进程组ID</li>
+</ul>
+</li>
+<li>获得或设置 记录锁 cmd=F_GETLK F_SETLK 或 F_SETLKW</li>
+</ul>
+<p>该函数的返回值与命令有关，如果出错所有命令都返回 -1</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span></div><div class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</div><div class="line">&#123;</div><div class="line">  <span class="keyword">int</span>   val;</div><div class="line">  <span class="keyword">if</span> (argc != <span class="number">2</span>)</div><div class="line">    err_quit(<span class="string">"usage: a.out &lt;descriptor#&gt;"</span>);</div><div class="line"></div><div class="line">  <span class="keyword">if</span> ((val = fcntl(atoi(argv[<span class="number">1</span>]), F_GETFL, <span class="number">0</span>)) &lt; <span class="number">0</span>)</div><div class="line">    err_sys(<span class="string">"fcntl error for fd %d"</span>, atoi(argv[<span class="number">1</span>]));</div><div class="line"></div><div class="line">  <span class="keyword">switch</span> (val &amp; O_ACCMODE) &#123;</div><div class="line">  <span class="keyword">case</span> O_RDONLY:</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"read only"</span>);</div><div class="line">    <span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> O_WRONLY:</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"write only"</span>);</div><div class="line">    <span class="keyword">break</span>;</div><div class="line">  <span class="keyword">case</span> O_RDWR:</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"read write"</span>);</div><div class="line">    <span class="keyword">break</span>;</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">    err_dump(<span class="string">"unknown access mode"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (val &amp; O_APPEND)</div><div class="line">    <span class="built_in">printf</span>(<span class="string">", append"</span>);</div><div class="line">  <span class="keyword">if</span> (val &amp; O_NONBLOCK)</div><div class="line">    <span class="built_in">printf</span>(<span class="string">", nonblocking"</span>);</div><div class="line">  <span class="keyword">if</span> (val &amp; O_SYNC)</div><div class="line">    <span class="built_in">printf</span>(<span class="string">", synchronous writes"</span>);</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined(_POSIX_C_SOURCE) &amp;&amp; defined(O_FSYNC) &amp;&amp; (O_FSYNC != O_SYNC)</span></div><div class="line">  <span class="keyword">if</span> (val &amp; O_FSYNC)</div><div class="line">    <span class="built_in">printf</span>(<span class="string">", synchronous writes"</span>);</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line">  <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</div><div class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改文件状态标志时要先取得现有标志值，然后根据需要修改，最后设置新标志值:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">void</span></div><div class="line">set_fl(<span class="keyword">int</span> fd, <span class="keyword">int</span> flags) <span class="comment">/* flags are file status flags to turn on */</span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">int</span>   val;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> ((val = fcntl(fd, F_GETFL, <span class="number">0</span>)) &lt; <span class="number">0</span>)</div><div class="line">    err_sys(<span class="string">"fcntl F_GETFL error"</span>);</div><div class="line"></div><div class="line">  val |= flags;   <span class="comment">/* turn on flags */</span></div><div class="line"></div><div class="line">  <span class="keyword">if</span> (fcntl(fd, F_SETFL, val) &lt; <span class="number">0</span>)</div><div class="line">    err_sys(<span class="string">"fcntl F_SETFL error"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">void</span></div><div class="line">clr_fl(<span class="keyword">int</span> fd, <span class="keyword">int</span> flags) <span class="comment">/* flags are file status flags to turn on */</span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">int</span>   val;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> ((val = fcntl(fd, F_GETFL, <span class="number">0</span>)) &lt; <span class="number">0</span>)</div><div class="line">    err_sys(<span class="string">"fcntl F_GETFL error"</span>);</div><div class="line"></div><div class="line">  val &amp;= ~flags;   <span class="comment">/* turn off flags */</span></div><div class="line"></div><div class="line">  <span class="keyword">if</span> (fcntl(fd, F_SETFL, val) &lt; <span class="number">0</span>)</div><div class="line">    err_sys(<span class="string">"fcntl F_SETFL error"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>调用打开 O_SYNC 使得每次write都要等待，直至数据写到磁盘上再返回，数据库系统很可能需要使用O_SYNC</p>
+<ul>
+<li>fsync和fdatasync 在我们需要时更新文件内容</li>
+<li>O_SYNC 标志则在我们每次写至文件时更新文件内容</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line">set_fl(STDOUT_FILENO, O_SYNC);</div></pre></td></tr></table></figure>
+<h2 id="dev-fd-目录"><a href="#dev-fd-目录" class="headerlink" title="/dev/fd 目录"></a>/dev/fd 目录</h2><p>打开文件 <code>/dev/fd/n</code> 等效于复制描述符n (假定n是打开的)</p>
+<p>使用/dev/fd 提高文件名参数的一致性，也更加清晰，无需使用 <code>-</code> 这种需要特殊解释的文件名</p>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/09/21/apue-文件IO/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>

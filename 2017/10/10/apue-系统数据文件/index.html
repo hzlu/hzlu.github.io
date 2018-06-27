@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>APUE 系统数据文件 - 卢浩钊的博客</title>
+    <meta charset="utf-8">
+    <meta name="description" content="luhaozhao.com personal blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="APUE 系统数据文件 — Vue.js">
+    <meta property="og:description" content="luhaozhao.com personal blog">
+    <meta property="og:image" content="https://luhaozhao.com//images/logo.png">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="APUE 系统数据文件 — 卢浩钊的博客">
+    <meta name="twitter:description" content="luhaozhao.com personal blog">
+    <meta name="twitter:image" content="https://luhaozhao.com/images/logo.png">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+    <link rel="icon" href="/images/logo.png" type="image/png">
+
+    <meta name="msapplication-TileColor" content="#4fc08d">
+    <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#4fc08d">
+
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- main page styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- this needs to be loaded before guide's inline scripts -->
+    <script>window.PAGE_TYPE = ""</script>
+
+    <!-- ga -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-66499261-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body class="docs">
+    <div id="mobile-bar" class="top">
+      <a class="menu-button"></a>
+      <a class="logo" href="/"></a>
+    </div>
+    <div id="header">
+  <a id="logo" href="/">
+    <img src="/images/logo.jpg">
+    <span>卢浩钊的博客</span>
+  </a>
+  <ul id="nav">
+    <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+  </ul>
+</div>
+
+    <div id="main" class="fix-sidebar">
+      <div class="sidebar">
+  <div class="sidebar-inner">
+    <ul class="main-menu">
+      <li>
+  <a href="/archives"
+    class="nav-link"
+    >
+    ARCHIVE
+  </a>
+</li>
+<li>
+  <a href="/categories"
+    class="nav-link"
+    >
+    CATEGORY
+  </a>
+</li>
+<li>
+  <a href="/about"
+    class="nav-link"
+    >
+    ABOUT
+  </a>
+</li>
+
+  <li>
+    <a id="nav-rss-link" class="nav-link" href="/atom.xml" title="rss_feed">
+      RSS
+    </a>
+  </li>
+
+
+    </ul>
+    
+      <div class="list" id="toc-list">
+        <ol class="my-toc"><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#获取口令文件项的函数"><span class="my-toc-text">获取口令文件项的函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#查看整个口令文件函数"><span class="my-toc-text">查看整个口令文件函数</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#阴影文件"><span class="my-toc-text">阴影文件</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#组文件"><span class="my-toc-text">组文件</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#附加组ID"><span class="my-toc-text">附加组ID</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#其他数据文件"><span class="my-toc-text">其他数据文件</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#utmp-和-wtmp-文件"><span class="my-toc-text">utmp 和 wtmp 文件</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#系统标识"><span class="my-toc-text">系统标识</span></a></li><li class="my-toc-item my-toc-level-2"><a class="my-toc-link" href="#时间和日期例程"><span class="my-toc-text">时间和日期例程</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+      <div class="content with-sidebar blog post">
+  <h1>APUE 系统数据文件</h1>
+  <h4>
+    <button id="toc-button" class="toc-button">显示文章目录</button>
+    &nbsp;&nbsp;
+    2017-10-10
+  </h4>
+  <ul>
+<li>使用nobody用户名的目的是，使任何人都可以登录到系统，但不提供任何特权。</li>
+<li><code>finger -p $(whoami)</code> finger 命令打印用户有关信息</li>
+</ul>
+<h2 id="获取口令文件项的函数"><a href="#获取口令文件项的函数" class="headerlink" title="获取口令文件项的函数"></a>获取口令文件项的函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pwd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function">struct passwd *<span class="title">getpwuid</span><span class="params">(<span class="keyword">uid_t</span> uid)</span></span>;</div><div class="line"><span class="function">struct passwd *<span class="title">getpwnam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</div></pre></td></tr></table></figure>
+<h2 id="查看整个口令文件函数"><a href="#查看整个口令文件函数" class="headerlink" title="查看整个口令文件函数"></a>查看整个口令文件函数</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="function">struct passwd *<span class="title">getpwent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"><span class="comment">/* 返回口令文件中的下一个记录项 */</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setpwent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"><span class="comment">/* 反绕它所打开的文件，使它们定位到文件开始处 */</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">endpwent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"><span class="comment">/* 一定要调用endpwent关闭这些文件 */</span></div></pre></td></tr></table></figure>
+<h2 id="阴影文件"><a href="#阴影文件" class="headerlink" title="阴影文件"></a>阴影文件</h2><p>访问阴影口令文件 <code>/etc/passwd</code> 的函数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;shadow.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function">struct spwd *<span class="title">getspnam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</div><div class="line"><span class="function">struct spwd *<span class="title">getspent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setspent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">endspent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div></pre></td></tr></table></figure>
+<h2 id="组文件"><a href="#组文件" class="headerlink" title="组文件"></a>组文件</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;grp.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function">struct group *<span class="title">getgrgid</span><span class="params">(<span class="keyword">gid_t</span> gid)</span></span>;</div><div class="line"><span class="function">struct group *<span class="title">getgrnam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</div></pre></td></tr></table></figure>
+<p>返回指向一个静态变量的指针，在每次调用时都会重写该静态变量。</p>
+<p>搜索整个组文件 <code>/etc/group</code> 的函数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;grp.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function">struct group *<span class="title">getgrent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setgrent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">endgrent</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div></pre></td></tr></table></figure>
+<h2 id="附加组ID"><a href="#附加组ID" class="headerlink" title="附加组ID"></a>附加组ID</h2><ul>
+<li>以前，每个用户任何时候都只属于一个实际组</li>
+<li><code>newgrp</code> 命令更改组ID</li>
+<li>后来引入附加组ID的概念</li>
+<li>可以属于多达16（常量 <code>NGROUPS_MAX</code> 规定）个另外的组</li>
+<li>文件访问权限检查改为：<ul>
+<li>将进程有效组ID与文件组ID相比较</li>
+<li>将所有附加组ID与文件的组ID进行比较</li>
+</ul>
+</li>
+<li>使用附加组ID的优点是不必显式更改组</li>
+</ul>
+<p>获取和设置附加组ID的函数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getgroups</span><span class="params">(<span class="keyword">int</span> gidsetsize, <span class="keyword">gid_t</span> grouplist[])</span></span>;</div><div class="line"><span class="comment">/* 成功返回附加组ID数，出错返回 -1 */</span></div><div class="line"><span class="comment">/* 将附加组ID填写到数组grouplist中，该数组存放元素最多为 gidsetsize 个 */</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;grp.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setgroups</span><span class="params">(<span class="keyword">int</span> ngroups, <span class="keyword">const</span> <span class="keyword">gid_t</span> grouplist[])</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">initgroups</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *username, <span class="keyword">gid_t</span> basegid)</span></span>;</div><div class="line"><span class="comment">/* 超级用户调用 */</span></div></pre></td></tr></table></figure>
+<h2 id="其他数据文件"><a href="#其他数据文件" class="headerlink" title="其他数据文件"></a>其他数据文件</h2><ul>
+<li>主机 /etc/hosts</li>
+<li>网络 /etc/networks</li>
+<li>协议 /etc/protocols</li>
+<li>服务 /etc/services</li>
+</ul>
+<h2 id="utmp-和-wtmp-文件"><a href="#utmp-和-wtmp-文件" class="headerlink" title="utmp 和 wtmp 文件"></a>utmp 和 wtmp 文件</h2><ul>
+<li><code>/var/run/utmp</code> 文件 记录当前登录进系统的各个用户</li>
+<li><code>/var/log/wtmp</code> 文件 跟踪各个登录和注销事件</li>
+</ul>
+<p>写入这两个文件中的是下列结构的一条二进制记录</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">utmp</span> &#123;</span></div><div class="line">  <span class="keyword">char</span> ut_line[<span class="number">8</span>];</div><div class="line">  <span class="keyword">char</span> ut_name[<span class="number">8</span>];</div><div class="line">  <span class="keyword">long</span> ut_time;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>登录时，login程序填写此类型结构，然后将其写入utmp文件中，同时添写到wtmp文件中</li>
+<li>注销时，init进程将utmp文件中相应的记录擦除，并将一个新记录添写到wtmp文件中</li>
+</ul>
+<h2 id="系统标识"><a href="#系统标识" class="headerlink" title="系统标识"></a>系统标识</h2><figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/utsname.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">uname</span><span class="params">(struct utsname *name)</span></span>;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">utsname</span> &#123;</span></div><div class="line">  <span class="keyword">char</span> sysname[];</div><div class="line">  <span class="keyword">char</span> nodename[];</div><div class="line">  <span class="keyword">char</span> release[];</div><div class="line">  <span class="keyword">char</span> version[];</div><div class="line">  <span class="keyword">char</span> machine[];</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>每个数组的长度由实现确定，以上是该结构至少需要提供的字段</p>
+<ul>
+<li>hostname 命令可用来获取和 <em>设置</em> 主机名</li>
+</ul>
+<h2 id="时间和日期例程"><a href="#时间和日期例程" class="headerlink" title="时间和日期例程"></a>时间和日期例程</h2><ul>
+<li>日历时间 <code>time_t</code></li>
+<li>以国际标准时间而非本地时间计时</li>
+<li>可自动进行转换</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">time_t</span> time(<span class="keyword">time_t</span> *calptr);</div></pre></td></tr></table></figure>
+<p>返回当前时间值，如果参数不为空，则时间值也会存放在 calptr 指向的单元里</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">gettimeofday</span><span class="params">(struct timeval *<span class="keyword">restrict</span> tp, <span class="keyword">void</span> *<span class="keyword">restrict</span> tzp)</span></span>;</div></pre></td></tr></table></figure>
+<ul>
+<li>gettimeofday 提供更高的分辨率，最高为微秒级</li>
+<li>tzp 唯一合法值是NULL</li>
+<li>其他tzp值产生不确定结果</li>
+<li>某些平台支持用tzp说明时区</li>
+<li>当前时间存放在tp指向的timeval结构中</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> &#123;</span></div><div class="line">  <span class="keyword">time_t</span> tv_sec;</div><div class="line">  <span class="keyword">long</span> tv_usec;</div><div class="line">&#125;;</div><div class="line"><span class="comment">/* 该结构存储秒和微妙 */</span></div></pre></td></tr></table></figure>
+
+  <div class="progress-bar"></div>
+  
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+  
+</div>
+
+
+
+    </div>
+    
+<script>
+  var disqus_shortname = 'luhaozhao';
+  
+  var disqus_url = 'http://luhaozhao.com/2017/10/10/apue-系统数据文件/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+    <script src="/js/smooth-scroll.min.js"></script>
+
+    <!-- main custom script for sidebars, version selects etc. -->
+    <script src="/js/css.escape.js"></script>
+    <script src="/js/common.js"></script>
+
+    <!-- fastclick -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body)
+      }, false)
+    </script>
+  </body>
+</html>
