@@ -1,6 +1,7 @@
 {
   "name": "luhaozhao.com",
-  "version": "0.1.0",
+  "author": "luhaozhao <hzlu2010@gmail.com>",
+  "version": "1.0.0",
   "private": true,
   "hexo": {
     "version": "3.3.9"
